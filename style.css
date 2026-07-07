@@ -1,40 +1,40 @@
-/* Fuente moderna y limpia */
+/* Gradiente azul claro para el fondo */
 body { 
-    font-family: 'Helvetica Neue', Arial, sans-serif; 
-    line-height: 1.8; 
-    max-width: 850px; 
-    margin: 0 auto; 
-    padding: 40px; 
-    background-color: #f9f9f9; 
-    color: #444; 
+    font-family: 'Segoe UI', Arial, sans-serif; 
+    line-height: 1.6; 
+    margin: 0; 
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 100%);
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
 }
 
-/* Encabezado elegante */
-header { 
-    text-align: center; 
-    margin-bottom: 50px; 
+/* Figura geométrica de fondo (Transparencia) */
+body::before {
+    content: "";
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.3);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    z-index: -1;
 }
 
-/* Navegación tipo botón */
-nav a { 
-    margin: 0 10px; 
-    text-decoration: none; 
-    color: #2c3e50; 
-    font-weight: 600; 
-    padding: 8px 16px; 
-    border: 1px solid #2c3e50; 
-    border-radius: 20px; 
-    transition: 0.3s;
-}
-nav a:hover { background: #2c3e50; color: white; }
-
-/* Secciones tipo tarjeta */
-.seccion { 
-    background: white; 
-    padding: 30px; 
-    margin-bottom: 30px; 
-    border-radius: 12px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+/* Contenedor principal para tarjetas */
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.7); /* Transparencia en tarjetas */
+    backdrop-filter: blur(10px); /* Efecto vidrio esmerilado */
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-h2 { color: #2c3e50; border-bottom: 2px solid #3498db; display: inline-block; }
+header { text-align: center; margin-bottom: 40px; }
+nav a { margin: 0 10px; color: #0277bd; font-weight: bold; text-decoration: none; }
+h1, h2 { color: #01579b; }
