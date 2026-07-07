@@ -1,41 +1,59 @@
+/* Configuración del fondo con tu imagen */
 body {
     font-family: 'Segoe UI', sans-serif;
-    /* Esto coloca tu imagen de fondo y la fija */
-    background-image: url('fondo.jpg'); 
+    background-image: url('fondo.jpg'); /* Asegúrate que este nombre coincida con tu archivo */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: white;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
-    padding-top: 50px;
-    margin: 0;
+    align-items: center;
+    min-height: 100vh;
 }
 
+/* Contenedor principal */
 .container {
-    /* Fondo blanco semitransparente para que se vea el fondo detrás */
-    background: rgba(255, 255, 255, 0.85); 
-    padding: 50px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    width: 80%;
-    max-width: 600px;
+    width: 90%;
+    max-width: 900px;
     text-align: center;
 }
 
-.tarjeta {
-    display: block;
-    background: #ffffff;
-    border: 2px solid #0056b3;
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 10px;
-    text-decoration: none;
-    color: #0056b3;
-    font-weight: bold;
-    transition: 0.3s;
+header h1 {
+    margin-bottom: 50px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
-.tarjeta:hover {
-    background: #0056b3;
+/* Contenedor de los rectángulos (Capítulos) */
+.menu-capitulos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Estilo de los rectángulos (Tarjetas) */
+.tarjeta-capitulo {
+    background: rgba(11, 45, 46, 0.8); /* Fondo oscuro semitransparente */
+    border: 2px solid #00d4ff;
+    padding: 40px;
+    text-align: center;
+    border-radius: 15px;
+    text-decoration: none;
     color: white;
+    transition: all 0.3s ease;
+}
+
+.tarjeta-capitulo:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateY(-10px);
+    border-color: white;
+}
+
+.tarjeta-capitulo h2 {
+    margin-top: 0;
+    color: #00d4ff;
 }
