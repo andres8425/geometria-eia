@@ -1,27 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Capítulo 1</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capítulo 1</title>
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async 
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
 </head>
 
 <body class="capitulo">
-    <div class="diapositiva">
-        <h1>Capítulo 1: Rectas y Segmentos</h1>
+
+  <nav class="barra-superior">
+    <a href="index.html">← Inicio</a>
+    <span>Capítulo 1</span>
+  </nav>
+
+  <main class="presentacion">
+
+    <section class="slide portada">
+      <div>
+        <span class="etiqueta">Geometría Euclideana</span>
+        <h1>Rectas, segmentos y puntos medios</h1>
+        <p>
+          En este capítulo estudiaremos los objetos básicos de la geometría:
+          puntos, rectas, segmentos y medidas.
+        </p>
+      </div>
+    </section>
+
+    <section class="slide dos-columnas">
+      <div>
+        <h2>¿Qué es un segmento?</h2>
+        <p>
+          Dados dos puntos \(A\) y \(B\), el segmento \(\overline{AB}\)
+          es el conjunto formado por los puntos \(A\), \(B\) y todos los
+          puntos que están entre ellos.
+        </p>
 
         <div class="academic-box definicion" data-title="DEFINICIÓN">
-            <p>Dados dos puntos \(A\) y \(B\), el segmento \(\overline{AB}\) es el conjunto de puntos que incluye a \(A\), \(B\) y todos los puntos entre ellos. La medida se denota como \(AB\).</p>
+          <p>
+            La medida del segmento \(\overline{AB}\) se denota por \(AB\).
+          </p>
         </div>
+      </div>
 
-        <div class="canvas-simulador">
-            </div>
+      <div class="grafico-segmento">
+        <div class="punto punto-a">A</div>
+        <div class="linea"></div>
+        <div class="punto punto-b">B</div>
+      </div>
+    </section>
 
-        <div class="academic-box proposicion" data-title="PROPOSICIÓN">
-            <p>El punto \(M\) es el punto medio de \(\overline{AB}\) si \(AM = MB = \frac{AB}{2}\).</p>
-        </div>
-    </div>
+    <section class="slide">
+      <h2>Punto medio de un segmento</h2>
+
+      <p>
+        El punto \(M\) es el punto medio del segmento \(\overline{AB}\)
+        cuando divide el segmento en dos partes de igual longitud.
+      </p>
+
+      <div class="grafico-punto-medio">
+        <div class="punto">A</div>
+        <div class="linea"></div>
+        <div class="punto medio">M</div>
+        <div class="linea"></div>
+        <div class="punto">B</div>
+      </div>
+
+      <div class="academic-box proposicion" data-title="PROPOSICIÓN">
+        <p>
+          \(M\) es punto medio de \(\overline{AB}\) si
+          \[
+          AM = MB = \frac{AB}{2}.
+          \]
+        </p>
+      </div>
+    </section>
+
+    <section class="slide ejemplo">
+      <h2>Ejemplo</h2>
+
+      <p>
+        Si un segmento mide \(AB = 12\) cm y \(M\) es su punto medio, entonces:
+      </p>
+
+      <div class="formula-grande">
+        \[
+        AM = MB = \frac{12}{2} = 6
+        \]
+      </div>
+
+      <p>
+        Por lo tanto, cada mitad del segmento mide \(6\) cm.
+      </p>
+    </section>
+
+    <section class="slide cierre">
+      <h2>Idea clave</h2>
+      <p>
+        Un segmento une dos puntos.  
+        El punto medio lo divide en dos partes iguales.
+      </p>
+
+      <a href="cap2.html" class="boton">Continuar al Capítulo 2 →</a>
+    </section>
+
+  </main>
+
 </body>
 </html>
