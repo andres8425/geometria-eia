@@ -3,31 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Fundamentos de Geometría</title>
+
+  <title>Segmentos | Geometría EIA</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] }
+    };
+  </script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script defer src="js/segmentos.js"></script>
 </head>
 
-<body class="home">
-  <main class="container">
-    <section class="hero">
-      <span class="etiqueta">Curso interactivo</span>
-      <h1>Fundamentos de Geometría Euclideana</h1>
-      <p>Explora conceptos geométricos mediante presentaciones visuales, ejemplos y simuladores.</p>
+<body>
+
+  <main class="app">
+
+    <section class="slide active">
+
+      <div class="tag">Capítulo 1 · Sección 1</div>
+
+      <h1>Segmentos</h1>
+
+      <p class="lead">
+        Dados dos puntos \(A\) y \(B\), el segmento \(\overline{AB}\)
+        es la parte de la recta comprendida entre ellos, incluyendo sus extremos.
+      </p>
+
+      <div class="geometry-card">
+
+        <svg id="segmentCanvas" viewBox="0 0 800 260">
+          <line x1="120" y1="130" x2="680" y2="130" class="segment-line"></line>
+
+          <circle id="pointA" cx="180" cy="130" r="16" class="point"></circle>
+          <circle id="pointB" cx="620" cy="130" r="16" class="point"></circle>
+
+          <text id="labelA" x="180" y="95" class="point-label">A</text>
+          <text id="labelB" x="620" y="95" class="point-label">B</text>
+
+          <text x="380" y="180" class="measure-label">
+            Segmento \overline{AB}
+          </text>
+        </svg>
+
+        <p class="instruction">
+          Arrastra los puntos \(A\) y \(B\).
+        </p>
+
+      </div>
+
+      <div class="info-grid">
+
+        <article class="box definition">
+          <h2>Definición</h2>
+          <p>
+            El segmento \(\overline{AB}\) es el objeto geométrico:
+            contiene los extremos \(A\), \(B\) y todos los puntos entre ellos.
+          </p>
+        </article>
+
+        <article class="box observation">
+          <h2>Observación</h2>
+          <p>
+            \(AB\) representa la longitud del segmento, no el segmento mismo.
+          </p>
+        </article>
+
+      </div>
+
+      <div class="result-box">
+        <p>Longitud actual:</p>
+        <strong id="lengthText">AB = 0</strong>
+      </div>
+
     </section>
 
-    <section class="menu-capitulos">
-      <a href="cap1.html" class="tarjeta-capitulo">
-        <span>01</span>
-        <h2>Capítulo 1</h2>
-        <p>Rectas, segmentos y puntos medios</p>
-      </a>
-
-      <a href="cap2.html" class="tarjeta-capitulo">
-        <span>02</span>
-        <h2>Capítulo 2</h2>
-        <p>Geometría vectorial</p>
-      </a>
-    </section>
   </main>
+
 </body>
 </html>
