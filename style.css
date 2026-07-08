@@ -1,79 +1,21 @@
-/* --- ESTILO GENERAL --- */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-}
-
-/* Fondo para el HOME (index) */
-body.home {
-    background-image: url('fondo.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-
-/* Fondo para los CAPÍTULOS (estilo presentación) */
-body.capitulo {
-    background: #f0f2f5; /* Gris muy claro tipo Canva */
-}
-
-.container {
-    width: 90%;
-    max-width: 900px;
-    margin-top: 50px;
-    padding: 20px;
-}
+/* --- ESTILO GENERAL (Se mantiene igual) --- */
+body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; min-height: 100vh; display: flex; justify-content: center; }
+body.home { background-image: url('fondo.jpg'); background-size: cover; background-position: center; background-attachment: fixed; }
+body.capitulo { background: #f0f2f5; }
+.container { width: 90%; max-width: 900px; margin-top: 50px; padding: 20px; }
 
 /* --- ESTILO DE DIAPOSITIVA (Capítulos) --- */
-.diapositiva {
-    background: white;
-    padding: 60px;
-    border-radius: 30px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-    color: #2d3436;
-}
+.diapositiva { background: white; padding: 60px; border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); color: #2d3436; margin-bottom: 50px; }
+
+/* --- BLOQUES ACADÉMICOS (Fieles al PDF) --- */
+.definicion { background: #e8f4fd; border-left: 6px solid #3498db; padding: 20px; margin: 25px 0; border-radius: 0 10px 10px 0; }
+.definicion::before { content: "Definición"; font-weight: bold; color: #3498db; display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 0.9em; }
+
+.teorema { background: #fff4e6; border-left: 6px solid #e67e22; padding: 20px; margin: 25px 0; border-radius: 0 10px 10px 0; }
+.teorema::before { content: "Teorema"; font-weight: bold; color: #e67e22; display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 0.9em; }
+
+.proposicion { background: #f4f4f4; border-left: 6px solid #7f8c8d; padding: 20px; margin: 25px 0; border-radius: 0 10px 10px 0; }
+.proposicion::before { content: "Proposición"; font-weight: bold; color: #7f8c8d; display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 0.9em; }
 
 /* --- COMPONENTES --- */
-header h1 {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.menu-capitulos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.tarjeta-capitulo {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 40px;
-    text-align: center;
-    border-radius: 20px;
-    text-decoration: none;
-    color: #0b2d2e;
-    transition: all 0.4s ease;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-.tarjeta-capitulo:hover {
-    background: white;
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-}
-
-.canvas-simulador {
-    width: 100%;
-    height: 350px;
-    background: #fdfdfd;
-    border-radius: 15px;
-    border: 1px solid #dfe6e9;
-    margin: 25px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+.canvas-simulador { width: 100%; height: 350px; background: #fdfdfd; border: 1px solid #dfe6e9; border-radius: 15px; margin: 25px 0; display: flex; align-items: center; justify-content: center; }
