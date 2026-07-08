@@ -1,6 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>Capítulo 1 - Fundamentos</title>
+</head>
 <body class="capitulo">
     <div class="container">
         <div class="diapositiva">
-            </div>
+            <header>
+                <a href="index.html">← Volver al Inicio</a>
+                <h1>1. Rectas, Segmentos y Congruencia</h1>
+            </header>
+
+            <section>
+                <h2>1.1 Rectas y Segmentos</h2>
+                <p>Una recta es infinita. Un segmento de recta \(AB\) es el conjunto de puntos entre \(A\) y \(B\). Su longitud se denota como \(d(A, B)\).</p>
+                <div class="canvas-simulador" id="box-segmento">
+                    [Interactividad: Arrastra los puntos A y B para medir la distancia \(d(A,B)\)]
+                </div>
+            </section>
+
+            <section>
+                <h2>1.2 Congruencia de Segmentos</h2>
+                <p>Dos segmentos \(AB\) y \(CD\) son congruentes (\(AB \cong CD\)) si tienen la misma medida.</p>
+                <div class="canvas-simulador" id="box-congruencia">
+                    [Interactividad: Modifica la longitud de AB y observa cómo el segmento CD debe ajustarse para mantener la congruencia]
+                </div>
+            </section>
+
+            <section>
+                <h2>1.3 Punto Medio</h2>
+                <p>El punto \(M\) es el punto medio de \(AB\) si \(d(A,M) = d(M,B) = \frac{1}{2}d(A,B)\).</p>
+                <div class="canvas-simulador" id="box-punto-medio">
+                    [Interactividad: Punto M dinámico que se recalcula automáticamente como \(\frac{A+B}{2}\)]
+                </div>
+            </section>
+        </div>
     </div>
 </body>
+</html>
