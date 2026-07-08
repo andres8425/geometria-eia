@@ -1,51 +1,35 @@
-/* --- LIMPIEZA Y ALINEACIÓN --- */
-body {
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+/* --- ESTILO GENERAL --- */
+body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; min-height: 100vh; }
+
+body.home { background: url('fondo.jpg') no-repeat center fixed; background-size: cover; }
+body.capitulo { background: #eef2f3; display: block; }
+
+.container { width: 90%; max-width: 850px; margin: 50px auto; }
+
+/* Diapositiva tipo Canva */
+.diapositiva { 
+    background: white; padding: 60px; border-radius: 25px; 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1); 
 }
 
-body.home {
-    background-image: url('fondo.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    display: flex; /* Centrado solo en el home */
-    justify-content: center;
-}
-
-body.capitulo {
-    background: #f0f2f5;
-    display: block; /* Alineación normal para capítulos */
-}
-
-.container {
-    width: 90%;
-    max-width: 850px;
-    margin: 50px auto; /* Centra el contenedor automáticamente */
-}
-
-/* --- BLOQUES DE REALCE CON DEGRADADO --- */
+/* BLOQUES ACADÉMICOS CON DEGRADADO Y REALCE */
 .academic-box {
-    padding: 30px;
-    margin: 30px 0;
-    border-radius: 15px;
-    color: white;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    padding: 25px; margin: 30px 0; border-radius: 15px;
+    color: white; box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
 }
 
-.definicion { background: linear-gradient(135deg, #3498db, #2980b9); }
-.teorema { background: linear-gradient(135deg, #e67e22, #d35400); }
-.proposicion { background: linear-gradient(135deg, #7f8c8d, #2c3e50); }
+.definicion { background: linear-gradient(135deg, #2193b0, #6dd5ed); }
+.teorema { background: linear-gradient(135deg, #ee9ca7, #ffdde1); color: #883e4a; }
+.proposicion { background: linear-gradient(135deg, #4facfe, #00f2fe); }
 
-.academic-box h3 { margin-top: 0; text-transform: uppercase; font-size: 0.9em; opacity: 0.9; }
+.academic-box h3 { margin: 0 0 10px 0; font-size: 1.1em; letter-spacing: 1px; }
 
-/* --- DIAPOSITIVA --- */
-.diapositiva {
-    background: white;
-    padding: 60px;
-    border-radius: 30px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-    color: #2d3436;
+/* ESPACIO PARA SIMULADOR */
+.canvas-simulador {
+    width: 100%; height: 350px;
+    background: #f8f9fa; border: 2px dashed #6dd5ed;
+    border-radius: 15px; margin: 40px 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #6c757d; font-weight: bold;
 }
