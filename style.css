@@ -1,1 +1,245 @@
+/* ========================= */
+/* ESTILO GENERAL */
+/* ========================= */
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* ========================= */
+/* PÁGINA INICIAL */
+/* ========================= */
+
+.home {
+  min-height: 100vh;
+  background:
+    linear-gradient(
+      rgba(0, 35, 38, 0.55),
+      rgba(0, 25, 28, 0.82)
+    ),
+    url("fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.inicio {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 50px 24px;
+}
+
+.hero-inicio {
+  width: min(1150px, 96%);
+  text-align: center;
+  animation: aparecerInicio 1s ease both;
+}
+
+.pretitle {
+  color: #f7c873;
+  text-transform: uppercase;
+  letter-spacing: 12px;
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+}
+
+.hero-inicio h1 {
+  font-size: clamp(4rem, 9vw, 8rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: 7px;
+  margin: 0;
+  color: #fffaf0;
+  text-shadow: 0 8px 35px rgba(0,0,0,0.55);
+}
+
+.linea-decorativa {
+  width: min(560px, 80%);
+  height: 1px;
+  margin: 34px auto 24px;
+  background: linear-gradient(90deg, transparent, #f7c873, transparent);
+  position: relative;
+}
+
+.linea-decorativa span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 34px;
+  height: 34px;
+  transform: translate(-50%, -50%);
+  border: 2px solid #f7c873;
+  border-radius: 50%;
+  background: rgba(0, 50, 52, 0.9);
+}
+
+.hero-inicio h2 {
+  font-size: 1.7rem;
+  letter-spacing: 8px;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+.descripcion {
+  max-width: 760px;
+  margin: 0 auto 40px;
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.92);
+}
+
+.capitulos-home {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 28px;
+  margin: 30px auto;
+  max-width: 920px;
+}
+
+.card-capitulo {
+  min-height: 240px;
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 24px;
+  align-items: center;
+  text-align: left;
+  padding: 28px;
+  border-radius: 26px;
+  text-decoration: none;
+  color: white;
+  background: rgba(0, 98, 93, 0.34);
+  border: 1px solid rgba(80, 255, 230, 0.35);
+  box-shadow: 0 24px 55px rgba(0,0,0,0.32);
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.card-capitulo:hover {
+  transform: translateY(-8px) scale(1.02);
+  background: rgba(0, 120, 110, 0.5);
+}
+
+.card-dorado {
+  background: rgba(60, 50, 28, 0.42);
+  border-color: rgba(247, 200, 115, 0.55);
+}
+
+.card-dorado:hover {
+  background: rgba(80, 60, 30, 0.55);
+}
+
+.icono-capitulo {
+  width: 150px;
+  height: 150px;
+  border: 2px solid #f7c873;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 0 40px rgba(247,200,115,0.15);
+}
+
+.compas,
+.triangulo-icono {
+  font-size: 5rem;
+  color: #f7c873;
+}
+
+.cap-label {
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  color: #f7c873;
+  margin: 0;
+}
+
+.card-capitulo h3 {
+  font-size: 4.2rem;
+  margin: 0;
+  color: #55ffe0;
+}
+
+.card-dorado h3 {
+  color: #f7c873;
+}
+
+.card-capitulo p {
+  font-size: 1.35rem;
+  line-height: 1.3;
+  margin: 8px 0 20px;
+}
+
+.card-capitulo span {
+  display: inline-block;
+  border: 1px solid currentColor;
+  padding: 10px 22px;
+  border-radius: 999px;
+  color: #55ffe0;
+}
+
+.card-dorado span {
+  color: #f7c873;
+}
+
+.beneficios {
+  max-width: 1080px;
+  margin: 28px auto 0;
+  padding: 20px 28px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.14);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  backdrop-filter: blur(10px);
+  font-size: 1rem;
+}
+
+/* ========================= */
+/* ANIMACIONES */
+/* ========================= */
+
+@keyframes aparecerInicio {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 900px) {
+  .capitulos-home {
+    grid-template-columns: 1fr;
+  }
+
+  .card-capitulo {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .icono-capitulo {
+    margin: auto;
+  }
+
+  .beneficios {
+    border-radius: 28px;
+    grid-template-columns: 1fr;
+  }
+
+  .pretitle {
+    letter-spacing: 6px;
+  }
+}
