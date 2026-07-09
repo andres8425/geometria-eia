@@ -243,3 +243,423 @@ body {
     letter-spacing: 6px;
   }
 }
+
+/* ========================= */
+/* CAPÍTULO 1 · PRESENTACIÓN */
+/* ========================= */
+
+.capitulo-presentacion {
+  margin: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(247, 200, 115, 0.25), transparent 28%),
+    radial-gradient(circle at 85% 80%, rgba(63, 170, 150, 0.22), transparent 30%),
+    linear-gradient(135deg, #123c32, #092622);
+  color: #fffaf0;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.deck {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.slide {
+  display: none;
+  width: min(1120px, 92vw);
+  height: min(680px, 82vh);
+  padding: 64px;
+  border-radius: 36px;
+  background:
+    linear-gradient(145deg, rgba(255, 250, 240, 0.97), rgba(244, 232, 205, 0.96));
+  color: #2c241c;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(247, 200, 115, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.slide::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border: 2px solid rgba(18, 60, 50, 0.12);
+  border-radius: 50%;
+  right: -150px;
+  top: -150px;
+}
+
+.slide.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: slideIn 0.7s cubic-bezier(.2,.8,.2,1);
+}
+
+.kicker {
+  color: #a65f3f;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 700;
+  margin: 0 0 16px;
+}
+
+.slide h1 {
+  font-size: clamp(4rem, 9vw, 7.8rem);
+  line-height: 0.95;
+  margin: 0 0 28px;
+  color: #123c32;
+}
+
+.slide h2 {
+  font-size: clamp(2.6rem, 5vw, 4.3rem);
+  line-height: 1;
+  margin: 0 0 28px;
+  color: #123c32;
+}
+
+.lead {
+  max-width: 850px;
+  font-size: 1.45rem;
+  line-height: 1.65;
+}
+
+.btn {
+  margin-top: 34px;
+  width: fit-content;
+  border: none;
+  border-radius: 999px;
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #123c32, #1f5f74);
+  color: #fffaf0;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(18, 60, 50, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 38px rgba(18, 60, 50, 0.32);
+}
+
+.segment-demo,
+.interactive-board {
+  width: 100%;
+  background: #fff4dc;
+  border: 2px solid rgba(166, 95, 63, 0.25);
+  border-radius: 28px;
+  padding: 18px;
+  margin: 20px 0;
+}
+
+.segment-demo svg,
+.interactive-board svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.svg-line {
+  stroke: #a65f3f;
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+
+.svg-point {
+  fill: #123c32;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
+}
+
+.svg-label {
+  text-anchor: middle;
+  font-size: 38px;
+  font-weight: 700;
+  fill: #123c32;
+}
+
+.draw {
+  stroke-dasharray: 480;
+  stroke-dashoffset: 480;
+  animation: drawLine 1.25s ease forwards;
+}
+
+.appear {
+  opacity: 0;
+  transform-origin: center;
+  animation: popPoint 0.65s ease forwards;
+}
+
+.delay {
+  animation-delay: 0.45s;
+}
+
+.definition-card,
+.formula-card,
+.answer-box {
+  background: white;
+  border-radius: 28px;
+  padding: 30px;
+  border-left: 10px solid #a65f3f;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.12);
+  font-size: 1.45rem;
+  line-height: 1.6;
+}
+
+.small-note {
+  margin-top: 18px;
+  color: #755b44;
+  font-size: 1rem;
+}
+
+#baseTrack {
+  stroke: rgba(18, 60, 50, 0.18);
+  stroke-width: 12;
+  stroke-linecap: round;
+}
+
+#segmentLine {
+  stroke: #a65f3f;
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+
+#pointA,
+#pointB {
+  fill: #123c32;
+  cursor: grab;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
+}
+
+#pointA:hover,
+#pointB:hover {
+  fill: #1f5f74;
+}
+
+#pointM {
+  fill: #b43b3b;
+}
+
+#labelA,
+#labelB,
+#labelM {
+  text-anchor: middle;
+  font-size: 36px;
+  font-weight: 700;
+  fill: #123c32;
+}
+
+#labelM {
+  fill: #b43b3b;
+}
+
+.measure-pill {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: fit-content;
+  background: #123c32;
+  color: white;
+  padding: 18px 26px;
+  border-radius: 999px;
+  box-shadow: 0 14px 30px rgba(18, 60, 50, 0.25);
+}
+
+.measure-pill span {
+  opacity: 0.85;
+}
+
+.measure-pill strong {
+  font-size: 1.35rem;
+}
+
+.flip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 32px;
+  margin-top: 28px;
+  max-width: 800px;
+}
+
+.flip-card {
+  height: 230px;
+  position: relative;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flip-card .front,
+.flip-card .back {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 28px;
+  backface-visibility: hidden;
+  transition: transform 0.75s cubic-bezier(.2,.8,.2,1);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.14);
+  padding: 28px;
+  text-align: center;
+}
+
+.flip-card .front {
+  background: white;
+  color: #123c32;
+  border: 2px solid rgba(18, 60, 50, 0.18);
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.flip-card .back {
+  background: #123c32;
+  color: white;
+  transform: rotateY(180deg);
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+
+.flip-card.flipped .front {
+  transform: rotateY(180deg);
+}
+
+.flip-card.flipped .back {
+  transform: rotateY(360deg);
+}
+
+.activity-box {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 22px;
+  font-size: 1.2rem;
+}
+
+.activity-box input {
+  padding: 14px 18px;
+  border-radius: 16px;
+  border: 2px solid rgba(18, 60, 50, 0.22);
+  font-size: 1.1rem;
+  width: 190px;
+}
+
+.activity-box button {
+  border: none;
+  background: #a65f3f;
+  color: white;
+  font-weight: 700;
+  border-radius: 16px;
+  padding: 14px 22px;
+  cursor: pointer;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 30px;
+}
+
+.summary-grid div {
+  background: white;
+  border-radius: 28px;
+  padding: 32px 20px;
+  text-align: center;
+  color: #123c32;
+  font-size: 2.3rem;
+  font-weight: 700;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.12);
+}
+
+.summary-grid span {
+  display: block;
+  font-size: 1rem;
+  margin-top: 12px;
+  color: #a65f3f;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.slide-controls {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.88);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+  color: #123c32;
+  z-index: 20;
+}
+
+.slide-controls button {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: #123c32;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.slide-controls span {
+  font-weight: 700;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes popPoint {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 850px) {
+  .slide {
+    padding: 34px;
+    height: 84vh;
+  }
+
+  .flip-grid,
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lead,
+  .definition-card,
+  .formula-card {
+    font-size: 1.15rem;
+  }
+}
