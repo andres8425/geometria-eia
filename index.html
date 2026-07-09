@@ -3,81 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Segmentos | Geometría EIA</title>
-
-  <link rel="stylesheet" href="css/style.css">
-
-  <script>
-    window.MathJax = {
-      tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] }
-    };
-  </script>
-
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script defer src="js/segmentos.js"></script>
+  <title>Fundamentos de Geometría Euclideana</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="home">
 
-  <main class="app">
+  <main class="inicio">
 
-    <section class="slide active">
+    <section class="hero-inicio">
 
-      <div class="tag">Capítulo 1 · Sección 1</div>
+      <p class="pretitle">Fundamentos de</p>
 
-      <h1>Segmentos</h1>
+      <h1>
+        Geometría <br>
+        Euclideana
+      </h1>
 
-      <p class="lead">
-        Dados dos puntos \(A\) y \(B\), el segmento \(\overline{AB}\)
-        es la parte de la recta comprendida entre ellos, incluyendo sus extremos.
+      <div class="linea-decorativa">
+        <span></span>
+      </div>
+
+      <h2>Universidad EIA</h2>
+
+      <p class="descripcion">
+        Bienvenido a este espacio interactivo donde la geometría cobra vida.
+        Explora conceptos fundamentales, construye intuición geométrica y desarrolla
+        tu razonamiento visual a través de definiciones, ejemplos, animaciones y ejercicios.
       </p>
 
-      <div class="geometry-card">
+      <section class="capitulos-home">
 
-        <svg id="segmentCanvas" viewBox="0 0 800 260">
-          <line x1="120" y1="130" x2="680" y2="130" class="segment-line"></line>
+        <a href="cap1.html" class="card-capitulo">
+          <div class="icono-capitulo">
+            <div class="compas">∡</div>
+          </div>
 
-          <circle id="pointA" cx="180" cy="130" r="16" class="point"></circle>
-          <circle id="pointB" cx="620" cy="130" r="16" class="point"></circle>
+          <div>
+            <p class="cap-label">Capítulo</p>
+            <h3>01</h3>
+            <p>El lenguaje elemental del plano</p>
+            <span>Explorar capítulo →</span>
+          </div>
+        </a>
 
-          <text id="labelA" x="180" y="95" class="point-label">A</text>
-          <text id="labelB" x="620" y="95" class="point-label">B</text>
+        <a href="cap2.html" class="card-capitulo card-dorado">
+          <div class="icono-capitulo">
+            <div class="triangulo-icono">
+              △
+            </div>
+          </div>
 
-          <text x="380" y="180" class="measure-label">
-            Segmento \overline{AB}
-          </text>
-        </svg>
+          <div>
+            <p class="cap-label">Capítulo</p>
+            <h3>02</h3>
+            <p>Triángulos y líneas notables</p>
+            <span>Explorar capítulo →</span>
+          </div>
+        </a>
 
-        <p class="instruction">
-          Arrastra los puntos \(A\) y \(B\).
-        </p>
+      </section>
 
-      </div>
-
-      <div class="info-grid">
-
-        <article class="box definition">
-          <h2>Definición</h2>
-          <p>
-            El segmento \(\overline{AB}\) es el objeto geométrico:
-            contiene los extremos \(A\), \(B\) y todos los puntos entre ellos.
-          </p>
-        </article>
-
-        <article class="box observation">
-          <h2>Observación</h2>
-          <p>
-            \(AB\) representa la longitud del segmento, no el segmento mismo.
-          </p>
-        </article>
-
-      </div>
-
-      <div class="result-box">
-        <p>Longitud actual:</p>
-        <strong id="lengthText">AB = 0</strong>
-      </div>
+      <section class="beneficios">
+        <div>📖 Contenido estructurado por capítulos</div>
+        <div>▶ Animaciones interactivas</div>
+        <div>✎ Ejercicios y actividades para practicar</div>
+        <div>💡 Aprende a tu ritmo desde cualquier lugar</div>
+      </section>
 
     </section>
 
