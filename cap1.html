@@ -1,2 +1,167 @@
-<link rel="stylesheet" href="style.css">
-<script defer src="segmentos.js"></script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capítulo 1 | Segmentos</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] }
+    };
+  </script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script defer src="script.js"></script>
+</head>
+
+<body class="capitulo-presentacion">
+
+  <main class="deck">
+
+    <section class="slide active">
+      <p class="kicker">Capítulo 1 · El lenguaje elemental del plano</p>
+      <h1>Segmentos</h1>
+      <p class="lead">
+        En esta sección aprenderemos a distinguir entre el segmento como objeto geométrico
+        y su longitud como medida.
+      </p>
+      <button class="btn" onclick="nextSlide()">Comenzar →</button>
+    </section>
+
+    <section class="slide">
+      <p class="kicker">Idea geométrica</p>
+      <h2>Nombrar lo que vemos</h2>
+      <p class="lead">
+        La geometría comienza cuando aprendemos a nombrar objetos, relaciones y medidas.
+      </p>
+
+      <div class="segment-demo">
+        <svg viewBox="0 0 900 260">
+          <line x1="210" y1="130" x2="690" y2="130" class="svg-line draw"></line>
+          <circle cx="210" cy="130" r="18" class="svg-point appear"></circle>
+          <circle cx="690" cy="130" r="18" class="svg-point appear delay"></circle>
+          <text x="210" y="88" class="svg-label">A</text>
+          <text x="690" y="88" class="svg-label">B</text>
+        </svg>
+      </div>
+
+      <button class="btn" onclick="nextSlide()">Siguiente →</button>
+    </section>
+
+    <section class="slide">
+      <p class="kicker">Definición</p>
+      <h2>¿Qué es un segmento?</h2>
+
+      <div class="definition-card">
+        <p>
+          Dados dos puntos \(A\) y \(B\), el segmento \(\overline{AB}\)
+          es la parte de la recta comprendida entre \(A\) y \(B\),
+          incluyendo sus extremos.
+        </p>
+      </div>
+
+      <p class="small-note">
+        Esta idea corresponde a la definición de segmento presentada en el Capítulo 1 del manuscrito. :contentReference[oaicite:0]{index=0}
+      </p>
+
+      <button class="btn" onclick="nextSlide()">Siguiente →</button>
+    </section>
+
+    <section class="slide">
+      <p class="kicker">Exploración interactiva</p>
+      <h2>Arrastra los extremos</h2>
+
+      <div class="interactive-board">
+        <svg id="segmentSvg" viewBox="0 0 900 330">
+          <line id="baseTrack" x1="140" y1="165" x2="760" y2="165"></line>
+          <line id="segmentLine" x1="240" y1="165" x2="660" y2="165"></line>
+
+          <circle id="pointA" cx="240" cy="165" r="20"></circle>
+          <circle id="pointB" cx="660" cy="165" r="20"></circle>
+
+          <circle id="pointM" cx="450" cy="165" r="14"></circle>
+
+          <text id="labelA" x="240" y="112">A</text>
+          <text id="labelB" x="660" y="112">B</text>
+          <text id="labelM" x="450" y="218">M</text>
+        </svg>
+      </div>
+
+      <div class="measure-pill">
+        <span>Longitud actual</span>
+        <strong id="lengthText">AB = 420 unidades</strong>
+      </div>
+
+      <button class="btn" onclick="nextSlide()">Siguiente →</button>
+    </section>
+
+    <section class="slide">
+      <p class="kicker">Objeto vs medida</p>
+      <h2>No es lo mismo \(\overline{AB}\) que \(AB\)</h2>
+
+      <div class="flip-grid">
+        <article class="flip-card" onclick="flipCard(this)">
+          <div class="front">\(\overline{AB}\)</div>
+          <div class="back">Es el segmento como objeto geométrico.</div>
+        </article>
+
+        <article class="flip-card" onclick="flipCard(this)">
+          <div class="front">\(AB\)</div>
+          <div class="back">Es la longitud del segmento.</div>
+        </article>
+      </div>
+
+      <p class="small-note">Haz clic sobre cada tarjeta.</p>
+
+      <button class="btn" onclick="nextSlide()">Siguiente →</button>
+    </section>
+
+    <section class="slide">
+      <p class="kicker">Punto medio</p>
+      <h2>Dividir en dos partes iguales</h2>
+
+      <div class="formula-card">
+        \[
+          AM = MB = \frac{AB}{2}
+        \]
+      </div>
+
+      <div class="activity-box">
+        <label for="inputAB">Escribe una longitud para \(AB\):</label>
+        <input id="inputAB" type="number" min="1" placeholder="Ejemplo: 12">
+        <button onclick="calculateMidpoint()">Calcular</button>
+      </div>
+
+      <div id="midpointAnswer" class="answer-box">
+        Aquí aparecerá la respuesta.
+      </div>
+
+      <button class="btn" onclick="nextSlide()">Siguiente →</button>
+    </section>
+
+    <section class="slide">
+      <p class="kicker">Resumen</p>
+      <h2>Idea clave</h2>
+
+      <div class="summary-grid">
+        <div>\(\overline{AB}\)<span>Segmento</span></div>
+        <div>\(AB\)<span>Longitud</span></div>
+        <div>\(M\)<span>Punto medio</span></div>
+      </div>
+
+      <a href="index.html" class="btn link-btn">← Volver al inicio</a>
+    </section>
+
+  </main>
+
+  <nav class="slide-controls">
+    <button onclick="prevSlide()">←</button>
+    <span id="slideCounter">1 / 7</span>
+    <button onclick="nextSlide()">→</button>
+  </nav>
+
+</body>
+</html>
