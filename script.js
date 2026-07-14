@@ -1732,40 +1732,100 @@ function initializeNotableLines() {
    12. CONGRUENCIA DE TRIÁNGULOS
 ========================================================= */
 
+/* =========================================================
+   CONGRUENCIA DE TRIÁNGULOS
+========================================================= */
+
+let congruenceAnimation = null;
+
 function superimposeTriangles() {
   const movingTriangle =
-    document.getElementById(
-      "movingTriangle"
-    );
+    document.getElementById("movingTriangle");
 
   const message =
-    document.getElementById(
-      "congruenceMessage"
-    );
+    document.getElementById("congruenceMessage");
 
-  if (
-    !movingTriangle ||
-    !message
-  ) {
+  if (!movingTriangle || !message) {
     return;
   }
 
-  movingTriangle.classList.add(
-    "superimposed"
+  /*
+   * Cancela una animación anterior antes de comenzar.
+   */
+  congruenceAnimation?.cancel();
+
+  message.classList.remove("success");
+
+  /*
+   * El segundo triángulo debe trasladarse:
+   *
+   * D(565,300) → A(170,330)
+   *
+   * desplazamiento:
+   * x = -395
+   * y = 30
+   */
+  congruenceAnimation = movingTriangle.animate(
+    [
+      {
+        transform: "translate(0px, 0px)",
+        opacity: 1
+      },
+      {
+        transform: "translate(-395px, 30px)",
+        opacity: 0.78
+      }
+    ],
+    {
+      duration: 1400,
+      easing: "cubic-bezier(.2, .8, .2, 1)",
+      fill: "forwards"
+    }
   );
 
-  window.setTimeout(() => {
-    message.classList.add(
-      "success"
+  congruenceAnimation.onfinish = () => {
+    movingTriangle.setAttribute(
+      "transform",
+      "translate(-395 30)"
     );
-  }, 1050);
+
+    movingTriangle.style.opacity = "0.78";
+
+    message.classList.add("success");
+
+    if (window.MathJax?.typesetPromise) {
+      MathJax.typesetPromise([message]).catch(
+        (error) => {
+          console.warn(
+            "No se pudo actualizar MathJax:",
+            error
+          );
+        }
+      );
+    }
+  };
 }
 
 function resetCongruence() {
   const movingTriangle =
-    document.getElementById(
-      "movingTriangle"
-    );
+    document.getElementById("movingTriangle");
+
+  const message =
+    document.getElementById("congruenceMessage");
+
+  if (!movingTriangle || !message) {
+    return;
+  }
+
+  congruenceAnimation?.cancel();
+  congruenceAnimation = null;
+
+  movingTriangle.removeAttribute("transform");
+  movingTriangle.style.opacity = "1";
+  movingTriangle.style.transform = "none";
+
+  message.classList.remove("success");
+}
 
   const message =
     document.getElementById(
