@@ -1075,3 +1075,15 @@ if (document.readyState === "loading") {
 } else {
   initializeApp();
 }
+/* DIAPOSITIVA 2 (TRIÁNGULOS)
+function restartTriangleAnimation(){
+
+const svg=document.getElementById("triangleDefinition");
+
+if(!svg)return;
+
+const clone=svg.cloneNode(true);
+
+svg.parentNode.replaceChild(clone,svg);
+
+}
