@@ -1,18 +1,32 @@
+/* =========================================================
+   NAVEGACIÓN DE LA PRESENTACIÓN
+========================================================= */
+
 let currentSlide = 0;
 
 const slides = document.querySelectorAll(".slide");
 const counter = document.getElementById("slideCounter");
 
 function showSlide(index) {
-  slides.forEach(slide => slide.classList.remove("active"));
+  if (!slides.length) return;
+
+  slides.forEach((slide) => {
+    slide.classList.remove("active");
+  });
 
   currentSlide = Math.max(0, Math.min(index, slides.length - 1));
-  slides[currentSlide].classList.add("active");
 
-  counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+  const activeSlide = slides[currentSlide];
+  activeSlide.classList.add("active");
 
-  if (window.MathJax) {
-    MathJax.typesetPromise();
+  if (counter) {
+    counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+  }
+
+  if (window.MathJax?.typesetPromise) {
+    MathJax.typesetPromise([activeSlide]).catch((error) => {
+      console.warn("MathJax no pudo actualizar la diapositiva:", error);
+    });
   }
 }
 
@@ -24,219 +38,310 @@ function prevSlide() {
   showSlide(currentSlide - 1);
 }
 
-document.addEventListener("keydown", event => {
-  if (event.key === "ArrowRight") nextSlide();
-  if (event.key === "ArrowLeft") prevSlide();
+document.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowRight") {
+    nextSlide();
+  }
+
+  if (event.key === "ArrowLeft") {
+    prevSlide();
+  }
 });
 
+/* =========================================================
+   TARJETAS GIRATORIAS
+========================================================= */
+
 function flipCard(card) {
+  if (!card) return;
   card.classList.toggle("flipped");
 }
 
-/* Segmento interactivo */
+/* =========================================================
+   SEGMENTO INTERACTIVO SIN PUNTO MEDIO
+========================================================= */
 
-const svg = document.getElementById("segmentSvg");
-const pointA = document.getElementById("pointA");
-const pointB = document.getElementById("pointB");
-const pointM = document.getElementById("pointM");
-const segmentLine = document.getElementById("segmentLine");
-const labelA = document.getElementById("labelA");
-const labelB = document.getElementById("labelB");
-const labelM = document.getElementById("labelM");
-const lengthText = document.getElementById("lengthText");
+const simpleSvg = document.getElementById("simpleSegmentSvg");
+const simplePointA = document.getElementById("simplePointA");
+const simplePointB = document.getElementById("simplePointB");
+const simpleLine = document.getElementById("simpleSegmentLine");
+const simpleLabelA = document.getElementById("simpleLabelA");
+const simpleLabelB = document.getElementById("simpleLabelB");
+const simpleLengthText = document.getElementById("simpleLengthText");
 
-let selectedPoint = null;
+let selectedSimplePoint = null;
 
-const minX = 140;
-const maxX = 760;
-const centerY = 165;
+const SVG_WIDTH = 900;
+const SIMPLE_MIN_X = 150;
+const SIMPLE_MAX_X = 750;
+const SIMPLE_CENTER_Y = 165;
+const MIN_DISTANCE = 70;
 
-function svgMousePosition(event) {
-  const rect = svg.getBoundingClientRect();
+function getSvgX(svgElement, event) {
+  const rect = svgElement.getBoundingClientRect();
 
-  return {
-    x: ((event.clientX - rect.left) / rect.width) * 900,
-    y: ((event.clientY - rect.top) / rect.height) * 330
-  };
+  return ((event.clientX - rect.left) / rect.width) * SVG_WIDTH;
 }
 
-function updateSegment() {
-  const ax = Number(pointA.getAttribute("cx"));
-  const bx = Number(pointB.getAttribute("cx"));
-  const mx = (ax + bx) / 2;
+function clamp(value, minimum, maximum) {
+  return Math.max(minimum, Math.min(maximum, value));
+}
 
-  segmentLine.setAttribute("x1", ax);
-  segmentLine.setAttribute("x2", bx);
+function updateSimpleSegment() {
+  if (
+    !simplePointA ||
+    !simplePointB ||
+    !simpleLine ||
+    !simpleLabelA ||
+    !simpleLabelB
+  ) {
+    return;
+  }
 
-  pointM.setAttribute("cx", mx);
+  const ax = Number(simplePointA.getAttribute("cx"));
+  const bx = Number(simplePointB.getAttribute("cx"));
 
-  labelA.setAttribute("x", ax);
-  labelB.setAttribute("x", bx);
-  labelM.setAttribute("x", mx);
+  simpleLine.setAttribute("x1", ax);
+  simpleLine.setAttribute("x2", bx);
+
+  simpleLabelA.setAttribute("x", ax);
+  simpleLabelB.setAttribute("x", bx);
 
   const length = Math.abs(bx - ax);
-  lengthText.textContent = `AB = ${length.toFixed(0)} unidades`;
+
+  if (simpleLengthText) {
+    simpleLengthText.textContent = `AB = ${length.toFixed(0)} unidades`;
+  }
 }
 
-function movePoint(point, x) {
-  const safeX = Math.max(minX, Math.min(maxX, x));
+function moveSimplePoint(point, rawX) {
+  if (!point || !simplePointA || !simplePointB) return;
+
+  const ax = Number(simplePointA.getAttribute("cx"));
+  const bx = Number(simplePointB.getAttribute("cx"));
+
+  let safeX = clamp(rawX, SIMPLE_MIN_X, SIMPLE_MAX_X);
+
+  if (point === simplePointA) {
+    safeX = Math.min(safeX, bx - MIN_DISTANCE);
+  }
+
+  if (point === simplePointB) {
+    safeX = Math.max(safeX, ax + MIN_DISTANCE);
+  }
 
   point.setAttribute("cx", safeX);
-  point.setAttribute("cy", centerY);
+  point.setAttribute("cy", SIMPLE_CENTER_Y);
 
-  updateSegment();
+  updateSimpleSegment();
 }
 
-function startDrag(point) {
-  selectedPoint = point;
-}
+function initializeSimpleSegment() {
+  if (!simpleSvg || !simplePointA || !simplePointB) return;
 
-function stopDrag() {
-  selectedPoint = null;
-}
-
-if (svg) {
-  pointA.addEventListener("mousedown", () => startDrag(pointA));
-  pointB.addEventListener("mousedown", () => startDrag(pointB));
-
-  svg.addEventListener("mousemove", event => {
-    if (!selectedPoint) return;
-    const { x } = svgMousePosition(event);
-    movePoint(selectedPoint, x);
+  simplePointA.addEventListener("pointerdown", (event) => {
+    selectedSimplePoint = simplePointA;
+    simplePointA.setPointerCapture(event.pointerId);
   });
 
-  window.addEventListener("mouseup", stopDrag);
+  simplePointB.addEventListener("pointerdown", (event) => {
+    selectedSimplePoint = simplePointB;
+    simplePointB.setPointerCapture(event.pointerId);
+  });
 
-  pointA.addEventListener("touchstart", () => startDrag(pointA));
-  pointB.addEventListener("touchstart", () => startDrag(pointB));
-
-  svg.addEventListener("touchmove", event => {
-    if (!selectedPoint) return;
+  simpleSvg.addEventListener("pointermove", (event) => {
+    if (!selectedSimplePoint) return;
 
     event.preventDefault();
-    const touch = event.touches[0];
-    const { x } = svgMousePosition(touch);
 
-    movePoint(selectedPoint, x);
+    const x = getSvgX(simpleSvg, event);
+    moveSimplePoint(selectedSimplePoint, x);
   });
 
-  window.addEventListener("touchend", stopDrag);
+  simpleSvg.addEventListener("pointerup", () => {
+    selectedSimplePoint = null;
+  });
 
-  updateSegment();
+  simpleSvg.addEventListener("pointercancel", () => {
+    selectedSimplePoint = null;
+  });
+
+  updateSimpleSegment();
 }
 
-/* Calculadora */
+/* =========================================================
+   SEGMENTO INTERACTIVO CON PUNTO MEDIO
+========================================================= */
+
+const midpointSvg = document.getElementById("midpointSvg");
+const midpointPointA = document.getElementById("midpointPointA");
+const midpointPointB = document.getElementById("midpointPointB");
+const midpointPointM = document.getElementById("midpointPointM");
+
+const midpointLine = document.getElementById("midpointSegmentLine");
+const midpointLeftHalf = document.getElementById("midpointLeftHalf");
+const midpointRightHalf = document.getElementById("midpointRightHalf");
+
+const midpointLabelA = document.getElementById("midpointLabelA");
+const midpointLabelB = document.getElementById("midpointLabelB");
+const midpointLabelM = document.getElementById("midpointLabelM");
+
+const midpointLengthAB = document.getElementById("midpointLengthAB");
+const midpointLengthAM = document.getElementById("midpointLengthAM");
+const midpointLengthMB = document.getElementById("midpointLengthMB");
+
+let selectedMidpointPoint = null;
+
+const MIDPOINT_MIN_X = 150;
+const MIDPOINT_MAX_X = 750;
+const MIDPOINT_CENTER_Y = 165;
+
+function updateMidpointSegment() {
+  if (
+    !midpointPointA ||
+    !midpointPointB ||
+    !midpointPointM ||
+    !midpointLine
+  ) {
+    return;
+  }
+
+  const ax = Number(midpointPointA.getAttribute("cx"));
+  const bx = Number(midpointPointB.getAttribute("cx"));
+  const mx = (ax + bx) / 2;
+
+  midpointLine.setAttribute("x1", ax);
+  midpointLine.setAttribute("x2", bx);
+
+  if (midpointLeftHalf) {
+    midpointLeftHalf.setAttribute("x1", ax);
+    midpointLeftHalf.setAttribute("x2", mx);
+  }
+
+  if (midpointRightHalf) {
+    midpointRightHalf.setAttribute("x1", mx);
+    midpointRightHalf.setAttribute("x2", bx);
+  }
+
+  midpointPointM.setAttribute("cx", mx);
+  midpointPointM.setAttribute("cy", MIDPOINT_CENTER_Y);
+
+  midpointLabelA?.setAttribute("x", ax);
+  midpointLabelB?.setAttribute("x", bx);
+  midpointLabelM?.setAttribute("x", mx);
+
+  const ab = Math.abs(bx - ax);
+  const am = ab / 2;
+  const mb = ab / 2;
+
+  if (midpointLengthAB) {
+    midpointLengthAB.textContent = `AB = ${ab.toFixed(0)}`;
+  }
+
+  if (midpointLengthAM) {
+    midpointLengthAM.textContent = `AM = ${am.toFixed(0)}`;
+  }
+
+  if (midpointLengthMB) {
+    midpointLengthMB.textContent = `MB = ${mb.toFixed(0)}`;
+  }
+}
+
+function moveMidpointEndpoint(point, rawX) {
+  if (!point || !midpointPointA || !midpointPointB) return;
+
+  const ax = Number(midpointPointA.getAttribute("cx"));
+  const bx = Number(midpointPointB.getAttribute("cx"));
+
+  let safeX = clamp(rawX, MIDPOINT_MIN_X, MIDPOINT_MAX_X);
+
+  if (point === midpointPointA) {
+    safeX = Math.min(safeX, bx - MIN_DISTANCE);
+  }
+
+  if (point === midpointPointB) {
+    safeX = Math.max(safeX, ax + MIN_DISTANCE);
+  }
+
+  point.setAttribute("cx", safeX);
+  point.setAttribute("cy", MIDPOINT_CENTER_Y);
+
+  updateMidpointSegment();
+}
+
+function initializeMidpointSegment() {
+  if (!midpointSvg || !midpointPointA || !midpointPointB) return;
+
+  midpointPointA.addEventListener("pointerdown", (event) => {
+    selectedMidpointPoint = midpointPointA;
+    midpointPointA.setPointerCapture(event.pointerId);
+  });
+
+  midpointPointB.addEventListener("pointerdown", (event) => {
+    selectedMidpointPoint = midpointPointB;
+    midpointPointB.setPointerCapture(event.pointerId);
+  });
+
+  midpointSvg.addEventListener("pointermove", (event) => {
+    if (!selectedMidpointPoint) return;
+
+    event.preventDefault();
+
+    const x = getSvgX(midpointSvg, event);
+    moveMidpointEndpoint(selectedMidpointPoint, x);
+  });
+
+  midpointSvg.addEventListener("pointerup", () => {
+    selectedMidpointPoint = null;
+  });
+
+  midpointSvg.addEventListener("pointercancel", () => {
+    selectedMidpointPoint = null;
+  });
+
+  updateMidpointSegment();
+}
+
+/* =========================================================
+   CALCULADORA DE PUNTO MEDIO
+========================================================= */
 
 function calculateMidpoint() {
   const input = document.getElementById("inputAB");
   const answer = document.getElementById("midpointAnswer");
 
+  if (!input || !answer) return;
+
   const ab = Number(input.value);
 
-  if (!ab || ab <= 0) {
-    answer.innerHTML = "Escribe una longitud positiva.";
+  if (!Number.isFinite(ab) || ab <= 0) {
+    answer.innerHTML =
+      '<span class="answer-error">Escribe una longitud positiva.</span>';
     return;
   }
 
+  const half = ab / 2;
+
   answer.innerHTML = `
-    Si \\(AB = ${ab}\\), entonces:
+    <p>Como \\(M\\) es el punto medio de \\(\\overline{AB}\\), entonces:</p>
     \\[
-      AM = MB = \\frac{${ab}}{2} = ${ab / 2}
+      AM = MB = \\frac{AB}{2}
+      = \\frac{${ab}}{2}
+      = ${half}
     \\]
   `;
 
-  if (window.MathJax) {
-    MathJax.typesetPromise();
+  if (window.MathJax?.typesetPromise) {
+    MathJax.typesetPromise([answer]).catch((error) => {
+      console.warn("No se pudo renderizar la respuesta:", error);
+    });
   }
 }
 
+/* =========================================================
+   INICIALIZACIÓN
+========================================================= */
+
+initializeSimpleSegment();
+initializeMidpointSegment();
 showSlide(0);
-
-/* ========================= */
-/* AJUSTES RESPONSIVE SIN CAMBIAR EL ESTILO */
-/* ========================= */
-
-@media (max-width: 768px) {
-
-  .slide {
-    width: 94vw;
-    height: auto;
-    min-height: 82vh;
-    max-height: none;
-    padding: 34px 26px;
-    overflow-y: auto;
-  }
-
-  .slide h1 {
-    font-size: clamp(3rem, 17vw, 5rem);
-    line-height: 0.95;
-    word-break: normal;
-    overflow-wrap: break-word;
-  }
-
-  .slide h2 {
-    font-size: clamp(2rem, 10vw, 3.2rem);
-    line-height: 1.05;
-    overflow-wrap: break-word;
-  }
-
-  .kicker {
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    line-height: 1.4;
-  }
-
-  .lead {
-    font-size: 1.1rem;
-    line-height: 1.55;
-  }
-
-  .definition-card,
-  .formula-card,
-  .answer-box {
-    font-size: 1.05rem;
-    padding: 22px;
-  }
-
-  .interactive-board,
-  .segment-demo {
-    padding: 10px;
-  }
-
-  .measure-pill {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    border-radius: 24px;
-    width: 100%;
-  }
-
-  .flip-grid,
-  .summary-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .flip-card {
-    height: 180px;
-  }
-
-  .activity-box {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .activity-box input,
-  .activity-box button {
-    width: 100%;
-  }
-
-  .btn {
-    width: 100%;
-    text-align: center;
-  }
-
-  .slide-controls {
-    bottom: 12px;
-    transform: translateX(-50%) scale(0.9);
-  }
-}
