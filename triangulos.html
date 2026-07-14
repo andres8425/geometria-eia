@@ -567,6 +567,295 @@
 
 </section>
 
+    <!-- =========================================
+     DIAPOSITIVA 4 · LÍNEAS NOTABLES
+========================================== -->
+
+<section class="slide">
+
+  <p class="kicker">
+    Líneas notables
+  </p>
+
+  <h2>Altura, mediana y bisectriz</h2>
+
+  <p class="lead compact-lead">
+    Selecciona una línea notable para observar su construcción
+    en el triángulo \(\triangle ABC\).
+  </p>
+
+  <div class="notable-lines-layout">
+
+    <div class="geometry-board notable-lines-board">
+
+      <svg
+        id="notableLinesSvg"
+        viewBox="0 0 900 470"
+        aria-label="Líneas notables de un triángulo"
+      >
+
+        <!-- Triángulo -->
+
+        <polygon
+          class="notable-triangle-fill"
+          points="210,370 700,370 500,70"
+        ></polygon>
+
+        <line
+          class="notable-triangle-side"
+          x1="210"
+          y1="370"
+          x2="700"
+          y2="370"
+        ></line>
+
+        <line
+          class="notable-triangle-side"
+          x1="700"
+          y1="370"
+          x2="500"
+          y2="70"
+        ></line>
+
+        <line
+          class="notable-triangle-side"
+          x1="500"
+          y1="70"
+          x2="210"
+          y2="370"
+        ></line>
+
+        <!-- Altura desde C -->
+
+        <g id="altitudeGroup" class="notable-group active">
+
+          <line
+            id="altitudeLine"
+            class="notable-line altitude-line"
+            x1="500"
+            y1="70"
+            x2="500"
+            y2="370"
+          ></line>
+
+          <circle
+            class="notable-foot"
+            cx="500"
+            cy="370"
+            r="9"
+          ></circle>
+
+          <!-- Símbolo de perpendicularidad -->
+
+          <path
+            class="right-angle-mark"
+            d="M 500 346 L 524 346 L 524 370"
+          ></path>
+
+          <text
+            class="notable-point-label"
+            x="500"
+            y="410"
+          >
+            H
+          </text>
+
+        </g>
+
+        <!-- Mediana desde C -->
+
+        <g id="medianGroup" class="notable-group">
+
+          <line
+            id="medianLine"
+            class="notable-line median-line"
+            x1="500"
+            y1="70"
+            x2="455"
+            y2="370"
+          ></line>
+
+          <circle
+            class="notable-foot median-point"
+            cx="455"
+            cy="370"
+            r="9"
+          ></circle>
+
+          <text
+            class="notable-point-label"
+            x="455"
+            y="410"
+          >
+            M
+          </text>
+
+          <!-- Marcas de igualdad -->
+
+          <line
+            class="equal-mark"
+            x1="325"
+            y1="360"
+            x2="325"
+            y2="380"
+          ></line>
+
+          <line
+            class="equal-mark"
+            x1="585"
+            y1="360"
+            x2="585"
+            y2="380"
+          ></line>
+
+        </g>
+
+        <!-- Bisectriz desde C -->
+
+        <g id="bisectorGroup" class="notable-group">
+
+          <line
+            id="bisectorLine"
+            class="notable-line bisector-line"
+            x1="500"
+            y1="70"
+            x2="455"
+            y2="370"
+          ></line>
+
+          <path
+            class="bisector-arc bisector-arc-left"
+            d="M 470 111 A 47 47 0 0 1 496 118"
+          ></path>
+
+          <path
+            class="bisector-arc bisector-arc-right"
+            d="M 496 118 A 47 47 0 0 1 522 108"
+          ></path>
+
+          <text
+            class="angle-equality-symbol"
+            x="468"
+            y="145"
+          >
+            α
+          </text>
+
+          <text
+            class="angle-equality-symbol"
+            x="520"
+            y="145"
+          >
+            α
+          </text>
+
+        </g>
+
+        <!-- Vértices -->
+
+        <circle
+          class="notable-vertex"
+          cx="210"
+          cy="370"
+          r="17"
+        ></circle>
+
+        <circle
+          class="notable-vertex"
+          cx="700"
+          cy="370"
+          r="17"
+        ></circle>
+
+        <circle
+          class="notable-vertex"
+          cx="500"
+          cy="70"
+          r="17"
+        ></circle>
+
+        <!-- Etiquetas -->
+
+        <text
+          class="notable-vertex-label"
+          x="180"
+          y="412"
+        >
+          A
+        </text>
+
+        <text
+          class="notable-vertex-label"
+          x="730"
+          y="412"
+        >
+          B
+        </text>
+
+        <text
+          class="notable-vertex-label"
+          x="500"
+          y="38"
+        >
+          C
+        </text>
+
+      </svg>
+
+    </div>
+
+    <div class="notable-lines-panel">
+
+      <button
+        type="button"
+        class="notable-selector active"
+        onclick="showNotableLine('altitude', this)"
+      >
+        Altura
+      </button>
+
+      <button
+        type="button"
+        class="notable-selector"
+        onclick="showNotableLine('median', this)"
+      >
+        Mediana
+      </button>
+
+      <button
+        type="button"
+        class="notable-selector"
+        onclick="showNotableLine('bisector', this)"
+      >
+        Bisectriz
+      </button>
+
+      <div
+        id="notableLineDescription"
+        class="notable-description"
+      >
+        <strong>Altura</strong>
+
+        <p>
+          La altura relativa al lado \(\overline{AB}\) es el segmento
+          perpendicular trazado desde el vértice \(C\) hasta la recta
+          que contiene a \(\overline{AB}\).
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <button
+    class="btn"
+    type="button"
+    onclick="nextSlide()"
+  >
+    Siguiente →
+  </button>
+
+</section>
   </main>
 
   <nav
