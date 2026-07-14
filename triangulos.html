@@ -337,6 +337,62 @@
     </button>
 
   </nav>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const triangleSlides = document.querySelectorAll(".slide");
+    const triangleCounter = document.getElementById("slideCounter");
 
+    let triangleCurrentSlide = 0;
+
+    function showTriangleSlide(index) {
+      if (!triangleSlides.length) return;
+
+      triangleCurrentSlide = Math.max(
+        0,
+        Math.min(index, triangleSlides.length - 1)
+      );
+
+      triangleSlides.forEach((slide, slideIndex) => {
+        slide.classList.toggle(
+          "active",
+          slideIndex === triangleCurrentSlide
+        );
+
+        slide.scrollTop = 0;
+      });
+
+      if (triangleCounter) {
+        triangleCounter.textContent =
+          `${triangleCurrentSlide + 1} / ${triangleSlides.length}`;
+      }
+
+      const activeSlide = triangleSlides[triangleCurrentSlide];
+
+      if (window.MathJax?.typesetPromise) {
+        MathJax.typesetPromise([activeSlide]).catch((error) => {
+          console.warn("Error de MathJax:", error);
+        });
+      }
+    }
+
+    /*
+     * Las funciones se guardan en window para que funcionen
+     * con onclick="nextSlide()" y onclick="prevSlide()".
+     */
+    window.nextSlide = function () {
+      showTriangleSlide(triangleCurrentSlide + 1);
+    };
+
+    window.prevSlide = function () {
+      showTriangleSlide(triangleCurrentSlide - 1);
+    };
+
+    window.goToSlide = function (index) {
+      showTriangleSlide(index);
+    };
+
+    showTriangleSlide(0);
+  });
+</script>
 </body>
 </html>
