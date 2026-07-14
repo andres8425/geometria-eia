@@ -3986,3 +3986,266 @@ function highlightTriangleElements(type, button) {
     width: fit-content;
   }
 }
+/* =========================================================
+   TRIÁNGULOS · DIAPOSITIVA 5
+   INTRODUCCIÓN A LA CONGRUENCIA
+========================================================= */
+
+.congruence-slide {
+  overflow-y: auto;
+}
+
+.congruence-board {
+  width: 100%;
+
+  margin: 8px 0 14px;
+  padding: 10px 18px;
+
+  border: 2px solid rgba(166, 95, 63, 0.22);
+  border-radius: var(--radio-lg);
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff8e9,
+      var(--papel-3)
+    );
+
+  box-shadow:
+    inset 0 0 45px rgba(166, 95, 63, 0.05);
+}
+
+#congruenceSvg {
+  width: 100%;
+  height: min(310px, 38vh);
+
+  display: block;
+  overflow: visible;
+}
+
+.congruence-fill {
+  stroke: none;
+}
+
+.fixed-fill {
+  fill: rgba(31, 104, 116, 0.14);
+}
+
+.moving-fill {
+  fill: rgba(166, 95, 63, 0.14);
+}
+
+.congruence-side {
+  fill: none;
+
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.side-one {
+  stroke: var(--rojo);
+}
+
+.side-two {
+  stroke: var(--azul);
+}
+
+.side-three {
+  stroke: var(--cobre-600);
+}
+
+.congruence-vertex {
+  fill: var(--verde-700);
+
+  stroke: var(--papel-3);
+  stroke-width: 3;
+
+  filter:
+    drop-shadow(
+      0 6px 8px rgba(0, 0, 0, 0.18)
+    );
+}
+
+.moving-vertex {
+  fill: var(--cobre-600);
+}
+
+.congruence-label {
+  fill: var(--verde-700);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 27px;
+  font-weight: 700;
+
+  text-anchor: middle;
+}
+
+.moving-label {
+  fill: var(--cobre-700);
+}
+
+/*
+ * El grupo móvil se desplaza mediante transform.
+ * La transición hace que la superposición sea suave.
+ */
+
+.moving-triangle {
+  transform-box: view-box;
+  transform-origin: center;
+
+  transition:
+    transform
+    1.3s
+    cubic-bezier(.2, .8, .2, 1),
+    opacity
+    500ms
+    ease;
+}
+
+.moving-triangle.superimposed {
+  transform:
+    translate(-395px, 30px)
+    rotate(0deg);
+}
+
+.congruence-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin: 4px 0 14px;
+}
+
+.congruence-button {
+  padding: 12px 22px;
+
+  border: none;
+  border-radius: 999px;
+
+  color: var(--blanco);
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--verde-700),
+      var(--verde-500)
+    );
+
+  box-shadow: var(--sombra-sm);
+
+  transition:
+    transform var(--transicion),
+    box-shadow var(--transicion),
+    filter var(--transicion);
+}
+
+.congruence-button:hover {
+  transform: translateY(-4px);
+
+  box-shadow: var(--sombra-md);
+}
+
+.congruence-button.secondary {
+  color: var(--verde-700);
+
+  border: 1px solid rgba(18, 60, 50, 0.18);
+
+  background: var(--blanco);
+}
+
+.congruence-definition {
+  width: 100%;
+
+  padding: 17px 22px;
+
+  border-left: 9px solid var(--cobre-600);
+  border-radius: var(--radio-md);
+
+  color: var(--texto);
+
+  background: var(--blanco);
+
+  box-shadow: var(--sombra-md);
+
+  transition:
+    transform 400ms ease,
+    border-color 400ms ease,
+    background 400ms ease;
+}
+
+.congruence-definition strong {
+  color: var(--verde-700);
+
+  font-size: 1.25rem;
+}
+
+.congruence-definition p {
+  margin: 7px 0 0;
+
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.congruence-definition.success {
+  transform: scale(1.015);
+
+  border-left-color: var(--verde-500);
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #eefaf5
+    );
+}
+
+.congruence-definition.success::before {
+  content: "✓ Los triángulos coinciden";
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--verde-700);
+
+  font-weight: 700;
+}
+
+@media (max-height: 800px) and (min-width: 769px) {
+  #congruenceSvg {
+    height: min(235px, 30vh);
+  }
+
+  .congruence-definition {
+    padding: 13px 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .congruence-board {
+    padding: 4px;
+  }
+
+  #congruenceSvg {
+    height: min(210px, 27vh);
+  }
+
+  .congruence-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .congruence-button {
+    width: 100%;
+  }
+
+  .congruence-definition {
+    padding: 14px 16px;
+  }
+}
