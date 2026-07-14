@@ -3048,3 +3048,93 @@ opacity:1;
     font-size: 20px;
   }
 }
+function highlightTriangleElements(type, button) {
+  const layout = document.querySelector(
+    ".triangle-elements-layout"
+  );
+
+  const description = document.getElementById(
+    "triangleElementDescription"
+  );
+
+  if (!layout || !description) {
+    return;
+  }
+
+  layout.classList.remove(
+    "show-all",
+    "show-vertices",
+    "show-sides",
+    "show-angles"
+  );
+
+  layout.classList.add(`show-${type}`);
+
+  document
+    .querySelectorAll(".element-selector")
+    .forEach((selector) => {
+      selector.classList.remove("active");
+    });
+
+  button?.classList.add("active");
+
+  const descriptions = {
+    all: `
+      <strong>\\(\\triangle ABC\\)</strong>
+      <p>
+        Está formado por tres vértices, tres lados
+        y tres ángulos interiores.
+      </p>
+    `,
+
+    vertices: `
+      <strong>Vértices</strong>
+      <p>
+        Los vértices son los puntos
+        \\(A\\), \\(B\\) y \\(C\\).
+      </p>
+    `,
+
+    sides: `
+      <strong>Lados</strong>
+      <p>
+        Los lados son
+        \\(\\overline{AB}\\),
+        \\(\\overline{BC}\\) y
+        \\(\\overline{CA}\\).
+      </p>
+    `,
+
+    angles: `
+      <strong>Ángulos interiores</strong>
+      <p>
+        Los ángulos interiores son
+        \\(\\angle A\\),
+        \\(\\angle B\\) y
+        \\(\\angle C\\).
+      </p>
+    `
+  };
+
+  description.style.opacity = "0";
+  description.style.transform = "translateY(6px)";
+
+  window.setTimeout(() => {
+    description.innerHTML =
+      descriptions[type] || descriptions.all;
+
+    description.style.opacity = "1";
+    description.style.transform = "translateY(0)";
+
+    if (window.MathJax?.typesetPromise) {
+      MathJax.typesetPromise([description]).catch(
+        (error) => {
+          console.warn(
+            "No se pudo renderizar MathJax:",
+            error
+          );
+        }
+      );
+    }
+  }, 140);
+}
