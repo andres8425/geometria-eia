@@ -847,7 +847,166 @@
   </button>
 
 </section>
- 
+ <!-- =========================================
+     DIAPOSITIVA 5 · CONGRUENCIA
+========================================== -->
+
+<section class="slide congruence-slide">
+
+  <p class="kicker">
+    Congruencia
+  </p>
+
+  <h2>¿Cuándo dos triángulos son congruentes?</h2>
+
+  <p class="lead compact-lead">
+    Dos triángulos son congruentes cuando tienen la misma forma
+    y el mismo tamaño, aunque estén ubicados o girados de manera diferente.
+  </p>
+
+  <div class="congruence-board">
+
+    <svg
+      id="congruenceSvg"
+      viewBox="0 0 900 410"
+      aria-label="Dos triángulos congruentes que pueden superponerse"
+    >
+
+      <!-- Triángulo fijo ABC -->
+
+      <g id="fixedTriangle">
+
+        <polygon
+          class="congruence-fill fixed-fill"
+          points="170,330 420,330 290,105"
+        ></polygon>
+
+        <line
+          class="congruence-side side-one"
+          x1="170"
+          y1="330"
+          x2="420"
+          y2="330"
+        ></line>
+
+        <line
+          class="congruence-side side-two"
+          x1="420"
+          y1="330"
+          x2="290"
+          y2="105"
+        ></line>
+
+        <line
+          class="congruence-side side-three"
+          x1="290"
+          y1="105"
+          x2="170"
+          y2="330"
+        ></line>
+
+        <circle class="congruence-vertex" cx="170" cy="330" r="13"></circle>
+        <circle class="congruence-vertex" cx="420" cy="330" r="13"></circle>
+        <circle class="congruence-vertex" cx="290" cy="105" r="13"></circle>
+
+        <text class="congruence-label" x="145" y="365">A</text>
+        <text class="congruence-label" x="445" y="365">B</text>
+        <text class="congruence-label" x="290" y="78">C</text>
+
+      </g>
+
+      <!-- Triángulo móvil DEF -->
+
+      <g id="movingTriangle" class="moving-triangle">
+
+        <polygon
+          class="congruence-fill moving-fill"
+          points="565,300 815,300 685,75"
+        ></polygon>
+
+        <line
+          class="congruence-side side-one"
+          x1="565"
+          y1="300"
+          x2="815"
+          y2="300"
+        ></line>
+
+        <line
+          class="congruence-side side-two"
+          x1="815"
+          y1="300"
+          x2="685"
+          y2="75"
+        ></line>
+
+        <line
+          class="congruence-side side-three"
+          x1="685"
+          y1="75"
+          x2="565"
+          y2="300"
+        ></line>
+
+        <circle class="congruence-vertex moving-vertex" cx="565" cy="300" r="13"></circle>
+        <circle class="congruence-vertex moving-vertex" cx="815" cy="300" r="13"></circle>
+        <circle class="congruence-vertex moving-vertex" cx="685" cy="75" r="13"></circle>
+
+        <text class="congruence-label moving-label" x="540" y="335">D</text>
+        <text class="congruence-label moving-label" x="840" y="335">E</text>
+        <text class="congruence-label moving-label" x="685" y="48">F</text>
+
+      </g>
+
+    </svg>
+
+  </div>
+
+  <div class="congruence-actions">
+
+    <button
+      type="button"
+      class="congruence-button"
+      onclick="superimposeTriangles()"
+    >
+      Superponer triángulos
+    </button>
+
+    <button
+      type="button"
+      class="congruence-button secondary"
+      onclick="resetCongruence()"
+    >
+      Reiniciar
+    </button>
+
+  </div>
+
+  <div
+    id="congruenceMessage"
+    class="congruence-definition"
+  >
+    <strong>Definición</strong>
+
+    <p>
+      Los triángulos \(\triangle ABC\) y \(\triangle DEF\)
+      son congruentes si existe una isometría que lleva uno sobre el otro.
+      Se escribe:
+      \[
+        \triangle ABC \cong \triangle DEF.
+      \]
+    </p>
+  </div>
+
+  <button
+    class="btn"
+    type="button"
+    onclick="nextSlide()"
+  >
+    Siguiente →
+  </button>
+
+</section>
   </main>
 
   <nav
