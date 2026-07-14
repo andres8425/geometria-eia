@@ -1733,120 +1733,191 @@ function initializeNotableLines() {
 ========================================================= */
 
 /* =========================================================
-   CONGRUENCIA DE TRIÁNGULOS
+   12. CONGRUENCIA DE TRIÁNGULOS
 ========================================================= */
 
-let congruenceAnimation = null;
+let congruenceFrameId = null;
+let congruenceStartTime = null;
 
-function superimposeTriangles() {
+const congruenceMovement = {
+  startX: 0,
+  startY: 0,
+  endX: -395,
+  endY: 30,
+  duration: 1400
+};
+
+function congruenceEase(progress) {
+  return progress < 0.5
+    ? 4 * progress * progress * progress
+    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+}
+
+function setMovingTrianglePosition(x, y) {
   const movingTriangle =
     document.getElementById("movingTriangle");
 
-  const message =
-    document.getElementById("congruenceMessage");
-
-  if (!movingTriangle || !message) {
+  if (!movingTriangle) {
     return;
   }
 
-  /*
-   * Cancela una animación anterior antes de comenzar.
-   */
-  congruenceAnimation?.cancel();
+  movingTriangle.setAttribute(
+    "transform",
+    `translate(${x} ${y})`
+  );
+}
 
-  message.classList.remove("success");
+function animateCongruence(timestamp) {
+  if (congruenceStartTime === null) {
+    congruenceStartTime = timestamp;
+  }
 
-  /*
-   * El segundo triángulo debe trasladarse:
-   *
-   * D(565,300) → A(170,330)
-   *
-   * desplazamiento:
-   * x = -395
-   * y = 30
-   */
-  congruenceAnimation = movingTriangle.animate(
-    [
-      {
-        transform: "translate(0px, 0px)",
-        opacity: 1
-      },
-      {
-        transform: "translate(-395px, 30px)",
-        opacity: 0.78
-      }
-    ],
-    {
-      duration: 1400,
-      easing: "cubic-bezier(.2, .8, .2, 1)",
-      fill: "forwards"
-    }
+  const elapsed =
+    timestamp - congruenceStartTime;
+
+  const progress = Math.min(
+    elapsed / congruenceMovement.duration,
+    1
   );
 
-  congruenceAnimation.onfinish = () => {
-    movingTriangle.setAttribute(
-      "transform",
-      "translate(-395 30)"
-    );
+  const easedProgress =
+    congruenceEase(progress);
 
-    movingTriangle.style.opacity = "0.78";
+  const currentX =
+    congruenceMovement.startX +
+    (
+      congruenceMovement.endX -
+      congruenceMovement.startX
+    ) *
+    easedProgress;
 
-    message.classList.add("success");
+  const currentY =
+    congruenceMovement.startY +
+    (
+      congruenceMovement.endY -
+      congruenceMovement.startY
+    ) *
+    easedProgress;
 
-    if (window.MathJax?.typesetPromise) {
-      MathJax.typesetPromise([message]).catch(
-        (error) => {
-          console.warn(
-            "No se pudo actualizar MathJax:",
-            error
-          );
-        }
+  setMovingTrianglePosition(
+    currentX,
+    currentY
+  );
+
+  if (progress < 1) {
+    congruenceFrameId =
+      requestAnimationFrame(
+        animateCongruence
       );
-    }
-  };
-}
 
-function resetCongruence() {
-  const movingTriangle =
-    document.getElementById("movingTriangle");
-
-  const message =
-    document.getElementById("congruenceMessage");
-
-  if (!movingTriangle || !message) {
     return;
   }
 
-  congruenceAnimation?.cancel();
-  congruenceAnimation = null;
+  congruenceFrameId = null;
+  congruenceStartTime = null;
 
-  movingTriangle.removeAttribute("transform");
-  movingTriangle.style.opacity = "1";
-  movingTriangle.style.transform = "none";
-
-  message.classList.remove("success");
-}
+  const movingTriangle =
+    document.getElementById(
+      "movingTriangle"
+    );
 
   const message =
     document.getElementById(
       "congruenceMessage"
     );
 
-  if (
-    !movingTriangle ||
-    !message
-  ) {
+  if (movingTriangle) {
+    movingTriangle.style.opacity =
+      "0.72";
+  }
+
+  message?.classList.add("success");
+}
+
+function superimposeTriangles() {
+  const movingTriangle =
+    document.getElementById(
+      "movingTriangle"
+    );
+
+  const message =
+    document.getElementById(
+      "congruenceMessage"
+    );
+
+  if (!movingTriangle) {
+    console.error(
+      'No existe el elemento con id="movingTriangle".'
+    );
+
     return;
   }
 
-  movingTriangle.classList.remove(
-    "superimposed"
+  if (congruenceFrameId !== null) {
+    cancelAnimationFrame(
+      congruenceFrameId
+    );
+  }
+
+  congruenceFrameId = null;
+  congruenceStartTime = null;
+
+  movingTriangle.style.opacity = "1";
+
+  message?.classList.remove(
+    "success"
   );
 
-  message.classList.remove(
+  setMovingTrianglePosition(0, 0);
+
+  congruenceFrameId =
+    requestAnimationFrame(
+      animateCongruence
+    );
+}
+
+function resetCongruence() {
+  const movingTriangle =
+    document.getElementById(
+      "movingTriangle"
+    );
+
+  const message =
+    document.getElementById(
+      "congruenceMessage"
+    );
+
+  if (congruenceFrameId !== null) {
+    cancelAnimationFrame(
+      congruenceFrameId
+    );
+  }
+
+  congruenceFrameId = null;
+  congruenceStartTime = null;
+
+  if (movingTriangle) {
+    movingTriangle.removeAttribute(
+      "transform"
+    );
+
+    movingTriangle.style.opacity =
+      "1";
+  }
+
+  message?.classList.remove(
     "success"
   );
 }
+
+/*
+ * Garantiza el acceso desde los onclick del HTML.
+ */
+window.superimposeTriangles =
+  superimposeTriangles;
+
+window.resetCongruence =
+  resetCongruence;
 /* =========================================================
    12. INICIALIZACIÓN GENERAL
 ========================================================= */
