@@ -309,6 +309,264 @@
 
     </section>
 
+    <!-- =========================================
+     DIAPOSITIVA 3 · ELEMENTOS DEL TRIÁNGULO
+========================================== -->
+
+<section class="slide">
+
+  <p class="kicker">
+    Elementos del triángulo
+  </p>
+
+  <h2>Vértices, lados y ángulos</h2>
+
+  <p class="lead compact-lead">
+    Selecciona un elemento para identificarlo en el triángulo
+    \(\triangle ABC\).
+  </p>
+
+  <div class="triangle-elements-layout">
+
+    <div class="geometry-board triangle-elements-board">
+
+      <svg
+        id="triangleElementsSvg"
+        viewBox="0 0 900 450"
+        aria-label="Elementos del triángulo ABC"
+      >
+
+        <!-- Interior -->
+
+        <polygon
+          id="elementsTriangleFill"
+          class="elements-triangle-fill"
+          points="220,350 680,350 470,75"
+        ></polygon>
+
+        <!-- Lados -->
+
+        <line
+          id="elementSideAB"
+          class="element-side"
+          x1="220"
+          y1="350"
+          x2="680"
+          y2="350"
+        ></line>
+
+        <line
+          id="elementSideBC"
+          class="element-side"
+          x1="680"
+          y1="350"
+          x2="470"
+          y2="75"
+        ></line>
+
+        <line
+          id="elementSideCA"
+          class="element-side"
+          x1="470"
+          y1="75"
+          x2="220"
+          y2="350"
+        ></line>
+
+        <!-- Ángulos interiores -->
+
+        <path
+          id="elementAngleA"
+          class="element-angle"
+          d="M 282 350 A 62 62 0 0 0 262 303"
+        ></path>
+
+        <path
+          id="elementAngleB"
+          class="element-angle"
+          d="M 618 350 A 62 62 0 0 1 640 302"
+        ></path>
+
+        <path
+          id="elementAngleC"
+          class="element-angle"
+          d="M 435 121 A 56 56 0 0 1 512 126"
+        ></path>
+
+        <!-- Vértices -->
+
+        <circle
+          id="elementVertexA"
+          class="element-vertex"
+          cx="220"
+          cy="350"
+          r="18"
+        ></circle>
+
+        <circle
+          id="elementVertexB"
+          class="element-vertex"
+          cx="680"
+          cy="350"
+          r="18"
+        ></circle>
+
+        <circle
+          id="elementVertexC"
+          class="element-vertex"
+          cx="470"
+          cy="75"
+          r="18"
+        ></circle>
+
+        <!-- Etiquetas de vértices -->
+
+        <text
+          class="element-vertex-label"
+          x="190"
+          y="395"
+        >
+          A
+        </text>
+
+        <text
+          class="element-vertex-label"
+          x="710"
+          y="395"
+        >
+          B
+        </text>
+
+        <text
+          class="element-vertex-label"
+          x="470"
+          y="42"
+        >
+          C
+        </text>
+
+        <!-- Etiquetas de lados -->
+
+        <text
+          id="sideLabelAB"
+          class="element-side-label"
+          x="450"
+          y="390"
+        >
+          \(\overline{AB}\)
+        </text>
+
+        <text
+          id="sideLabelBC"
+          class="element-side-label"
+          x="610"
+          y="195"
+        >
+          \(\overline{BC}\)
+        </text>
+
+        <text
+          id="sideLabelCA"
+          class="element-side-label"
+          x="325"
+          y="195"
+        >
+          \(\overline{CA}\)
+        </text>
+
+        <!-- Etiquetas de ángulos -->
+
+        <text
+          id="angleLabelA"
+          class="element-angle-label"
+          x="285"
+          y="323"
+        >
+          \(\angle A\)
+        </text>
+
+        <text
+          id="angleLabelB"
+          class="element-angle-label"
+          x="610"
+          y="323"
+        >
+          \(\angle B\)
+        </text>
+
+        <text
+          id="angleLabelC"
+          class="element-angle-label"
+          x="470"
+          y="145"
+        >
+          \(\angle C\)
+        </text>
+
+      </svg>
+
+    </div>
+
+    <div class="triangle-elements-panel">
+
+      <button
+        type="button"
+        class="element-selector active"
+        onclick="highlightTriangleElements('all', this)"
+      >
+        Todo
+      </button>
+
+      <button
+        type="button"
+        class="element-selector"
+        onclick="highlightTriangleElements('vertices', this)"
+      >
+        Vértices
+      </button>
+
+      <button
+        type="button"
+        class="element-selector"
+        onclick="highlightTriangleElements('sides', this)"
+      >
+        Lados
+      </button>
+
+      <button
+        type="button"
+        class="element-selector"
+        onclick="highlightTriangleElements('angles', this)"
+      >
+        Ángulos
+      </button>
+
+      <div
+        id="triangleElementDescription"
+        class="element-description"
+      >
+        <strong>\(\triangle ABC\)</strong>
+
+        <p>
+          Está formado por tres vértices, tres lados y tres
+          ángulos interiores.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <button
+    class="btn"
+    type="button"
+    onclick="nextSlide()"
+  >
+    Siguiente →
+  </button>
+
+</section>
+
   </main>
 
   <nav
