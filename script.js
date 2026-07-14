@@ -151,3 +151,92 @@ function calculateMidpoint() {
 }
 
 showSlide(0);
+
+/* ========================= */
+/* AJUSTES RESPONSIVE SIN CAMBIAR EL ESTILO */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  .slide {
+    width: 94vw;
+    height: auto;
+    min-height: 82vh;
+    max-height: none;
+    padding: 34px 26px;
+    overflow-y: auto;
+  }
+
+  .slide h1 {
+    font-size: clamp(3rem, 17vw, 5rem);
+    line-height: 0.95;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+
+  .slide h2 {
+    font-size: clamp(2rem, 10vw, 3.2rem);
+    line-height: 1.05;
+    overflow-wrap: break-word;
+  }
+
+  .kicker {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    line-height: 1.4;
+  }
+
+  .lead {
+    font-size: 1.1rem;
+    line-height: 1.55;
+  }
+
+  .definition-card,
+  .formula-card,
+  .answer-box {
+    font-size: 1.05rem;
+    padding: 22px;
+  }
+
+  .interactive-board,
+  .segment-demo {
+    padding: 10px;
+  }
+
+  .measure-pill {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 24px;
+    width: 100%;
+  }
+
+  .flip-grid,
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flip-card {
+    height: 180px;
+  }
+
+  .activity-box {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .activity-box input,
+  .activity-box button {
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .slide-controls {
+    bottom: 12px;
+    transform: translateX(-50%) scale(0.9);
+  }
+}
