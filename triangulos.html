@@ -28,17 +28,16 @@
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
   ></script>
 
-  <script
-    defer
-    src="script.js"
-  ></script>
+  <script defer src="script.js"></script>
 </head>
 
 <body class="capitulo-presentacion triangulos-presentacion">
 
   <main class="deck">
 
-    <!-- DIAPOSITIVA 1 · PORTADA -->
+    <!-- =========================================
+         DIAPOSITIVA 1 · PORTADA
+    ========================================== -->
 
     <section class="slide active triangle-cover">
 
@@ -78,14 +77,10 @@
             aria-label="Construcción animada de un triángulo ABC"
           >
 
-            <!-- Interior del triángulo -->
-
             <polygon
               class="cover-triangle-fill"
               points="105,400 515,400 345,80"
             ></polygon>
-
-            <!-- Lados -->
 
             <line
               class="cover-triangle-side side-ab"
@@ -111,8 +106,6 @@
               y2="400"
             ></line>
 
-            <!-- Puntos -->
-
             <circle
               class="cover-triangle-point point-a"
               cx="105"
@@ -133,8 +126,6 @@
               cy="80"
               r="17"
             ></circle>
-
-            <!-- Etiquetas -->
 
             <text
               class="cover-triangle-label label-a"
@@ -175,6 +166,149 @@
 
     </section>
 
+    <!-- =========================================
+         DIAPOSITIVA 2 · DEFINICIÓN
+    ========================================== -->
+
+    <section class="slide">
+
+      <p class="kicker">
+        Construcción geométrica
+      </p>
+
+      <h2>¿Qué es un triángulo?</h2>
+
+      <p class="lead compact-lead">
+        Un triángulo se obtiene al unir mediante segmentos tres puntos
+        que no están sobre una misma recta.
+      </p>
+
+      <div class="geometry-board triangle-construction">
+
+        <svg
+          id="triangleDefinition"
+          viewBox="0 0 900 430"
+          aria-label="Construcción del triángulo ABC"
+        >
+
+          <!-- Interior -->
+
+          <polygon
+            class="triangle-fill appear-fill"
+            points="240,320 660,320 450,90"
+          ></polygon>
+
+          <!-- Lados -->
+
+          <line
+            class="triangle-side draw1"
+            x1="240"
+            y1="320"
+            x2="660"
+            y2="320"
+          ></line>
+
+          <line
+            class="triangle-side draw2"
+            x1="660"
+            y1="320"
+            x2="450"
+            y2="90"
+          ></line>
+
+          <line
+            class="triangle-side draw3"
+            x1="450"
+            y1="90"
+            x2="240"
+            y2="320"
+          ></line>
+
+          <!-- Puntos -->
+
+          <circle
+            class="triangle-point point1"
+            cx="240"
+            cy="320"
+            r="16"
+          ></circle>
+
+          <circle
+            class="triangle-point point2"
+            cx="660"
+            cy="320"
+            r="16"
+          ></circle>
+
+          <circle
+            class="triangle-point point3"
+            cx="450"
+            cy="90"
+            r="16"
+          ></circle>
+
+          <!-- Etiquetas -->
+
+          <text
+            class="triangle-label label1"
+            x="210"
+            y="365"
+          >
+            A
+          </text>
+
+          <text
+            class="triangle-label label2"
+            x="690"
+            y="365"
+          >
+            B
+          </text>
+
+          <text
+            class="triangle-label label3"
+            x="450"
+            y="55"
+          >
+            C
+          </text>
+
+        </svg>
+
+      </div>
+
+      <div class="definition-card triangle-definition-text">
+
+        <p>
+          <strong>Definición.</strong>
+          Un <strong>triángulo</strong> es el polígono determinado por
+          tres puntos no colineales unidos dos a dos mediante segmentos.
+        </p>
+
+      </div>
+
+      <div class="triangle-slide-actions">
+
+        <button
+          class="btn"
+          type="button"
+          onclick="restartTriangleAnimation()"
+        >
+          Repetir construcción
+        </button>
+
+        <button
+          class="btn"
+          type="button"
+          onclick="nextSlide()"
+        >
+          Siguiente →
+        </button>
+
+      </div>
+
+    </section>
+
   </main>
 
   <nav
@@ -191,7 +325,7 @@
     </button>
 
     <span id="slideCounter">
-      1 / 1
+      1 / 2
     </span>
 
     <button
@@ -203,149 +337,6 @@
     </button>
 
   </nav>
-
-  /* DIAPOSITIVA 2 (TRIÁNGULOS)/*
-
-  <section class="slide">
-
-    <p class="kicker">
-        CONSTRUCCIÓN GEOMÉTRICA
-    </p>
-
-    <h2>¿Qué es un triángulo?</h2>
-
-    <p class="lead">
-        Un triángulo se obtiene al unir mediante segmentos tres puntos que no están sobre una misma recta.
-    </p>
-
-    <div class="triangle-construction">
-
-        <svg
-            id="triangleDefinition"
-            viewBox="0 0 900 430">
-
-            <!-- interior -->
-
-            <polygon
-                class="triangle-fill appear-fill"
-                points="240,320 660,320 450,90">
-            </polygon>
-
-            <!-- lados -->
-
-            <line
-                class="triangle-side draw1"
-                x1="240"
-                y1="320"
-                x2="660"
-                y2="320">
-            </line>
-
-            <line
-                class="triangle-side draw2"
-                x1="660"
-                y1="320"
-                x2="450"
-                y2="90">
-            </line>
-
-            <line
-                class="triangle-side draw3"
-                x1="450"
-                y1="90"
-                x2="240"
-                y2="320">
-            </line>
-
-            <!-- puntos -->
-
-            <circle
-                class="triangle-point point1"
-                cx="240"
-                cy="320"
-                r="16">
-            </circle>
-
-            <circle
-                class="triangle-point point2"
-                cx="660"
-                cy="320"
-                r="16">
-            </circle>
-
-            <circle
-                class="triangle-point point3"
-                cx="450"
-                cy="90"
-                r="16">
-            </circle>
-
-            <!-- etiquetas -->
-
-            <text
-                class="triangle-label label1"
-                x="215"
-                y="360">
-
-                A
-
-            </text>
-
-            <text
-                class="triangle-label label2"
-                x="680"
-                y="360">
-
-                B
-
-            </text>
-
-            <text
-                class="triangle-label label3"
-                x="450"
-                y="60">
-
-                C
-
-            </text>
-
-        </svg>
-
-    </div>
-
-    <div class="definition-card">
-
-        <strong>Definición</strong>
-
-        <p>
-
-            Un <strong>triángulo</strong> es el polígono determinado por tres puntos no colineales unidos dos a dos mediante segmentos.
-
-        </p>
-
-    </div>
-
-    <div style="margin-top:30px;display:flex;gap:15px;">
-
-        <button
-            class="btn"
-            onclick="restartTriangleAnimation()">
-
-            Repetir construcción
-
-        </button>
-
-        <button
-            class="btn"
-            onclick="nextSlide()">
-
-            Siguiente →
-
-        </button>
-
-    </div>
-
-</section>
 
 </body>
 </html>
