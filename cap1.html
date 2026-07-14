@@ -2,553 +2,84 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Capítulo 1 | Segmentos</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Capítulo 1 | Geometría del plano</title>
 
   <link rel="stylesheet" href="style.css">
-
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)'], ['$', '$']]
-      }
-    };
-  </script>
-
-  <script
-    defer
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
-
-  <script defer src="script.js"></script>
 </head>
 
 <body class="capitulo-presentacion">
 
   <main class="deck">
 
-    <!-- Diapositiva 1 -->
-    <section class="slide active">
+    <section class="slide active section-cover">
+
       <p class="kicker">
-        Capítulo 1 · El lenguaje elemental del plano
+        Fundamentos de Geometría Euclidiana
       </p>
 
-      <h1>Segmentos</h1>
+      <h1>Geometría del plano</h1>
 
       <p class="lead">
-        En esta sección aprenderemos a distinguir entre el segmento como
-        objeto geométrico y su longitud como medida.
+        En este capítulo estudiaremos los objetos fundamentales del plano,
+        las relaciones entre ellos y las primeras herramientas para razonar
+        sobre figuras geométricas.
       </p>
 
-      <button class="btn" type="button" onclick="nextSlide()">
-        Comenzar →
-      </button>
-    </section>
+      <div class="section-menu">
 
-    <!-- Diapositiva 2 -->
-    <section class="slide">
-      <p class="kicker">Idea geométrica</p>
+        <a
+          href="segmentos.html"
+          class="section-card"
+        >
+          <span class="section-number">
+            01
+          </span>
 
-      <h2 class="title-long">Nombrar lo que vemos</h2>
+          <strong>
+            Segmentos y ángulos
+          </strong>
 
-      <p class="lead">
-        La geometría comienza cuando aprendemos a nombrar objetos,
-        relaciones y medidas.
-      </p>
+          <small>
+            Segmentos, longitud, punto medio, definición formal de ángulo,
+            clasificación y construcciones interactivas.
+          </small>
+        </a>
 
-      <div class="segment-demo">
-        <svg viewBox="0 0 900 260" aria-label="Segmento AB">
+        <article class="section-card locked">
 
-          <line
-            x1="210"
-            y1="130"
-            x2="690"
-            y2="130"
-            class="svg-line draw"
-            stroke="#ad6543"
-            stroke-width="9"
-            stroke-linecap="round">
-          </line>
+          <span class="section-number">
+            02
+          </span>
 
-          <circle
-            cx="210"
-            cy="130"
-            r="18"
-            class="svg-point appear"
-            fill="#123c32">
-          </circle>
+          <strong>
+            Congruencia de triángulos
+          </strong>
 
-          <circle
-            cx="690"
-            cy="130"
-            r="18"
-            class="svg-point appear delay"
-            fill="#123c32">
-          </circle>
-
-          <text
-            x="210"
-            y="88"
-            class="svg-label"
-            fill="#123c32">
-            A
-          </text>
-
-          <text
-            x="690"
-            y="88"
-            class="svg-label"
-            fill="#123c32">
-            B
-          </text>
-
-        </svg>
-      </div>
-
-      <button class="btn" type="button" onclick="nextSlide()">
-        Siguiente →
-      </button>
-    </section>
-
-    <!-- Diapositiva 3 -->
-    <section class="slide">
-      <p class="kicker">Definición</p>
-
-      <h2>¿Qué es un segmento?</h2>
-
-      <div class="definition-card">
-        <p>
-          Dados dos puntos distintos \(A\) y \(B\), el segmento
-          \(\overline{AB}\) es la parte de la recta determinada por
-          \(A\) y \(B\) que está comprendida entre ambos puntos,
-          incluyendo sus extremos.
-        </p>
-      </div>
-
-      <p class="small-note">
-        El símbolo \(\overline{AB}\) representa el objeto geométrico,
-        mientras que \(AB\) representa su longitud.
-      </p>
-
-      <button class="btn" type="button" onclick="nextSlide()">
-        Siguiente →
-      </button>
-    </section>
-
-    <!-- Diapositiva 4 -->
-    <section class="slide">
-      <p class="kicker">Exploración interactiva</p>
-
-      <h2>Arrastra los extremos</h2>
-
-      <p class="lead compact-lead">
-        Mueve los puntos \(A\) y \(B\). Observa cómo cambia la longitud
-        del segmento \(\overline{AB}\).
-      </p>
-
-      <div class="interactive-board compact-board">
-        <svg
-          id="simpleSegmentSvg"
-          viewBox="0 0 900 300"
-          aria-label="Segmento interactivo AB">
-
-          <line
-            id="simpleBaseTrack"
-            x1="150"
-            y1="165"
-            x2="750"
-            y2="165"
-            stroke="rgba(18,60,50,0.16)"
-            stroke-width="12"
-            stroke-linecap="round">
-          </line>
-
-          <line
-            id="simpleSegmentLine"
-            x1="250"
-            y1="165"
-            x2="650"
-            y2="165"
-            stroke="#ad6543"
-            stroke-width="9"
-            stroke-linecap="round">
-          </line>
-
-          <circle
-            id="simplePointA"
-            cx="250"
-            cy="165"
-            r="20"
-            fill="#123c32">
-          </circle>
-
-          <circle
-            id="simplePointB"
-            cx="650"
-            cy="165"
-            r="20"
-            fill="#123c32">
-          </circle>
-
-          <text
-            id="simpleLabelA"
-            x="250"
-            y="112"
-            fill="#123c32">
-            A
-          </text>
-
-          <text
-            id="simpleLabelB"
-            x="650"
-            y="112"
-            fill="#123c32">
-            B
-          </text>
-
-        </svg>
-      </div>
-
-      <div class="measure-pill">
-        <span>Longitud actual</span>
-
-        <strong id="simpleLengthText">
-          AB = 400 unidades
-        </strong>
-      </div>
-
-      <button class="btn" type="button" onclick="nextSlide()">
-        Siguiente →
-      </button>
-    </section>
-
-    <!-- Diapositiva 5 -->
-    <section class="slide">
-      <p class="kicker">Objeto vs medida</p>
-
-      <h2 class="title-long">
-        No es lo mismo \(\overline{AB}\) que \(AB\)
-      </h2>
-
-      <div class="flip-grid">
-
-        <article
-          class="flip-card"
-          onclick="flipCard(this)"
-          onkeydown="if(event.key === 'Enter' || event.key === ' '){ flipCard(this); }"
-          tabindex="0">
-
-          <div class="front">
-            \(\overline{AB}\)
-          </div>
-
-          <div class="back">
-            Es el segmento como objeto geométrico.
-          </div>
-
-        </article>
-
-        <article
-          class="flip-card"
-          onclick="flipCard(this)"
-          onkeydown="if(event.key === 'Enter' || event.key === ' '){ flipCard(this); }"
-          tabindex="0">
-
-          <div class="front">
-            \(AB\)
-          </div>
-
-          <div class="back">
-            Es la longitud del segmento.
-          </div>
+          <small>
+            Clasificación de triángulos y criterios de congruencia.
+            Próximamente.
+          </small>
 
         </article>
 
       </div>
 
-      <p class="small-note">
-        Haz clic sobre cada tarjeta.
-      </p>
-
-      <button class="btn" type="button" onclick="nextSlide()">
-        Siguiente →
-      </button>
-    </section>
-
-    <!-- Diapositiva 6 -->
-    <section class="slide midpoint-definition-slide">
-      <p class="kicker">Definición</p>
-
-      <h2 class="title-long">
-        Punto medio de un segmento
-      </h2>
-
-      <div class="definition-card midpoint-definition">
-        <p>
-          Sea \(\overline{AB}\) un segmento. Un punto \(M\) es el
-          <strong>punto medio</strong> de \(\overline{AB}\) si cumple
-          simultáneamente las siguientes condiciones:
-        </p>
-
-        <ol>
-          <li>
-            \(M\) pertenece al segmento \(\overline{AB}\).
-          </li>
-
-          <li>
-            Los segmentos \(\overline{AM}\) y \(\overline{MB}\)
-            tienen la misma longitud:
-            \[
-              AM = MB.
-            \]
-          </li>
-        </ol>
-      </div>
-
-      <div class="rigorous-conclusion">
-        Por lo tanto,
-        \[
-          AM = MB = \frac{AB}{2}.
-        \]
-      </div>
-
-      <button class="btn" type="button" onclick="nextSlide()">
-        Ver la construcción →
-      </button>
-    </section>
-
-    <!-- Diapositiva 7 -->
-    <section class="slide">
-      <p class="kicker">Exploración del punto medio</p>
-
-      <h2 class="title-long">
-        El punto medio se ajusta automáticamente
-      </h2>
-
-      <p class="lead compact-lead">
-        Arrastra \(A\) o \(B\). El punto \(M\) permanece sobre el
-        segmento y conserva la igualdad \(AM = MB\).
-      </p>
-
-      <div class="interactive-board compact-board">
-
-        <svg
-          id="midpointSvg"
-          viewBox="0 0 900 300"
-          aria-label="Segmento interactivo con punto medio">
-
-          <line
-            id="midpointBaseTrack"
-            x1="150"
-            y1="165"
-            x2="750"
-            y2="165"
-            stroke="rgba(18,60,50,0.16)"
-            stroke-width="12"
-            stroke-linecap="round">
-          </line>
-
-          <line
-            id="midpointSegmentLine"
-            x1="250"
-            y1="165"
-            x2="650"
-            y2="165"
-            stroke="#ad6543"
-            stroke-width="10"
-            stroke-linecap="round">
-          </line>
-
-          <line
-            id="midpointLeftHalf"
-            x1="250"
-            y1="165"
-            x2="450"
-            y2="165"
-            stroke="#ad6543"
-            stroke-width="10"
-            stroke-linecap="round">
-          </line>
-
-          <line
-            id="midpointRightHalf"
-            x1="450"
-            y1="165"
-            x2="650"
-            y2="165"
-            stroke="#1f6874"
-            stroke-width="10"
-            stroke-linecap="round">
-          </line>
-
-          <circle
-            id="midpointPointA"
-            cx="250"
-            cy="165"
-            r="20"
-            fill="#123c32">
-          </circle>
-
-          <circle
-            id="midpointPointB"
-            cx="650"
-            cy="165"
-            r="20"
-            fill="#123c32">
-          </circle>
-
-          <circle
-            id="midpointPointM"
-            cx="450"
-            cy="165"
-            r="14"
-            fill="#bd3740">
-          </circle>
-
-          <text
-            id="midpointLabelA"
-            x="250"
-            y="112"
-            fill="#123c32">
-            A
-          </text>
-
-          <text
-            id="midpointLabelB"
-            x="650"
-            y="112"
-            fill="#123c32">
-            B
-          </text>
-
-          <text
-            id="midpointLabelM"
-            x="450"
-            y="220"
-            fill="#bd3740">
-            M
-          </text>
-
-        </svg>
-      </div>
-
-      <div class="midpoint-measures">
-        <span id="midpointLengthAB">
-          AB = 400
-        </span>
-
-        <span id="midpointLengthAM">
-          AM = 200
-        </span>
-
-        <span id="midpointLengthMB">
-          MB = 200
-        </span>
-      </div>
-
-      <button class="btn" type="button" onclick="nextSlide()">
-        Siguiente →
-      </button>
-    </section>
-
-    <!-- Diapositiva 8 -->
-    <section class="slide">
-      <p class="kicker">Actividad</p>
-
-      <h2>Calcula las dos mitades</h2>
-
-      <div class="formula-card">
-        \[
-          AM = MB = \frac{AB}{2}
-        \]
-      </div>
-
-      <div class="activity-box">
-
-        <label for="inputAB">
-          Escribe una longitud para \(AB\):
-        </label>
-
-        <input
-          id="inputAB"
-          type="number"
-          min="1"
-          step="any"
-          placeholder="Ejemplo: 12">
-
-        <button
-          type="button"
-          onclick="calculateMidpoint()">
-          Calcular
-        </button>
-
-      </div>
-
-      <div id="midpointAnswer" class="answer-box">
-        Aquí aparecerá la respuesta.
-      </div>
-
-      <button class="btn" type="button" onclick="nextSlide()">
-        Siguiente →
-      </button>
-    </section>
-
-    <!-- Diapositiva 9 -->
-    <section class="slide">
-      <p class="kicker">Resumen</p>
-
-      <h2>Idea clave</h2>
-
-      <div class="summary-grid">
-
-        <div>
-          \(\overline{AB}\)
-          <span>Segmento</span>
-        </div>
-
-        <div>
-          \(AB\)
-          <span>Longitud</span>
-        </div>
-
-        <div>
-          \(M\)
-          <span>Punto medio</span>
-        </div>
-
-      </div>
-
-      <a href="index.html" class="btn link-btn">
+      <a
+        href="index.html"
+        class="btn link-btn"
+      >
         ← Volver al inicio
       </a>
+
     </section>
 
   </main>
-
-  <nav
-    class="slide-controls"
-    aria-label="Controles de la presentación">
-
-    <button
-      type="button"
-      onclick="prevSlide()"
-      aria-label="Diapositiva anterior">
-      ←
-    </button>
-
-    <span id="slideCounter">
-      1 / 9
-    </span>
-
-    <button
-      type="button"
-      onclick="nextSlide()"
-      aria-label="Diapositiva siguiente">
-      →
-    </button>
-
-  </nav>
 
 </body>
 </html>
