@@ -909,9 +909,13 @@ const angleSettings = {
   viewBoxWidth: 900,
   viewBoxHeight: 380,
   centerX: 450,
-  centerY: 210,
-  rayLength: 250,
-  arcRadius: 75
+  centerY: 220,
+
+  /* Evita que B y su etiqueta salgan del SVG */
+  rayLength: 155,
+  labelDistance: 182,
+
+  arcRadius: 65
 };
 
 /**
