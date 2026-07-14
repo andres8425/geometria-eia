@@ -2740,3 +2740,311 @@ opacity:1;
     width: 100%;
   }
 }
+/* =========================================================
+   TRIÁNGULOS · DIAPOSITIVA 3
+   ELEMENTOS DEL TRIÁNGULO
+========================================================= */
+
+.triangle-elements-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 24px;
+  align-items: stretch;
+
+  margin: 8px 0 18px;
+}
+
+.triangle-elements-board {
+  margin: 0;
+}
+
+#triangleElementsSvg {
+  width: 100%;
+  height: min(350px, 42vh);
+
+  overflow: visible;
+}
+
+.elements-triangle-fill {
+  fill: rgba(31, 104, 116, 0.1);
+
+  transition:
+    fill var(--transicion),
+    opacity var(--transicion);
+}
+
+.element-side {
+  stroke: var(--cobre-600);
+  stroke-width: 9;
+  stroke-linecap: round;
+
+  transition:
+    stroke var(--transicion),
+    stroke-width var(--transicion),
+    opacity var(--transicion),
+    filter var(--transicion);
+}
+
+.element-vertex {
+  fill: var(--verde-700);
+
+  stroke: var(--papel-3);
+  stroke-width: 4;
+
+  transition:
+    fill var(--transicion),
+    r var(--transicion),
+    opacity var(--transicion),
+    filter var(--transicion);
+}
+
+.element-angle {
+  fill: none;
+
+  stroke: var(--azul);
+  stroke-width: 7;
+  stroke-linecap: round;
+
+  transition:
+    stroke var(--transicion),
+    stroke-width var(--transicion),
+    opacity var(--transicion),
+    filter var(--transicion);
+}
+
+.element-vertex-label {
+  fill: var(--verde-700);
+
+  font-size: 34px;
+  font-weight: 700;
+
+  text-anchor: middle;
+
+  pointer-events: none;
+}
+
+.element-side-label,
+.element-angle-label {
+  opacity: 0;
+
+  fill: var(--verde-700);
+
+  font-size: 24px;
+  font-weight: 700;
+
+  text-anchor: middle;
+
+  pointer-events: none;
+
+  transition:
+    opacity var(--transicion),
+    transform var(--transicion);
+}
+
+.element-side-label {
+  fill: var(--cobre-700);
+}
+
+.element-angle-label {
+  fill: var(--azul);
+}
+
+.triangle-elements-panel {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.element-selector {
+  width: 100%;
+
+  padding: 13px 18px;
+
+  border: 1px solid rgba(18, 60, 50, 0.16);
+  border-radius: 16px;
+
+  color: var(--verde-700);
+
+  font-weight: 700;
+  text-align: left;
+
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.82);
+
+  transition:
+    transform var(--transicion),
+    color var(--transicion),
+    background var(--transicion),
+    box-shadow var(--transicion);
+}
+
+.element-selector:hover {
+  transform: translateX(4px);
+
+  box-shadow: var(--sombra-sm);
+}
+
+.element-selector.active {
+  color: var(--blanco);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--verde-700),
+      var(--verde-500)
+    );
+
+  box-shadow: var(--sombra-sm);
+}
+
+.element-description {
+  min-height: 150px;
+
+  margin-top: 6px;
+  padding: 18px;
+
+  border-left: 7px solid var(--cobre-600);
+  border-radius: 18px;
+
+  color: var(--texto);
+
+  background: var(--blanco);
+
+  box-shadow: var(--sombra-sm);
+}
+
+.element-description strong {
+  color: var(--verde-700);
+
+  font-size: 1.25rem;
+}
+
+.element-description p {
+  margin: 10px 0 0;
+
+  line-height: 1.45;
+}
+
+/* Estado general */
+
+.triangle-elements-layout.show-all .element-side,
+.triangle-elements-layout.show-all .element-vertex,
+.triangle-elements-layout.show-all .element-angle {
+  opacity: 1;
+}
+
+/* Vértices */
+
+.triangle-elements-layout.show-vertices .element-side,
+.triangle-elements-layout.show-vertices .element-angle {
+  opacity: 0.18;
+}
+
+.triangle-elements-layout.show-vertices .element-vertex {
+  fill: var(--rojo);
+
+  filter:
+    drop-shadow(
+      0 0 12px rgba(189, 55, 64, 0.5)
+    );
+}
+
+.triangle-elements-layout.show-vertices .element-vertex-label {
+  fill: var(--rojo);
+}
+
+/* Lados */
+
+.triangle-elements-layout.show-sides .element-vertex,
+.triangle-elements-layout.show-sides .element-angle {
+  opacity: 0.22;
+}
+
+.triangle-elements-layout.show-sides .element-side {
+  stroke: var(--cobre-600);
+  stroke-width: 13;
+
+  filter:
+    drop-shadow(
+      0 0 8px rgba(166, 95, 63, 0.45)
+    );
+}
+
+.triangle-elements-layout.show-sides .element-side-label {
+  opacity: 1;
+
+  transform: translateY(-4px);
+}
+
+/* Ángulos */
+
+.triangle-elements-layout.show-angles .element-side,
+.triangle-elements-layout.show-angles .element-vertex {
+  opacity: 0.22;
+}
+
+.triangle-elements-layout.show-angles .element-angle {
+  stroke: var(--azul);
+  stroke-width: 11;
+
+  filter:
+    drop-shadow(
+      0 0 9px rgba(31, 104, 116, 0.5)
+    );
+}
+
+.triangle-elements-layout.show-angles .element-angle-label {
+  opacity: 1;
+
+  transform: translateY(-3px);
+}
+
+@media (max-height: 800px) and (min-width: 769px) {
+  #triangleElementsSvg {
+    height: min(260px, 33vh);
+  }
+
+  .element-description {
+    min-height: 120px;
+
+    padding: 14px;
+  }
+}
+
+@media (max-width: 850px) {
+  .triangle-elements-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .triangle-elements-panel {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .element-description {
+    grid-column: 1 / -1;
+  }
+
+  .element-selector {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  #triangleElementsSvg {
+    height: min(220px, 29vh);
+  }
+
+  .triangle-elements-panel {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .element-description {
+    min-height: 100px;
+  }
+
+  .element-side-label,
+  .element-angle-label {
+    font-size: 20px;
+  }
+}
