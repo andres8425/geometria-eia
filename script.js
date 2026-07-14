@@ -1267,3 +1267,117 @@ function showNotableLine(type, button) {
     renderMath(description);
   }, 140);
 }
+/* =========================================================
+   LÍNEAS NOTABLES REDISEÑADAS
+========================================================= */
+
+function selectNotableConstruction(type, button) {
+  const sceneIds = {
+    altitude: "ntAltitudeScene",
+    median: "ntMedianScene",
+    bisector: "ntBisectorScene"
+  };
+
+  const definitions = {
+    altitude: {
+      title: "Altura",
+
+      text: `
+        La <strong>altura relativa a
+        \\(\\overline{AB}\\)</strong> es el segmento
+        perpendicular trazado desde el vértice
+        \\(C\\) hasta la recta que contiene al lado
+        \\(\\overline{AB}\\).
+      `
+    },
+
+    median: {
+      title: "Mediana",
+
+      text: `
+        La <strong>mediana relativa a
+        \\(\\overline{AB}\\)</strong> es el segmento
+        que une el vértice \\(C\\) con el punto medio
+        \\(M\\) del lado \\(\\overline{AB}\\).
+      `
+    },
+
+    bisector: {
+      title: "Bisectriz",
+
+      text: `
+        La <strong>bisectriz del ángulo
+        \\(\\angle ACB\\)</strong> es la semirrecta
+        que parte del vértice \\(C\\) y divide dicho
+        ángulo en dos ángulos de igual medida.
+      `
+    }
+  };
+
+  const definition =
+    document.getElementById("notableDefinition");
+
+  /*
+   * Oculta las escenas.
+   */
+  document
+    .querySelectorAll(".nt-scene")
+    .forEach((scene) => {
+      scene.classList.remove("active");
+    });
+
+  /*
+   * Clona la escena elegida para reiniciar
+   * correctamente todas sus animaciones.
+   */
+  const originalScene =
+    document.getElementById(sceneIds[type]);
+
+  if (originalScene) {
+    const clonedScene =
+      originalScene.cloneNode(true);
+
+    originalScene.replaceWith(clonedScene);
+
+    requestAnimationFrame(() => {
+      clonedScene.classList.add("active");
+    });
+  }
+
+  /*
+   * Actualiza botones.
+   */
+  document
+    .querySelectorAll(".nt-button")
+    .forEach((item) => {
+      item.classList.remove("active");
+    });
+
+  button?.classList.add("active");
+
+  if (!definition || !definitions[type]) {
+    return;
+  }
+
+  definition.style.opacity = "0";
+  definition.style.transform =
+    "translateY(6px)";
+
+  window.setTimeout(() => {
+    definition.innerHTML = `
+      <span class="notable-definition-tag">
+        ${definitions[type].title}
+      </span>
+
+      <p>
+        ${definitions[type].text}
+      </p>
+    `;
+
+    definition.style.opacity = "1";
+    definition.style.transform =
+      "translateY(0)";
+
+    renderMath(definition);
+  }, 150);
+}
