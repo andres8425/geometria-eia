@@ -1,1 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Triángulos y congruencia</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [
+          ['\\(', '\\)'],
+          ['$', '$']
+        ]
+      }
+    };
+  </script>
+
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+
+  <script
+    defer
+    src="script.js"
+  ></script>
+</head>
+
+<body class="capitulo-presentacion triangulos-presentacion">
+
+  <main class="deck">
+
+    <!-- DIAPOSITIVA 1 · PORTADA -->
+
+    <section class="slide active triangle-cover">
+
+      <div class="triangle-cover-content">
+
+        <div class="triangle-cover-text">
+
+          <p class="kicker triangle-kicker">
+            Capítulo 1 · Sección 2
+          </p>
+
+          <h1 class="triangle-cover-title">
+            Triángulos y congruencia
+          </h1>
+
+          <p class="lead triangle-cover-lead">
+            Comprenderemos la estructura de los triángulos y aprenderemos
+            cuándo dos de ellos representan exactamente la misma figura
+            geométrica.
+          </p>
+
+          <button
+            class="btn triangle-start-button"
+            type="button"
+            onclick="nextSlide()"
+          >
+            Comenzar →
+          </button>
+
+        </div>
+
+        <div class="triangle-cover-visual">
+
+          <svg
+            id="triangleCoverSvg"
+            viewBox="0 0 620 500"
+            aria-label="Construcción animada de un triángulo ABC"
+          >
+
+            <!-- Interior del triángulo -->
+
+            <polygon
+              class="cover-triangle-fill"
+              points="105,400 515,400 345,80"
+            ></polygon>
+
+            <!-- Lados -->
+
+            <line
+              class="cover-triangle-side side-ab"
+              x1="105"
+              y1="400"
+              x2="515"
+              y2="400"
+            ></line>
+
+            <line
+              class="cover-triangle-side side-bc"
+              x1="515"
+              y1="400"
+              x2="345"
+              y2="80"
+            ></line>
+
+            <line
+              class="cover-triangle-side side-ca"
+              x1="345"
+              y1="80"
+              x2="105"
+              y2="400"
+            ></line>
+
+            <!-- Puntos -->
+
+            <circle
+              class="cover-triangle-point point-a"
+              cx="105"
+              cy="400"
+              r="17"
+            ></circle>
+
+            <circle
+              class="cover-triangle-point point-b"
+              cx="515"
+              cy="400"
+              r="17"
+            ></circle>
+
+            <circle
+              class="cover-triangle-point point-c"
+              cx="345"
+              cy="80"
+              r="17"
+            ></circle>
+
+            <!-- Etiquetas -->
+
+            <text
+              class="cover-triangle-label label-a"
+              x="76"
+              y="437"
+            >
+              A
+            </text>
+
+            <text
+              class="cover-triangle-label label-b"
+              x="542"
+              y="437"
+            >
+              B
+            </text>
+
+            <text
+              class="cover-triangle-label label-c"
+              x="345"
+              y="48"
+            >
+              C
+            </text>
+
+          </svg>
+
+        </div>
+
+      </div>
+
+      <a
+        href="cap1.html"
+        class="triangle-back-link"
+      >
+        ← Volver al menú del capítulo
+      </a>
+
+    </section>
+
+  </main>
+
+  <nav
+    class="slide-controls"
+    aria-label="Controles de la presentación"
+  >
+
+    <button
+      type="button"
+      onclick="prevSlide()"
+      aria-label="Diapositiva anterior"
+    >
+      ←
+    </button>
+
+    <span id="slideCounter">
+      1 / 1
+    </span>
+
+    <button
+      type="button"
+      onclick="nextSlide()"
+      aria-label="Diapositiva siguiente"
+    >
+      →
+    </button>
+
+  </nav>
+
+</body>
+</html>
