@@ -1,20 +1,9 @@
 /* =========================================================
-   GEOM-EIA
-   SCRIPT.JS GENERAL
-
-   Incluye:
-   - motor de diapositivas;
-   - navegación por teclado;
-   - tarjetas giratorias;
-   - segmento interactivo;
-   - punto medio interactivo;
-   - constructor de ángulos;
-   - actividad de clasificación;
-   - reinicio de animaciones.
+   GEOM-EIA · SCRIPT.JS
 ========================================================= */
 
 /* =========================================================
-   1. MOTOR DE DIAPOSITIVAS
+   1. PRESENTACIÓN
 ========================================================= */
 
 let currentSlide = 0;
@@ -22,23 +11,11 @@ let currentSlide = 0;
 const slides = document.querySelectorAll(".slide");
 const slideCounter = document.getElementById("slideCounter");
 
-/**
- * Muestra una diapositiva y oculta las demás.
- *
- * @param {number} index Índice de la diapositiva.
- */
 function showSlide(index) {
-  if (!slides.length) {
-    return;
-  }
+  if (!slides.length) return;
 
   slides.forEach((slide) => {
     slide.classList.remove("active");
-
-    /*
-     * Evita que una diapositiva conserve una posición de
-     * desplazamiento anterior.
-     */
     slide.scrollTop = 0;
   });
 
@@ -56,10 +33,8 @@ function showSlide(index) {
   });
 
   updateSlideCounter();
+  restartSlideAnimations(activeSlide);
 
-  /*
-   * MathJax renderiza únicamente la diapositiva activa.
-   */
   if (window.MathJax?.typesetPromise) {
     MathJax.typesetPromise([activeSlide])
       .then(() => {
@@ -72,79 +47,42 @@ function showSlide(index) {
         );
       });
   }
-
-  restartSlideAnimations(activeSlide);
 }
 
-/**
- * Actualiza el contador inferior.
- */
 function updateSlideCounter() {
-  if (!slideCounter || !slides.length) {
-    return;
-  }
+  if (!slideCounter || !slides.length) return;
 
   slideCounter.textContent =
     `${currentSlide + 1} / ${slides.length}`;
 }
 
-/**
- * Avanza una diapositiva.
- */
 function nextSlide() {
   showSlide(currentSlide + 1);
 }
 
-/**
- * Retrocede una diapositiva.
- */
 function prevSlide() {
   showSlide(currentSlide - 1);
 }
 
-/**
- * Salta directamente a una diapositiva.
- *
- * @param {number} index Índice de destino.
- */
 function goToSlide(index) {
   showSlide(index);
 }
 
-/**
- * Reinicia las animaciones CSS de la diapositiva activa.
- *
- * @param {HTMLElement} slide Diapositiva activa.
- */
 function restartSlideAnimations(slide) {
-  if (!slide) {
-    return;
-  }
+  if (!slide) return;
 
   const animatedElements = slide.querySelectorAll(
     ".draw, .appear, .delay"
   );
 
   animatedElements.forEach((element) => {
-    const animationName =
-      window.getComputedStyle(element).animationName;
-
     element.style.animation = "none";
 
-    /*
-     * Fuerza al navegador a recalcular el estilo.
-     */
     void element.offsetWidth;
 
     element.style.animation = "";
-
-    if (animationName === "none") {
-      element.removeAttribute("style");
-    }
   });
 }
-
-/* Navegación con teclado */
 
 document.addEventListener("keydown", (event) => {
   const activeTag =
@@ -155,9 +93,7 @@ document.addEventListener("keydown", (event) => {
     activeTag === "textarea" ||
     activeTag === "select";
 
-  if (isTyping) {
-    return;
-  }
+  if (isTyping) return;
 
   if (
     event.key === "ArrowRight" ||
@@ -186,14 +122,6 @@ document.addEventListener("keydown", (event) => {
    2. UTILIDADES
 ========================================================= */
 
-/**
- * Restringe un valor a un intervalo.
- *
- * @param {number} value
- * @param {number} minimum
- * @param {number} maximum
- * @returns {number}
- */
 function clamp(value, minimum, maximum) {
   return Math.max(
     minimum,
@@ -201,97 +129,69 @@ function clamp(value, minimum, maximum) {
   );
 }
 
-/**
- * Convierte la coordenada horizontal del puntero
- * al sistema de coordenadas de un SVG.
- *
- * @param {SVGElement} svgElement
- * @param {PointerEvent} event
- * @param {number} viewBoxWidth
- * @returns {number}
- */
-function getSvgX(
-  svgElement,
-  event,
-  viewBoxWidth
-) {
-  const rect =
-    svgElement.getBoundingClientRect();
+function getSvgX(svgElement, event, viewBoxWidth) {
+  const rect = svgElement.getBoundingClientRect();
 
   return (
-    (event.clientX - rect.left) /
-    rect.width
-  ) * viewBoxWidth;
+    ((event.clientX - rect.left) / rect.width) *
+    viewBoxWidth
+  );
 }
 
-/**
- * Convierte el puntero al sistema de coordenadas
- * completo de un SVG.
- *
- * @param {SVGElement} svgElement
- * @param {PointerEvent} event
- * @param {number} viewBoxWidth
- * @param {number} viewBoxHeight
- * @returns {{x:number,y:number}}
- */
 function getSvgPoint(
   svgElement,
   event,
   viewBoxWidth,
   viewBoxHeight
 ) {
-  const rect =
-    svgElement.getBoundingClientRect();
+  const rect = svgElement.getBoundingClientRect();
 
   return {
     x:
-      ((event.clientX - rect.left) /
-        rect.width) *
+      ((event.clientX - rect.left) / rect.width) *
       viewBoxWidth,
 
     y:
-      ((event.clientY - rect.top) /
-        rect.height) *
+      ((event.clientY - rect.top) / rect.height) *
       viewBoxHeight
   };
+}
+
+function renderMath(element) {
+  if (!element || !window.MathJax?.typesetPromise) {
+    return;
+  }
+
+  MathJax.typesetPromise([element]).catch((error) => {
+    console.warn(
+      "No se pudo renderizar la expresión:",
+      error
+    );
+  });
 }
 
 /* =========================================================
    3. TARJETAS GIRATORIAS
 ========================================================= */
 
-/**
- * Gira una tarjeta.
- *
- * @param {HTMLElement} card
- */
 function flipCard(card) {
-  if (!card) {
-    return;
-  }
+  if (!card) return;
 
   card.classList.toggle("flipped");
 }
 
-/*
- * Permite activar las tarjetas con Enter o espacio
- * sin necesidad de escribir eventos inline.
- */
 document
   .querySelectorAll(".flip-card")
   .forEach((card) => {
-    card.addEventListener(
-      "keydown",
-      (event) => {
-        if (
-          event.key === "Enter" ||
-          event.key === " "
-        ) {
-          event.preventDefault();
-          flipCard(card);
-        }
+    card.addEventListener("keydown", (event) => {
+      if (
+        event.key === "Enter" ||
+        event.key === " "
+      ) {
+        event.preventDefault();
+        flipCard(card);
       }
-    );
+    });
   });
 
 /* =========================================================
@@ -299,39 +199,25 @@ document
 ========================================================= */
 
 const simpleSegmentSvg =
-  document.getElementById(
-    "simpleSegmentSvg"
-  );
+  document.getElementById("simpleSegmentSvg");
 
 const simplePointA =
-  document.getElementById(
-    "simplePointA"
-  );
+  document.getElementById("simplePointA");
 
 const simplePointB =
-  document.getElementById(
-    "simplePointB"
-  );
+  document.getElementById("simplePointB");
 
 const simpleSegmentLine =
-  document.getElementById(
-    "simpleSegmentLine"
-  );
+  document.getElementById("simpleSegmentLine");
 
 const simpleLabelA =
-  document.getElementById(
-    "simpleLabelA"
-  );
+  document.getElementById("simpleLabelA");
 
 const simpleLabelB =
-  document.getElementById(
-    "simpleLabelB"
-  );
+  document.getElementById("simpleLabelB");
 
 const simpleLengthText =
-  document.getElementById(
-    "simpleLengthText"
-  );
+  document.getElementById("simpleLengthText");
 
 let selectedSimplePoint = null;
 
@@ -343,9 +229,6 @@ const simpleSegmentSettings = {
   minimumDistance: 70
 };
 
-/**
- * Actualiza línea, etiquetas y longitud.
- */
 function updateSimpleSegment() {
   if (
     !simplePointA ||
@@ -363,25 +246,11 @@ function updateSimpleSegment() {
     simplePointB.getAttribute("cx")
   );
 
-  simpleSegmentLine.setAttribute(
-    "x1",
-    ax
-  );
+  simpleSegmentLine.setAttribute("x1", ax);
+  simpleSegmentLine.setAttribute("x2", bx);
 
-  simpleSegmentLine.setAttribute(
-    "x2",
-    bx
-  );
-
-  simpleLabelA?.setAttribute(
-    "x",
-    ax
-  );
-
-  simpleLabelB?.setAttribute(
-    "x",
-    bx
-  );
+  simpleLabelA?.setAttribute("x", ax);
+  simpleLabelB?.setAttribute("x", bx);
 
   const length = Math.abs(bx - ax);
 
@@ -391,23 +260,8 @@ function updateSimpleSegment() {
   }
 }
 
-/**
- * Mueve uno de los extremos sin permitir que
- * los puntos se crucen ni abandonen la línea.
- *
- * @param {SVGCircleElement} point
- * @param {number} rawX
- */
-function moveSimplePoint(
-  point,
-  rawX
-) {
-  if (
-    !simplePointA ||
-    !simplePointB
-  ) {
-    return;
-  }
+function moveSimplePoint(point, rawX) {
+  if (!simplePointA || !simplePointB) return;
 
   const ax = Number(
     simplePointA.getAttribute("cx")
@@ -426,24 +280,18 @@ function moveSimplePoint(
   if (point === simplePointA) {
     safeX = Math.min(
       safeX,
-      bx -
-        simpleSegmentSettings.minimumDistance
+      bx - simpleSegmentSettings.minimumDistance
     );
   }
 
   if (point === simplePointB) {
     safeX = Math.max(
       safeX,
-      ax +
-        simpleSegmentSettings.minimumDistance
+      ax + simpleSegmentSettings.minimumDistance
     );
   }
 
-  point.setAttribute(
-    "cx",
-    safeX
-  );
-
+  point.setAttribute("cx", safeX);
   point.setAttribute(
     "cy",
     simpleSegmentSettings.centerY
@@ -452,9 +300,6 @@ function moveSimplePoint(
   updateSimpleSegment();
 }
 
-/**
- * Inicializa el segmento interactivo.
- */
 function initializeSimpleSegment() {
   if (
     !simpleSegmentSvg ||
@@ -467,8 +312,7 @@ function initializeSimpleSegment() {
   simplePointA.addEventListener(
     "pointerdown",
     (event) => {
-      selectedSimplePoint =
-        simplePointA;
+      selectedSimplePoint = simplePointA;
 
       simplePointA.setPointerCapture(
         event.pointerId
@@ -479,8 +323,7 @@ function initializeSimpleSegment() {
   simplePointB.addEventListener(
     "pointerdown",
     (event) => {
-      selectedSimplePoint =
-        simplePointB;
+      selectedSimplePoint = simplePointB;
 
       simplePointB.setPointerCapture(
         event.pointerId
@@ -491,22 +334,17 @@ function initializeSimpleSegment() {
   simpleSegmentSvg.addEventListener(
     "pointermove",
     (event) => {
-      if (!selectedSimplePoint) {
-        return;
-      }
+      if (!selectedSimplePoint) return;
 
       event.preventDefault();
 
-      const x = getSvgX(
-        simpleSegmentSvg,
-        event,
-        simpleSegmentSettings
-          .viewBoxWidth
-      );
-
       moveSimplePoint(
         selectedSimplePoint,
-        x
+        getSvgX(
+          simpleSegmentSvg,
+          event,
+          simpleSegmentSettings.viewBoxWidth
+        )
       );
     }
   );
@@ -528,9 +366,7 @@ function initializeSimpleSegment() {
   simpleSegmentSvg.addEventListener(
     "pointerleave",
     (event) => {
-      if (
-        event.buttons === 0
-      ) {
+      if (event.buttons === 0) {
         stopDrag();
       }
     }
@@ -544,69 +380,43 @@ function initializeSimpleSegment() {
 ========================================================= */
 
 const midpointSvg =
-  document.getElementById(
-    "midpointSvg"
-  );
+  document.getElementById("midpointSvg");
 
 const midpointPointA =
-  document.getElementById(
-    "midpointPointA"
-  );
+  document.getElementById("midpointPointA");
 
 const midpointPointB =
-  document.getElementById(
-    "midpointPointB"
-  );
+  document.getElementById("midpointPointB");
 
 const midpointPointM =
-  document.getElementById(
-    "midpointPointM"
-  );
+  document.getElementById("midpointPointM");
 
 const midpointSegmentLine =
-  document.getElementById(
-    "midpointSegmentLine"
-  );
+  document.getElementById("midpointSegmentLine");
 
 const midpointLeftHalf =
-  document.getElementById(
-    "midpointLeftHalf"
-  );
+  document.getElementById("midpointLeftHalf");
 
 const midpointRightHalf =
-  document.getElementById(
-    "midpointRightHalf"
-  );
+  document.getElementById("midpointRightHalf");
 
 const midpointLabelA =
-  document.getElementById(
-    "midpointLabelA"
-  );
+  document.getElementById("midpointLabelA");
 
 const midpointLabelB =
-  document.getElementById(
-    "midpointLabelB"
-  );
+  document.getElementById("midpointLabelB");
 
 const midpointLabelM =
-  document.getElementById(
-    "midpointLabelM"
-  );
+  document.getElementById("midpointLabelM");
 
 const midpointLengthAB =
-  document.getElementById(
-    "midpointLengthAB"
-  );
+  document.getElementById("midpointLengthAB");
 
 const midpointLengthAM =
-  document.getElementById(
-    "midpointLengthAM"
-  );
+  document.getElementById("midpointLengthAM");
 
 const midpointLengthMB =
-  document.getElementById(
-    "midpointLengthMB"
-  );
+  document.getElementById("midpointLengthMB");
 
 let selectedMidpointPoint = null;
 
@@ -618,9 +428,6 @@ const midpointSettings = {
   minimumDistance: 70
 };
 
-/**
- * Actualiza el segmento y calcula M.
- */
 function updateMidpointSegment() {
   if (
     !midpointPointA ||
@@ -642,91 +449,37 @@ function updateMidpointSegment() {
   const mx = (ax + bx) / 2;
   const length = Math.abs(bx - ax);
 
-  midpointSegmentLine.setAttribute(
-    "x1",
-    ax
-  );
+  midpointSegmentLine.setAttribute("x1", ax);
+  midpointSegmentLine.setAttribute("x2", bx);
 
-  midpointSegmentLine.setAttribute(
-    "x2",
-    bx
-  );
+  midpointLeftHalf?.setAttribute("x1", ax);
+  midpointLeftHalf?.setAttribute("x2", mx);
 
-  midpointLeftHalf?.setAttribute(
-    "x1",
-    ax
-  );
+  midpointRightHalf?.setAttribute("x1", mx);
+  midpointRightHalf?.setAttribute("x2", bx);
 
-  midpointLeftHalf?.setAttribute(
-    "x2",
-    mx
-  );
-
-  midpointRightHalf?.setAttribute(
-    "x1",
-    mx
-  );
-
-  midpointRightHalf?.setAttribute(
-    "x2",
-    bx
-  );
-
-  midpointPointM.setAttribute(
-    "cx",
-    mx
-  );
-
+  midpointPointM.setAttribute("cx", mx);
   midpointPointM.setAttribute(
     "cy",
     midpointSettings.centerY
   );
 
-  midpointLabelA?.setAttribute(
-    "x",
-    ax
-  );
+  midpointLabelA?.setAttribute("x", ax);
+  midpointLabelB?.setAttribute("x", bx);
+  midpointLabelM?.setAttribute("x", mx);
 
-  midpointLabelB?.setAttribute(
-    "x",
-    bx
-  );
+  midpointLengthAB.textContent =
+    `AB = ${length.toFixed(0)}`;
 
-  midpointLabelM?.setAttribute(
-    "x",
-    mx
-  );
+  midpointLengthAM.textContent =
+    `AM = ${(length / 2).toFixed(0)}`;
 
-  if (midpointLengthAB) {
-    midpointLengthAB.textContent =
-      `AB = ${length.toFixed(0)}`;
-  }
-
-  if (midpointLengthAM) {
-    midpointLengthAM.textContent =
-      `AM = ${(length / 2).toFixed(0)}`;
-  }
-
-  if (midpointLengthMB) {
-    midpointLengthMB.textContent =
-      `MB = ${(length / 2).toFixed(0)}`;
-  }
+  midpointLengthMB.textContent =
+    `MB = ${(length / 2).toFixed(0)}`;
 }
 
-/**
- * Mueve un extremo y conserva el punto medio.
- *
- * @param {SVGCircleElement} point
- * @param {number} rawX
- */
-function moveMidpointEndpoint(
-  point,
-  rawX
-) {
-  if (
-    !midpointPointA ||
-    !midpointPointB
-  ) {
+function moveMidpointEndpoint(point, rawX) {
+  if (!midpointPointA || !midpointPointB) {
     return;
   }
 
@@ -747,24 +500,18 @@ function moveMidpointEndpoint(
   if (point === midpointPointA) {
     safeX = Math.min(
       safeX,
-      bx -
-        midpointSettings.minimumDistance
+      bx - midpointSettings.minimumDistance
     );
   }
 
   if (point === midpointPointB) {
     safeX = Math.max(
       safeX,
-      ax +
-        midpointSettings.minimumDistance
+      ax + midpointSettings.minimumDistance
     );
   }
 
-  point.setAttribute(
-    "cx",
-    safeX
-  );
-
+  point.setAttribute("cx", safeX);
   point.setAttribute(
     "cy",
     midpointSettings.centerY
@@ -773,9 +520,6 @@ function moveMidpointEndpoint(
   updateMidpointSegment();
 }
 
-/**
- * Inicializa la construcción del punto medio.
- */
 function initializeMidpointSegment() {
   if (
     !midpointSvg ||
@@ -788,8 +532,7 @@ function initializeMidpointSegment() {
   midpointPointA.addEventListener(
     "pointerdown",
     (event) => {
-      selectedMidpointPoint =
-        midpointPointA;
+      selectedMidpointPoint = midpointPointA;
 
       midpointPointA.setPointerCapture(
         event.pointerId
@@ -800,8 +543,7 @@ function initializeMidpointSegment() {
   midpointPointB.addEventListener(
     "pointerdown",
     (event) => {
-      selectedMidpointPoint =
-        midpointPointB;
+      selectedMidpointPoint = midpointPointB;
 
       midpointPointB.setPointerCapture(
         event.pointerId
@@ -812,21 +554,17 @@ function initializeMidpointSegment() {
   midpointSvg.addEventListener(
     "pointermove",
     (event) => {
-      if (!selectedMidpointPoint) {
-        return;
-      }
+      if (!selectedMidpointPoint) return;
 
       event.preventDefault();
 
-      const x = getSvgX(
-        midpointSvg,
-        event,
-        midpointSettings.viewBoxWidth
-      );
-
       moveMidpointEndpoint(
         selectedMidpointPoint,
-        x
+        getSvgX(
+          midpointSvg,
+          event,
+          midpointSettings.viewBoxWidth
+        )
       );
     }
   );
@@ -848,9 +586,7 @@ function initializeMidpointSegment() {
   midpointSvg.addEventListener(
     "pointerleave",
     (event) => {
-      if (
-        event.buttons === 0
-      ) {
+      if (event.buttons === 0) {
         stopDrag();
       }
     }
@@ -864,78 +600,67 @@ function initializeMidpointSegment() {
 ========================================================= */
 
 const angleSvg =
-  document.getElementById(
-    "angleSvg"
-  );
+  document.getElementById("angleSvg");
+
+const angleRayA =
+  document.getElementById("angleRayA");
 
 const angleRayB =
-  document.getElementById(
-    "angleRayB"
-  );
+  document.getElementById("angleRayB");
+
+const angleVertexO =
+  document.getElementById("angleVertexO");
+
+const anglePointA =
+  document.getElementById("anglePointA");
 
 const anglePointB =
-  document.getElementById(
-    "anglePointB"
-  );
+  document.getElementById("anglePointB");
 
 const angleLabelB =
-  document.getElementById(
-    "angleLabelB"
-  );
+  document.getElementById("angleLabelB");
 
 const angleArc =
-  document.getElementById(
-    "angleArc"
-  );
+  document.getElementById("angleArc");
 
 const angleMeasureSvg =
-  document.getElementById(
-    "angleMeasureSvg"
-  );
+  document.getElementById("angleMeasureSvg");
 
 const angleMeasureText =
-  document.getElementById(
-    "angleMeasureText"
-  );
+  document.getElementById("angleMeasureText");
 
 const angleTypeText =
-  document.getElementById(
-    "angleTypeText"
-  );
+  document.getElementById("angleTypeText");
 
 let draggingAnglePoint = false;
 
+/*
+ * El constructor se sitúa en una zona segura del SVG.
+ * La longitud se reduce para impedir que B salga del panel.
+ */
 const angleSettings = {
   viewBoxWidth: 900,
   viewBoxHeight: 380,
+
   centerX: 450,
   centerY: 220,
 
-  /* Evita que B y su etiqueta salgan del SVG */
-  rayLength: 155,
-  labelDistance: 182,
+  rayLength: 150,
+  labelDistance: 178,
+  arcRadius: 62,
 
-  arcRadius: 65
+  labelMarginX: 35,
+  labelMarginY: 42
 };
 
-/**
- * Clasifica un ángulo entre 0° y 180°.
- *
- * @param {number} degrees
- * @returns {string}
- */
 function classifyAngleValue(degrees) {
-  const rounded =
-    Math.round(degrees);
+  const rounded = Math.round(degrees);
 
   if (rounded === 0) {
     return "Ángulo nulo";
   }
 
-  if (
-    rounded > 0 &&
-    rounded < 90
-  ) {
+  if (rounded > 0 && rounded < 90) {
     return "Ángulo agudo";
   }
 
@@ -943,30 +668,16 @@ function classifyAngleValue(degrees) {
     return "Ángulo recto";
   }
 
-  if (
-    rounded > 90 &&
-    rounded < 180
-  ) {
+  if (rounded > 90 && rounded < 180) {
     return "Ángulo obtuso";
   }
 
   return "Ángulo llano";
 }
 
-/**
- * Calcula un punto mediante coordenadas polares.
- *
- * El signo negativo permite que los ángulos positivos
- * se dibujen visualmente hacia arriba.
- *
- * @param {number} degrees
- * @param {number} radius
- * @returns {{x:number,y:number}}
- */
 function polarPoint(
   degrees,
-  radius =
-    angleSettings.rayLength
+  radius = angleSettings.rayLength
 ) {
   const radians =
     (-degrees * Math.PI) / 180;
@@ -982,12 +693,101 @@ function polarPoint(
   };
 }
 
-/**
- * Actualiza la posición de B, el segundo lado,
- * el arco y la clasificación.
- *
- * @param {number} degrees
+/*
+ * Ajusta también la semirrecta fija, el vértice y A.
+ * Así no necesitas cambiar las coordenadas del HTML.
  */
+function configureStaticAngleElements() {
+  const endpointA = polarPoint(
+    0,
+    angleSettings.rayLength
+  );
+
+  angleRayA?.setAttribute(
+    "x1",
+    angleSettings.centerX
+  );
+
+  angleRayA?.setAttribute(
+    "y1",
+    angleSettings.centerY
+  );
+
+  angleRayA?.setAttribute(
+    "x2",
+    endpointA.x
+  );
+
+  angleRayA?.setAttribute(
+    "y2",
+    endpointA.y
+  );
+
+  angleRayB?.setAttribute(
+    "x1",
+    angleSettings.centerX
+  );
+
+  angleRayB?.setAttribute(
+    "y1",
+    angleSettings.centerY
+  );
+
+  angleVertexO?.setAttribute(
+    "cx",
+    angleSettings.centerX
+  );
+
+  angleVertexO?.setAttribute(
+    "cy",
+    angleSettings.centerY
+  );
+
+  anglePointA?.setAttribute(
+    "cx",
+    endpointA.x
+  );
+
+  anglePointA?.setAttribute(
+    "cy",
+    endpointA.y
+  );
+
+  /*
+   * Reubica las etiquetas O y A aunque no tengan ID.
+   */
+  const labels =
+    angleSvg?.querySelectorAll(".angle-label");
+
+  labels?.forEach((label) => {
+    const text = label.textContent.trim();
+
+    if (text === "O") {
+      label.setAttribute(
+        "x",
+        angleSettings.centerX
+      );
+
+      label.setAttribute(
+        "y",
+        angleSettings.centerY + 45
+      );
+    }
+
+    if (text === "A") {
+      label.setAttribute(
+        "x",
+        endpointA.x + 26
+      );
+
+      label.setAttribute(
+        "y",
+        endpointA.y + 6
+      );
+    }
+  });
+}
+
 function updateAngle(degrees) {
   if (
     !angleRayB ||
@@ -998,71 +798,68 @@ function updateAngle(degrees) {
     return;
   }
 
-  const safeDegrees =
-    Math.round(
-      clamp(
-        degrees,
-        0,
-        180
-      )
-    );
+  const safeDegrees = Math.round(
+    clamp(degrees, 0, 180)
+  );
 
-  const endpoint =
-    polarPoint(safeDegrees);
+  const endpoint = polarPoint(
+    safeDegrees,
+    angleSettings.rayLength
+  );
 
-  const labelPoint =
-    polarPoint(
-      safeDegrees,
-      angleSettings.rayLength + 30
-    );
+  const rawLabelPoint = polarPoint(
+    safeDegrees,
+    angleSettings.labelDistance
+  );
 
-  angleRayB.setAttribute(
-    "x2",
-    endpoint.x
+  /*
+   * Impide que la etiqueta B toque los bordes.
+   */
+  const safeLabelX = clamp(
+    rawLabelPoint.x,
+    angleSettings.labelMarginX,
+    angleSettings.viewBoxWidth -
+      angleSettings.labelMarginX
+  );
+
+  const safeLabelY = clamp(
+    rawLabelPoint.y,
+    angleSettings.labelMarginY,
+    angleSettings.viewBoxHeight -
+      angleSettings.labelMarginY
   );
 
   angleRayB.setAttribute(
-    "y2",
-    endpoint.y
+    "x1",
+    angleSettings.centerX
   );
 
-  anglePointB.setAttribute(
-    "cx",
-    endpoint.x
+  angleRayB.setAttribute(
+    "y1",
+    angleSettings.centerY
   );
 
-  anglePointB.setAttribute(
-    "cy",
-    endpoint.y
+  angleRayB.setAttribute("x2", endpoint.x);
+  angleRayB.setAttribute("y2", endpoint.y);
+
+  anglePointB.setAttribute("cx", endpoint.x);
+  anglePointB.setAttribute("cy", endpoint.y);
+
+  angleLabelB.setAttribute("x", safeLabelX);
+  angleLabelB.setAttribute("y", safeLabelY);
+
+  const arcStart = polarPoint(
+    0,
+    angleSettings.arcRadius
   );
 
-  angleLabelB.setAttribute(
-    "x",
-    labelPoint.x
+  const arcEnd = polarPoint(
+    safeDegrees,
+    angleSettings.arcRadius
   );
-
-  angleLabelB.setAttribute(
-    "y",
-    labelPoint.y
-  );
-
-  const arcStart =
-    polarPoint(
-      0,
-      angleSettings.arcRadius
-    );
-
-  const arcEnd =
-    polarPoint(
-      safeDegrees,
-      angleSettings.arcRadius
-    );
 
   if (safeDegrees === 0) {
-    angleArc.setAttribute(
-      "d",
-      ""
-    );
+    angleArc.setAttribute("d", "");
   } else {
     const path = [
       "M",
@@ -1078,20 +875,28 @@ function updateAngle(degrees) {
       arcEnd.y
     ].join(" ");
 
-    angleArc.setAttribute(
-      "d",
-      path
-    );
+    angleArc.setAttribute("d", path);
   }
 
   const classification =
-    classifyAngleValue(
-      safeDegrees
-    );
+    classifyAngleValue(safeDegrees);
 
   if (angleMeasureSvg) {
     angleMeasureSvg.textContent =
       `${safeDegrees}°`;
+
+    /*
+     * Mantiene la medida dentro del SVG.
+     */
+    angleMeasureSvg.setAttribute(
+      "x",
+      angleSettings.centerX
+    );
+
+    angleMeasureSvg.setAttribute(
+      "y",
+      350
+    );
   }
 
   if (angleMeasureText) {
@@ -1105,25 +910,14 @@ function updateAngle(degrees) {
   }
 }
 
-/**
- * Construye un ángulo preestablecido.
- *
- * @param {number} degrees
- */
 function setAngle(degrees) {
   updateAngle(degrees);
 }
 
-/**
- * Inicializa la interacción del constructor.
- */
 function initializeAngleBuilder() {
-  if (
-    !angleSvg ||
-    !anglePointB
-  ) {
-    return;
-  }
+  if (!angleSvg || !anglePointB) return;
+
+  configureStaticAngleElements();
 
   anglePointB.addEventListener(
     "pointerdown",
@@ -1139,9 +933,7 @@ function initializeAngleBuilder() {
   angleSvg.addEventListener(
     "pointermove",
     (event) => {
-      if (!draggingAnglePoint) {
-        return;
-      }
+      if (!draggingAnglePoint) return;
 
       event.preventDefault();
 
@@ -1153,29 +945,27 @@ function initializeAngleBuilder() {
       );
 
       const dx =
-        point.x -
-        angleSettings.centerX;
+        point.x - angleSettings.centerX;
 
       const dy =
-        angleSettings.centerY -
-        point.y;
+        angleSettings.centerY - point.y;
 
       let degrees =
-        Math.atan2(
-          dy,
-          dx
-        ) *
+        Math.atan2(dy, dx) *
         (180 / Math.PI);
 
       /*
-       * Solo usamos la región superior,
-       * correspondiente a 0°–180°.
+       * Si el puntero baja por debajo del eje horizontal,
+       * se conserva el extremo más cercano: 0° o 180°.
        */
-      degrees = clamp(
-        degrees,
-        0,
-        180
-      );
+      if (point.y > angleSettings.centerY) {
+        degrees =
+          point.x >= angleSettings.centerX
+            ? 0
+            : 180;
+      }
+
+      degrees = clamp(degrees, 0, 180);
 
       updateAngle(degrees);
     }
@@ -1198,9 +988,7 @@ function initializeAngleBuilder() {
   angleSvg.addEventListener(
     "pointerleave",
     (event) => {
-      if (
-        event.buttons === 0
-      ) {
+      if (event.buttons === 0) {
         stopDrag();
       }
     }
@@ -1213,26 +1001,16 @@ function initializeAngleBuilder() {
    7. ACTIVIDAD DE CLASIFICACIÓN
 ========================================================= */
 
-/**
- * Clasifica el valor escrito por el estudiante.
- */
 function classifyAngleInput() {
   const input =
-    document.getElementById(
-      "angleInput"
-    );
+    document.getElementById("angleInput");
 
   const answer =
-    document.getElementById(
-      "angleAnswer"
-    );
+    document.getElementById("angleAnswer");
 
-  if (!input || !answer) {
-    return;
-  }
+  if (!input || !answer) return;
 
-  const value =
-    Number(input.value);
+  const value = Number(input.value);
 
   if (
     !Number.isFinite(value) ||
@@ -1265,34 +1043,8 @@ function classifyAngleInput() {
   renderMath(answer);
 }
 
-/**
- * Renderiza MathJax dentro de un elemento.
- *
- * @param {HTMLElement} element
- */
-function renderMath(element) {
-  if (
-    !element ||
-    !window.MathJax?.typesetPromise
-  ) {
-    return;
-  }
-
-  MathJax.typesetPromise([element])
-    .catch((error) => {
-      console.warn(
-        "No se pudo renderizar la expresión:",
-        error
-      );
-    });
-}
-
-/* Permite ejecutar la actividad con Enter */
-
 const angleInput =
-  document.getElementById(
-    "angleInput"
-  );
+  document.getElementById("angleInput");
 
 angleInput?.addEventListener(
   "keydown",
@@ -1304,7 +1056,7 @@ angleInput?.addEventListener(
 );
 
 /* =========================================================
-   8. INICIALIZACIÓN GENERAL
+   8. INICIALIZACIÓN
 ========================================================= */
 
 function initializeApp() {
@@ -1315,10 +1067,7 @@ function initializeApp() {
   showSlide(0);
 }
 
-if (
-  document.readyState ===
-  "loading"
-) {
+if (document.readyState === "loading") {
   document.addEventListener(
     "DOMContentLoaded",
     initializeApp
