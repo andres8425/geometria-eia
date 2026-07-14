@@ -566,12 +566,11 @@
   </button>
 
 </section>
-
-    <!-- =========================================
+<!-- =========================================
      DIAPOSITIVA 4 · LÍNEAS NOTABLES
 ========================================== -->
 
-<section class="slide">
+<section class="slide notable-slide">
 
   <p class="kicker">
     Líneas notables
@@ -580,269 +579,261 @@
   <h2>Altura, mediana y bisectriz</h2>
 
   <p class="lead compact-lead">
-    Selecciona una línea notable para observar su construcción
-    en el triángulo \(\triangle ABC\).
+    Selecciona una construcción para observar cómo se define
+    cada línea notable en el triángulo \(\triangle ABC\).
   </p>
 
-  <div class="notable-lines-layout">
+  <div class="notable-stage">
 
-    <div class="geometry-board notable-lines-board">
+    <div class="notable-canvas">
 
       <svg
-        id="notableLinesSvg"
-        viewBox="0 0 900 470"
-        aria-label="Líneas notables de un triángulo"
+        id="notableSvg"
+        viewBox="0 0 900 430"
+        aria-label="Construcción de líneas notables"
       >
 
-        <!-- Triángulo -->
+        <!-- Interior -->
 
         <polygon
-          class="notable-triangle-fill"
-          points="210,370 700,370 500,70"
+          class="nt-triangle-fill"
+          points="205,350 695,350 500,65"
         ></polygon>
 
+        <!-- Lados -->
+
         <line
-          class="notable-triangle-side"
-          x1="210"
-          y1="370"
-          x2="700"
-          y2="370"
+          class="nt-side"
+          x1="205"
+          y1="350"
+          x2="695"
+          y2="350"
         ></line>
 
         <line
-          class="notable-triangle-side"
-          x1="700"
-          y1="370"
+          class="nt-side"
+          x1="695"
+          y1="350"
           x2="500"
-          y2="70"
+          y2="65"
         ></line>
 
         <line
-          class="notable-triangle-side"
+          class="nt-side"
           x1="500"
-          y1="70"
-          x2="210"
-          y2="370"
+          y1="65"
+          x2="205"
+          y2="350"
         ></line>
 
-        <!-- Altura desde C -->
+        <!-- ===============================
+             CONSTRUCCIÓN: ALTURA
+        ================================ -->
 
-        <g id="altitudeGroup" class="notable-group active">
+        <g id="ntAltitudeScene" class="nt-scene active">
+
+          <circle
+            class="nt-focus-point nt-altitude-color"
+            cx="500"
+            cy="65"
+            r="26"
+          ></circle>
 
           <line
-            id="altitudeLine"
-            class="notable-line altitude-line"
+            class="nt-construction-line nt-altitude-line"
             x1="500"
-            y1="70"
+            y1="65"
             x2="500"
-            y2="370"
+            y2="350"
           ></line>
 
           <circle
-            class="notable-foot"
+            class="nt-special-point nt-altitude-color"
             cx="500"
-            cy="370"
-            r="9"
+            cy="350"
+            r="10"
           ></circle>
 
-          <!-- Símbolo de perpendicularidad -->
-
           <path
-            class="right-angle-mark"
-            d="M 500 346 L 524 346 L 524 370"
+            class="nt-right-angle"
+            d="M 500 322 L 528 322 L 528 350"
           ></path>
 
           <text
-            class="notable-point-label"
+            class="nt-point-name nt-altitude-name"
             x="500"
-            y="410"
+            y="394"
           >
             H
           </text>
 
         </g>
 
-        <!-- Mediana desde C -->
+        <!-- ===============================
+             CONSTRUCCIÓN: MEDIANA
+        ================================ -->
 
-        <g id="medianGroup" class="notable-group">
-
-          <line
-            id="medianLine"
-            class="notable-line median-line"
-            x1="500"
-            y1="70"
-            x2="455"
-            y2="370"
-          ></line>
+        <g id="ntMedianScene" class="nt-scene">
 
           <circle
-            class="notable-foot median-point"
-            cx="455"
-            cy="370"
-            r="9"
+            class="nt-focus-point nt-median-color"
+            cx="500"
+            cy="65"
+            r="26"
           ></circle>
 
+          <circle
+            class="nt-special-point nt-median-color"
+            cx="450"
+            cy="350"
+            r="10"
+          ></circle>
+
+          <line
+            class="nt-construction-line nt-median-line"
+            x1="500"
+            y1="65"
+            x2="450"
+            y2="350"
+          ></line>
+
+          <!-- Marcas de igualdad en AM y MB -->
+
+          <line
+            class="nt-equal-mark"
+            x1="325"
+            y1="338"
+            x2="325"
+            y2="362"
+          ></line>
+
+          <line
+            class="nt-equal-mark"
+            x1="575"
+            y1="338"
+            x2="575"
+            y2="362"
+          ></line>
+
           <text
-            class="notable-point-label"
-            x="455"
-            y="410"
+            class="nt-point-name nt-median-name"
+            x="450"
+            y="394"
           >
             M
           </text>
 
-          <!-- Marcas de igualdad -->
-
-          <line
-            class="equal-mark"
-            x1="325"
-            y1="360"
-            x2="325"
-            y2="380"
-          ></line>
-
-          <line
-            class="equal-mark"
-            x1="585"
-            y1="360"
-            x2="585"
-            y2="380"
-          ></line>
-
         </g>
 
-        <!-- Bisectriz desde C -->
+        <!-- ===============================
+             CONSTRUCCIÓN: BISECTRIZ
+        ================================ -->
 
-        <g id="bisectorGroup" class="notable-group">
+        <g id="ntBisectorScene" class="nt-scene">
+
+          <circle
+            class="nt-focus-point nt-bisector-color"
+            cx="500"
+            cy="65"
+            r="26"
+          ></circle>
 
           <line
-            id="bisectorLine"
-            class="notable-line bisector-line"
+            class="nt-construction-line nt-bisector-line"
             x1="500"
-            y1="70"
-            x2="455"
-            y2="370"
+            y1="65"
+            x2="450"
+            y2="350"
           ></line>
 
+          <!-- Arcos interiores -->
+
           <path
-            class="bisector-arc bisector-arc-left"
-            d="M 470 111 A 47 47 0 0 1 496 118"
+            class="nt-angle-arc nt-left-arc"
+            d="M 458 112 A 58 58 0 0 1 494 126"
           ></path>
 
           <path
-            class="bisector-arc bisector-arc-right"
-            d="M 496 118 A 47 47 0 0 1 522 108"
+            class="nt-angle-arc nt-right-arc"
+            d="M 494 126 A 58 58 0 0 1 535 111"
           ></path>
 
           <text
-            class="angle-equality-symbol"
-            x="468"
-            y="145"
+            class="nt-alpha nt-alpha-left"
+            x="457"
+            y="150"
           >
             α
           </text>
 
           <text
-            class="angle-equality-symbol"
-            x="520"
-            y="145"
+            class="nt-alpha nt-alpha-right"
+            x="532"
+            y="150"
           >
             α
           </text>
 
         </g>
 
-        <!-- Vértices -->
+        <!-- Vértices visibles -->
 
-        <circle
-          class="notable-vertex"
-          cx="210"
-          cy="370"
-          r="17"
-        ></circle>
-
-        <circle
-          class="notable-vertex"
-          cx="700"
-          cy="370"
-          r="17"
-        ></circle>
-
-        <circle
-          class="notable-vertex"
-          cx="500"
-          cy="70"
-          r="17"
-        ></circle>
+        <circle class="nt-vertex" cx="205" cy="350" r="17"></circle>
+        <circle class="nt-vertex" cx="695" cy="350" r="17"></circle>
+        <circle class="nt-vertex" cx="500" cy="65" r="17"></circle>
 
         <!-- Etiquetas -->
 
-        <text
-          class="notable-vertex-label"
-          x="180"
-          y="412"
-        >
-          A
-        </text>
-
-        <text
-          class="notable-vertex-label"
-          x="730"
-          y="412"
-        >
-          B
-        </text>
-
-        <text
-          class="notable-vertex-label"
-          x="500"
-          y="38"
-        >
-          C
-        </text>
+        <text class="nt-label" x="175" y="394">A</text>
+        <text class="nt-label" x="725" y="394">B</text>
+        <text class="nt-label" x="500" y="35">C</text>
 
       </svg>
 
     </div>
 
-    <div class="notable-lines-panel">
+    <div class="notable-toolbar">
 
       <button
         type="button"
-        class="notable-selector active"
-        onclick="showNotableLine('altitude', this)"
+        class="nt-button active"
+        data-notable="altitude"
+        onclick="selectNotableConstruction('altitude', this)"
       >
         Altura
       </button>
 
       <button
         type="button"
-        class="notable-selector"
-        onclick="showNotableLine('median', this)"
+        class="nt-button"
+        data-notable="median"
+        onclick="selectNotableConstruction('median', this)"
       >
         Mediana
       </button>
 
       <button
         type="button"
-        class="notable-selector"
-        onclick="showNotableLine('bisector', this)"
+        class="nt-button"
+        data-notable="bisector"
+        onclick="selectNotableConstruction('bisector', this)"
       >
         Bisectriz
       </button>
 
-      <div
-        id="notableLineDescription"
-        class="notable-description"
-      >
-        <strong>Altura</strong>
+    </div>
 
-        <p>
-          La altura relativa al lado \(\overline{AB}\) es el segmento
-          perpendicular trazado desde el vértice \(C\) hasta la recta
-          que contiene a \(\overline{AB}\).
-        </p>
-      </div>
+    <div
+      id="notableDefinition"
+      class="notable-definition"
+    >
+      <span class="notable-definition-tag">Altura</span>
 
+      <p>
+        La <strong>altura relativa a \(\overline{AB}\)</strong>
+        es el segmento perpendicular trazado desde el vértice
+        \(C\) hasta la recta que contiene al lado \(\overline{AB}\).
+      </p>
     </div>
 
   </div>
@@ -856,6 +847,7 @@
   </button>
 
 </section>
+ 
   </main>
 
   <nav
