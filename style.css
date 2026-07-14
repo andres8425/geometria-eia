@@ -663,3 +663,319 @@ body {
     font-size: 1.15rem;
   }
 }
+
+/* =========================================================
+   CORRECCIÓN DEFINITIVA: TÍTULOS, DISTRIBUCIÓN Y SVG
+   Debe permanecer al FINAL de style.css
+========================================================= */
+
+/* Evita que el contenido alto quede centrado y se corte arriba */
+.capitulo-presentacion .slide.active {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: stretch;
+}
+
+/* Espacio seguro para títulos y controles inferiores */
+.capitulo-presentacion .slide {
+  width: min(1120px, 92vw);
+  height: min(680px, 86vh);
+  padding: clamp(34px, 5vh, 58px) clamp(34px, 4vw, 62px) 88px;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+/* Evita que los títulos crezcan demasiado en pantallas bajas */
+.capitulo-presentacion .slide h1,
+.capitulo-presentacion .slide h2 {
+  width: 100%;
+  max-width: 100%;
+  flex-shrink: 0;
+  overflow: visible;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.capitulo-presentacion .slide h1 {
+  font-size: clamp(3.5rem, 6.8vw, 6.6rem) !important;
+  line-height: 0.95 !important;
+  margin: 0 0 24px !important;
+}
+
+.capitulo-presentacion .slide h2 {
+  font-size: clamp(2.2rem, 4.1vw, 3.75rem) !important;
+  line-height: 1.02 !important;
+  margin: 0 0 20px !important;
+}
+
+/* Títulos largos: máximo dos líneas, sin salir de la tarjeta */
+.capitulo-presentacion .slide h2.title-long {
+  font-size: clamp(2rem, 3.6vw, 3.3rem) !important;
+  max-width: 950px;
+}
+
+/* Texto introductorio más compacto */
+.capitulo-presentacion .compact-lead {
+  font-size: clamp(1rem, 1.7vw, 1.25rem);
+  line-height: 1.42;
+  margin: 0 0 12px;
+}
+
+/* La zona del SVG no debe crecer excesivamente */
+.capitulo-presentacion .compact-board {
+  margin: 8px 0 14px;
+  padding: 8px 14px;
+  flex-shrink: 1;
+}
+
+.capitulo-presentacion .compact-board svg {
+  width: 100%;
+  height: min(275px, 34vh);
+  display: block;
+  overflow: visible;
+}
+
+/* =========================================================
+   SEGMENTO SIMPLE
+========================================================= */
+
+#simpleBaseTrack {
+  stroke: rgba(18, 60, 50, 0.16) !important;
+  stroke-width: 12 !important;
+  stroke-linecap: round;
+}
+
+#simpleSegmentLine {
+  stroke: #ad6543 !important;
+  stroke-width: 9 !important;
+  stroke-linecap: round;
+}
+
+#simplePointA,
+#simplePointB {
+  fill: #123c32 !important;
+  stroke: #fff4dc;
+  stroke-width: 3;
+  cursor: grab;
+  touch-action: none;
+  filter: drop-shadow(0 7px 9px rgba(0, 0, 0, 0.2));
+}
+
+#simplePointA:active,
+#simplePointB:active {
+  cursor: grabbing;
+}
+
+#simpleLabelA,
+#simpleLabelB {
+  fill: #123c32 !important;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 36px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+/* =========================================================
+   SEGMENTO CON PUNTO MEDIO
+========================================================= */
+
+#midpointBaseTrack {
+  stroke: rgba(18, 60, 50, 0.16) !important;
+  stroke-width: 12 !important;
+  stroke-linecap: round;
+}
+
+/* Línea completa, visible debajo de las dos mitades */
+#midpointSegmentLine {
+  stroke: #ad6543 !important;
+  stroke-width: 10 !important;
+  stroke-linecap: round;
+}
+
+/* Las mitades refuerzan visualmente AM = MB */
+#midpointLeftHalf {
+  stroke: #ad6543 !important;
+  stroke-width: 10 !important;
+  stroke-linecap: round;
+}
+
+#midpointRightHalf {
+  stroke: #1f6874 !important;
+  stroke-width: 10 !important;
+  stroke-linecap: round;
+}
+
+#midpointPointA,
+#midpointPointB {
+  fill: #123c32 !important;
+  stroke: #fff4dc;
+  stroke-width: 3;
+  cursor: grab;
+  touch-action: none;
+  filter: drop-shadow(0 7px 9px rgba(0, 0, 0, 0.2));
+}
+
+#midpointPointM {
+  fill: #bd3740 !important;
+  stroke: #fff4dc;
+  stroke-width: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.18));
+}
+
+#midpointLabelA,
+#midpointLabelB,
+#midpointLabelM {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 36px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+#midpointLabelA,
+#midpointLabelB {
+  fill: #123c32 !important;
+}
+
+#midpointLabelM {
+  fill: #bd3740 !important;
+}
+
+/* Medidas debajo del segmento */
+.midpoint-measures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.midpoint-measures span {
+  background: #123c32;
+  color: #fffaf0;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-weight: 700;
+}
+
+/* Botón siempre dentro de la diapositiva */
+.capitulo-presentacion .slide > .btn,
+.capitulo-presentacion .slide > .link-btn {
+  flex-shrink: 0;
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
+/* La definición de punto medio ocupa menos altura */
+.midpoint-definition {
+  font-size: clamp(1rem, 1.75vw, 1.25rem) !important;
+  line-height: 1.42 !important;
+  padding: clamp(20px, 2.5vw, 28px) !important;
+}
+
+.midpoint-definition p {
+  margin: 0 0 12px;
+}
+
+.midpoint-definition ol {
+  margin: 10px 0 0;
+  padding-left: 28px;
+}
+
+.midpoint-definition li {
+  margin-bottom: 10px;
+}
+
+.rigorous-conclusion {
+  margin-top: 12px;
+  padding: 12px 20px;
+  font-size: clamp(1rem, 1.7vw, 1.2rem);
+}
+
+/* =========================================================
+   PANTALLAS DE POCA ALTURA
+========================================================= */
+
+@media (max-height: 800px) and (min-width: 769px) {
+  .capitulo-presentacion .slide {
+    height: 89vh;
+    padding-top: 28px;
+    padding-bottom: 78px;
+  }
+
+  .capitulo-presentacion .slide h1 {
+    font-size: clamp(3.2rem, 6vw, 5.5rem) !important;
+  }
+
+  .capitulo-presentacion .slide h2 {
+    font-size: clamp(2rem, 3.6vw, 3.15rem) !important;
+    margin-bottom: 14px !important;
+  }
+
+  .capitulo-presentacion .slide h2.title-long {
+    font-size: clamp(1.85rem, 3.15vw, 2.75rem) !important;
+  }
+
+  .capitulo-presentacion .compact-board svg {
+    height: min(235px, 31vh);
+  }
+
+  .definition-card,
+  .formula-card,
+  .answer-box {
+    padding: 18px 24px;
+  }
+}
+
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media (max-width: 768px) {
+  .capitulo-presentacion .slide {
+    width: 94vw;
+    height: 87vh;
+    padding: 26px 20px 72px;
+  }
+
+  .capitulo-presentacion .slide h1 {
+    font-size: clamp(2.8rem, 15vw, 4.5rem) !important;
+  }
+
+  .capitulo-presentacion .slide h2,
+  .capitulo-presentacion .slide h2.title-long {
+    font-size: clamp(1.75rem, 8.5vw, 2.65rem) !important;
+    line-height: 1.04 !important;
+  }
+
+  .capitulo-presentacion .compact-board svg {
+    height: min(215px, 28vh);
+  }
+
+  .measure-pill {
+    width: 100%;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+    border-radius: 22px;
+  }
+
+  .midpoint-measures {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .midpoint-measures span {
+    text-align: center;
+  }
+
+  .capitulo-presentacion .slide > .btn,
+  .capitulo-presentacion .slide > .link-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
