@@ -2553,3 +2553,190 @@ opacity:1;
 
 }
 
+/* =========================================================
+   TRIÁNGULOS · DIAPOSITIVA 2
+========================================================= */
+
+.triangle-construction {
+  margin: 8px 0 14px;
+}
+
+#triangleDefinition {
+  width: min(100%, 720px);
+  height: min(285px, 34vh);
+  margin: auto;
+  overflow: visible;
+}
+
+.triangle-side {
+  fill: none;
+  stroke: var(--cobre-600);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+}
+
+.draw1 {
+  animation: triangleDefinitionDraw 0.8s 1s forwards;
+}
+
+.draw2 {
+  animation: triangleDefinitionDraw 0.8s 1.85s forwards;
+}
+
+.draw3 {
+  animation: triangleDefinitionDraw 0.8s 2.7s forwards;
+}
+
+.triangle-point {
+  fill: var(--verde-700);
+  stroke: var(--papel-3);
+  stroke-width: 4;
+
+  opacity: 0;
+
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+
+  animation: triangleDefinitionPoint 0.45s forwards;
+}
+
+.point1 {
+  animation-delay: 0.2s;
+}
+
+.point2 {
+  animation-delay: 0.5s;
+}
+
+.point3 {
+  animation-delay: 0.8s;
+}
+
+.triangle-label {
+  fill: var(--verde-700);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 34px;
+  font-weight: 700;
+
+  text-anchor: middle;
+
+  opacity: 0;
+
+  animation: triangleDefinitionLabel 0.4s forwards;
+}
+
+.label1 {
+  animation-delay: 0.35s;
+}
+
+.label2 {
+  animation-delay: 0.65s;
+}
+
+.label3 {
+  animation-delay: 0.95s;
+}
+
+.triangle-fill {
+  fill: rgba(31, 104, 116, 0.14);
+  opacity: 0;
+
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.appear-fill {
+  animation: triangleDefinitionFill 0.8s 3.55s forwards;
+}
+
+.triangle-definition-text {
+  opacity: 0;
+  animation: triangleDefinitionText 0.65s 4.05s forwards;
+}
+
+.triangle-slide-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+
+  margin-top: 16px;
+}
+
+.triangle-slide-actions .btn {
+  margin-top: 0;
+}
+
+@keyframes triangleDefinitionDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes triangleDefinitionPoint {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes triangleDefinitionLabel {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes triangleDefinitionFill {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes triangleDefinitionText {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-height: 800px) and (min-width: 769px) {
+  #triangleDefinition {
+    height: min(215px, 28vh);
+  }
+
+  .triangle-definition-text {
+    padding: 16px 20px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #triangleDefinition {
+    height: min(190px, 25vh);
+  }
+
+  .triangle-slide-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .triangle-slide-actions .btn {
+    width: 100%;
+  }
+}
