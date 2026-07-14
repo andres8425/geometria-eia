@@ -4091,24 +4091,9 @@ function highlightTriangleElements(type, button) {
  */
 
 .moving-triangle {
-  transform-box: view-box;
   transform-origin: center;
-
-  transition:
-    transform
-    1.3s
-    cubic-bezier(.2, .8, .2, 1),
-    opacity
-    500ms
-    ease;
+  will-change: transform, opacity;
 }
-
-.moving-triangle.superimposed {
-  transform:
-    translate(-395px, 30px)
-    rotate(0deg);
-}
-
 .congruence-actions {
   display: flex;
   justify-content: center;
