@@ -1949,25 +1949,31 @@ button.section-card {
     transition-duration: 1ms !important;
   }
 }
+
+
 /* =========================================================
    SECCIÓN 2 · TRIÁNGULOS Y CONGRUENCIA
    DIAPOSITIVA 1 · PORTADA
 ========================================================= */
 
 .triangle-cover {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .triangle-cover-content {
-  min-height: 100%;
+  width: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
 
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.85fr);
-  gap: clamp(30px, 5vw, 70px);
+  grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+  gap: clamp(24px, 4vw, 58px);
   align-items: center;
 }
 
 .triangle-cover-text {
+  min-width: 0;
   position: relative;
   z-index: 2;
 
@@ -1978,7 +1984,6 @@ button.section-card {
 
 .triangle-kicker {
   opacity: 0;
-
   animation:
     triangleTextEnter
     700ms
@@ -1987,11 +1992,14 @@ button.section-card {
     forwards;
 }
 
-.triangle-cover-title {
-  max-width: 690px;
+.triangle-cover .triangle-cover-title {
+  max-width: 680px;
+  margin-bottom: clamp(14px, 2vh, 22px);
+
+  font-size: clamp(2.65rem, 4.7vw, 5rem);
+  line-height: 0.96;
 
   opacity: 0;
-
   animation:
     triangleTitleEnter
     850ms
@@ -2001,10 +2009,10 @@ button.section-card {
 }
 
 .triangle-cover-lead {
-  max-width: 690px;
+  max-width: 650px;
+  margin-bottom: 0;
 
   opacity: 0;
-
   animation:
     triangleTextEnter
     750ms
@@ -2014,10 +2022,11 @@ button.section-card {
 }
 
 .triangle-start-button {
-  margin-top: 26px;
+  width: fit-content;
+  margin-top: 24px;
+  margin-bottom: 0;
 
   opacity: 0;
-
   animation:
     triangleButtonEnter
     650ms
@@ -2027,18 +2036,19 @@ button.section-card {
 }
 
 .triangle-cover-visual {
+  min-width: 0;
+  min-height: 0;
   position: relative;
   z-index: 2;
 
   display: grid;
   place-items: center;
-
-  min-width: 0;
 }
 
 #triangleCoverSvg {
-  width: min(100%, 530px);
+  width: min(100%, 490px);
   height: auto;
+  max-height: min(470px, 58vh);
 
   overflow: visible;
 
@@ -2048,13 +2058,12 @@ button.section-card {
     );
 }
 
-/* Interior */
-
 .cover-triangle-fill {
   fill: rgba(31, 104, 116, 0.13);
 
   opacity: 0;
 
+  transform-box: fill-box;
   transform-origin: center;
   transform: scale(0.92);
 
@@ -2065,8 +2074,6 @@ button.section-card {
     ease
     forwards;
 }
-
-/* Lados */
 
 .cover-triangle-side {
   fill: none;
@@ -2082,40 +2089,20 @@ button.section-card {
 .side-ab {
   stroke-dasharray: 410;
   stroke-dashoffset: 410;
-
-  animation:
-    triangleDrawSide
-    650ms
-    1.15s
-    ease
-    forwards;
+  animation: triangleDrawSide 650ms 1.15s ease forwards;
 }
 
 .side-bc {
   stroke-dasharray: 365;
   stroke-dashoffset: 365;
-
-  animation:
-    triangleDrawSide
-    650ms
-    1.55s
-    ease
-    forwards;
+  animation: triangleDrawSide 650ms 1.55s ease forwards;
 }
 
 .side-ca {
   stroke-dasharray: 400;
   stroke-dashoffset: 400;
-
-  animation:
-    triangleDrawSide
-    650ms
-    1.95s
-    ease
-    forwards;
+  animation: triangleDrawSide 650ms 1.95s ease forwards;
 }
-
-/* Puntos */
 
 .cover-triangle-point {
   fill: var(--verde-700);
@@ -2141,19 +2128,9 @@ button.section-card {
     forwards;
 }
 
-.point-a {
-  animation-delay: 650ms;
-}
-
-.point-b {
-  animation-delay: 800ms;
-}
-
-.point-c {
-  animation-delay: 950ms;
-}
-
-/* Etiquetas */
+.point-a { animation-delay: 650ms; }
+.point-b { animation-delay: 800ms; }
+.point-c { animation-delay: 950ms; }
 
 .cover-triangle-label {
   fill: var(--verde-700);
@@ -2163,6 +2140,7 @@ button.section-card {
   font-weight: 700;
 
   text-anchor: middle;
+  pointer-events: none;
 
   opacity: 0;
 
@@ -2173,19 +2151,9 @@ button.section-card {
     forwards;
 }
 
-.label-a {
-  animation-delay: 800ms;
-}
-
-.label-b {
-  animation-delay: 950ms;
-}
-
-.label-c {
-  animation-delay: 1.1s;
-}
-
-/* Regreso */
+.label-a { animation-delay: 800ms; }
+.label-b { animation-delay: 950ms; }
+.label-c { animation-delay: 1.1s; }
 
 .triangle-back-link {
   position: absolute;
@@ -2208,40 +2176,29 @@ button.section-card {
 
 .triangle-back-link:hover {
   opacity: 1;
-
   transform: translateX(-4px);
 }
-
-/* Animaciones */
 
 @keyframes triangleTitleEnter {
   from {
     opacity: 0;
-
-    transform:
-      translateY(30px)
-      scale(0.97);
+    transform: translateY(30px) scale(0.97);
   }
 
   to {
     opacity: 1;
-
-    transform:
-      translateY(0)
-      scale(1);
+    transform: translateY(0) scale(1);
   }
 }
 
 @keyframes triangleTextEnter {
   from {
     opacity: 0;
-
     transform: translateY(18px);
   }
 
   to {
     opacity: 1;
-
     transform: translateY(0);
   }
 }
@@ -2249,31 +2206,23 @@ button.section-card {
 @keyframes triangleButtonEnter {
   from {
     opacity: 0;
-
-    transform:
-      translateY(14px)
-      scale(0.96);
+    transform: translateY(14px) scale(0.96);
   }
 
   to {
     opacity: 1;
-
-    transform:
-      translateY(0)
-      scale(1);
+    transform: translateY(0) scale(1);
   }
 }
 
 @keyframes trianglePointEnter {
   from {
     opacity: 0;
-
     transform: scale(0);
   }
 
   to {
     opacity: 1;
-
     transform: scale(1);
   }
 }
@@ -2281,13 +2230,11 @@ button.section-card {
 @keyframes triangleLabelEnter {
   from {
     opacity: 0;
-
     transform: translateY(8px);
   }
 
   to {
     opacity: 1;
-
     transform: translateY(0);
   }
 }
@@ -2301,49 +2248,58 @@ button.section-card {
 @keyframes triangleFillEnter {
   from {
     opacity: 0;
-
     transform: scale(0.92);
   }
 
   to {
     opacity: 1;
-
     transform: scale(1);
   }
 }
 
-/* Pantallas de poca altura */
-
-@media (max-height: 800px) and (min-width: 769px) {
-
+@media (max-height: 800px) and (min-width: 901px) {
   .triangle-cover-content {
-    gap: 34px;
+    gap: 26px;
+  }
+
+  .triangle-cover .triangle-cover-title {
+    font-size: clamp(2.45rem, 4vw, 4.15rem);
+  }
+
+  .triangle-cover-lead {
+    font-size: 1rem;
+    line-height: 1.42;
   }
 
   #triangleCoverSvg {
-    width: min(100%, 430px);
+    width: min(100%, 405px);
+    max-height: 400px;
   }
 
-  .triangle-cover-title {
-    font-size: clamp(2.8rem, 4.8vw, 4.8rem);
+  .triangle-start-button {
+    margin-top: 18px;
   }
 }
 
-/* Tableta */
-
 @media (max-width: 900px) {
+  .triangle-cover {
+    padding-bottom: 88px;
+  }
 
   .triangle-cover-content {
     grid-template-columns: 1fr;
     gap: 10px;
-
     align-content: start;
   }
 
   .triangle-cover-text {
     align-items: center;
-
     text-align: center;
+  }
+
+  .triangle-cover .triangle-cover-title {
+    max-width: 760px;
+    font-size: clamp(2.35rem, 8vw, 4rem);
   }
 
   .triangle-cover-lead {
@@ -2355,44 +2311,61 @@ button.section-card {
   }
 
   #triangleCoverSvg {
-    width: min(100%, 390px);
-    max-height: 310px;
+    width: min(100%, 370px);
+    max-height: 285px;
   }
 }
 
-/* Celular */
-
 @media (max-width: 768px) {
-
   .triangle-cover {
-    padding-bottom: 80px;
+    padding: 22px 18px 86px;
+    overflow-y: auto;
   }
 
   .triangle-cover-content {
-    gap: 4px;
+    gap: 6px;
   }
 
-  .triangle-cover-title {
-    font-size: clamp(2.35rem, 12vw, 3.8rem);
+  .triangle-cover .triangle-cover-title {
+    margin-bottom: 10px;
+    font-size: clamp(2.05rem, 10.5vw, 3.25rem);
+    line-height: 0.98;
   }
 
   .triangle-cover-lead {
-    font-size: 0.96rem;
+    font-size: 0.93rem;
+    line-height: 1.38;
   }
 
   #triangleCoverSvg {
-    width: min(100%, 330px);
-    max-height: 250px;
+    width: min(100%, 285px);
+    max-height: 220px;
   }
 
   .triangle-start-button {
     width: 100%;
+    margin-top: 14px;
   }
 
   .triangle-back-link {
-    left: 20px;
-    bottom: 22px;
+    left: 18px;
+    bottom: 20px;
+    max-width: calc(100% - 36px);
+    font-size: 0.8rem;
+  }
+}
 
-    font-size: 0.82rem;
+@media (max-width: 420px) {
+  .triangle-cover .triangle-cover-title {
+    font-size: clamp(1.85rem, 9.5vw, 2.7rem);
+  }
+
+  #triangleCoverSvg {
+    width: min(100%, 245px);
+    max-height: 190px;
+  }
+
+  .cover-triangle-label {
+    font-size: 34px;
   }
 }
