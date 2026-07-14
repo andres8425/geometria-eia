@@ -3136,5 +3136,362 @@ function highlightTriangleElements(type, button) {
         }
       );
     }
+
+     /* =========================================================
+   TRIÁNGULOS · DIAPOSITIVA 4
+   LÍNEAS NOTABLES
+========================================================= */
+
+.notable-lines-layout {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 285px;
+  gap: 24px;
+  align-items: stretch;
+
+  margin: 8px 0 18px;
+}
+
+.notable-lines-board {
+  margin: 0;
+}
+
+#notableLinesSvg {
+  width: 100%;
+  height: min(350px, 42vh);
+
+  overflow: visible;
+}
+
+.notable-triangle-fill {
+  fill: rgba(31, 104, 116, 0.09);
+}
+
+.notable-triangle-side {
+  stroke: var(--cobre-600);
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.notable-vertex {
+  fill: var(--verde-700);
+
+  stroke: var(--papel-3);
+  stroke-width: 4;
+}
+
+.notable-vertex-label,
+.notable-point-label {
+  fill: var(--verde-700);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32px;
+  font-weight: 700;
+
+  text-anchor: middle;
+}
+
+.notable-point-label {
+  font-size: 26px;
+}
+
+.notable-group {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.notable-group.active {
+  opacity: 1;
+
+  animation:
+    notableGroupEnter
+    520ms
+    cubic-bezier(.2, .8, .2, 1)
+    both;
+}
+
+.notable-line {
+  fill: none;
+
+  stroke-width: 9;
+  stroke-linecap: round;
+
+  stroke-dasharray: 420;
+  stroke-dashoffset: 420;
+
+  animation:
+    drawNotableLine
+    900ms
+    ease
+    forwards;
+}
+
+.altitude-line {
+  stroke: var(--rojo);
+}
+
+.median-line {
+  stroke: var(--azul);
+}
+
+.bisector-line {
+  stroke: var(--dorado);
+}
+
+.notable-foot {
+  fill: var(--rojo);
+
+  stroke: var(--papel-3);
+  stroke-width: 3;
+
+  opacity: 0;
+
+  animation:
+    notablePointEnter
+    450ms
+    650ms
+    ease
+    forwards;
+}
+
+.median-point {
+  fill: var(--azul);
+}
+
+.right-angle-mark {
+  fill: none;
+
+  stroke: var(--rojo);
+  stroke-width: 6;
+  stroke-linejoin: round;
+
+  opacity: 0;
+
+  animation:
+    notableSymbolEnter
+    420ms
+    720ms
+    ease
+    forwards;
+}
+
+.equal-mark {
+  stroke: var(--azul);
+  stroke-width: 5;
+  stroke-linecap: round;
+
+  opacity: 0;
+
+  animation:
+    notableSymbolEnter
+    420ms
+    720ms
+    ease
+    forwards;
+}
+
+.bisector-arc {
+  fill: none;
+
+  stroke: var(--dorado);
+  stroke-width: 6;
+  stroke-linecap: round;
+
+  opacity: 0;
+
+  animation:
+    notableSymbolEnter
+    450ms
+    680ms
+    ease
+    forwards;
+}
+
+.angle-equality-symbol {
+  fill: var(--cobre-700);
+
+  font-size: 25px;
+  font-weight: 700;
+
+  text-anchor: middle;
+
+  opacity: 0;
+
+  animation:
+    notableSymbolEnter
+    450ms
+    850ms
+    ease
+    forwards;
+}
+
+/* Panel */
+
+.notable-lines-panel {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.notable-selector {
+  width: 100%;
+
+  padding: 14px 18px;
+
+  border: 1px solid rgba(18, 60, 50, 0.16);
+  border-radius: 16px;
+
+  color: var(--verde-700);
+
+  font-weight: 700;
+  text-align: left;
+
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.86);
+
+  box-shadow: var(--sombra-sm);
+
+  transition:
+    transform var(--transicion),
+    color var(--transicion),
+    background var(--transicion),
+    box-shadow var(--transicion);
+}
+
+.notable-selector:hover {
+  transform: translateX(5px);
+}
+
+.notable-selector.active {
+  color: var(--blanco);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--verde-700),
+      var(--verde-500)
+    );
+}
+
+.notable-description {
+  min-height: 190px;
+
+  margin-top: 6px;
+  padding: 18px;
+
+  border-left: 7px solid var(--cobre-600);
+  border-radius: 18px;
+
+  color: var(--texto);
+
+  background: var(--blanco);
+
+  box-shadow: var(--sombra-sm);
+
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.notable-description strong {
+  color: var(--verde-700);
+
+  font-size: 1.3rem;
+}
+
+.notable-description p {
+  margin: 10px 0 0;
+
+  line-height: 1.45;
+}
+
+/* Animaciones */
+
+@keyframes drawNotableLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes notablePointEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes notableSymbolEnter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes notableGroupEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive */
+
+@media (max-height: 800px) and (min-width: 769px) {
+  #notableLinesSvg {
+    height: min(260px, 33vh);
+  }
+
+  .notable-description {
+    min-height: 150px;
+    padding: 14px;
+  }
+}
+
+@media (max-width: 850px) {
+  .notable-lines-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .notable-lines-panel {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .notable-description {
+    grid-column: 1 / -1;
+  }
+
+  .notable-selector {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  #notableLinesSvg {
+    height: min(215px, 29vh);
+  }
+
+  .notable-lines-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .notable-description {
+    min-height: 120px;
+  }
+}
   }, 140);
 }
