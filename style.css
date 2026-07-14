@@ -3495,3 +3495,494 @@ function highlightTriangleElements(type, button) {
 }
   }, 140);
 }
+/* =========================================================
+   TRIÁNGULOS · LÍNEAS NOTABLES REDISEÑADAS
+========================================================= */
+
+.notable-slide {
+  overflow-y: auto;
+}
+
+.notable-stage {
+  width: 100%;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+
+  margin: 4px 0 16px;
+}
+
+.notable-canvas {
+  width: 100%;
+
+  padding: 8px 16px;
+
+  border: 2px solid rgba(166, 95, 63, 0.22);
+  border-radius: var(--radio-lg);
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff8e9,
+      var(--papel-3)
+    );
+
+  box-shadow:
+    inset 0 0 45px rgba(173, 101, 67, 0.05);
+}
+
+#notableSvg {
+  width: min(100%, 850px);
+  height: min(325px, 39vh);
+
+  display: block;
+
+  margin: auto;
+
+  overflow: visible;
+}
+
+/* Triángulo base */
+
+.nt-triangle-fill {
+  fill: rgba(31, 104, 116, 0.08);
+}
+
+.nt-side {
+  fill: none;
+
+  stroke: var(--cobre-600);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nt-vertex {
+  fill: var(--verde-700);
+
+  stroke: var(--papel-3);
+  stroke-width: 4;
+
+  filter:
+    drop-shadow(
+      0 7px 9px rgba(0, 0, 0, 0.18)
+    );
+}
+
+.nt-label,
+.nt-point-name {
+  fill: var(--verde-700);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 31px;
+  font-weight: 700;
+
+  text-anchor: middle;
+
+  pointer-events: none;
+}
+
+/* Escenas */
+
+.nt-scene {
+  display: none;
+
+  transform-origin: center;
+}
+
+.nt-scene.active {
+  display: block;
+
+  animation:
+    ntSceneEnter
+    420ms
+    cubic-bezier(.2, .8, .2, 1)
+    both;
+}
+
+/* Punto de inicio resaltado */
+
+.nt-focus-point {
+  opacity: 0;
+
+  stroke: none;
+
+  animation:
+    ntPulsePoint
+    620ms
+    ease
+    forwards;
+}
+
+.nt-altitude-color {
+  fill: rgba(189, 55, 64, 0.2);
+}
+
+.nt-median-color {
+  fill: rgba(31, 104, 116, 0.2);
+}
+
+.nt-bisector-color {
+  fill: rgba(247, 200, 115, 0.34);
+}
+
+/* Líneas animadas */
+
+.nt-construction-line {
+  fill: none;
+
+  stroke-width: 9;
+  stroke-linecap: round;
+
+  stroke-dasharray: 410;
+  stroke-dashoffset: 410;
+
+  animation:
+    ntDrawLine
+    950ms
+    180ms
+    ease
+    forwards;
+}
+
+.nt-altitude-line {
+  stroke: var(--rojo);
+}
+
+.nt-median-line {
+  stroke: var(--azul);
+}
+
+.nt-bisector-line {
+  stroke: #d19534;
+}
+
+/* Punto H o M */
+
+.nt-special-point {
+  opacity: 0;
+
+  stroke: var(--papel-3);
+  stroke-width: 3;
+
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+
+  animation:
+    ntPointAppear
+    420ms
+    820ms
+    cubic-bezier(.2, .9, .3, 1.2)
+    forwards;
+}
+
+/* Símbolo de perpendicularidad */
+
+.nt-right-angle {
+  fill: none;
+
+  stroke: var(--rojo);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  opacity: 0;
+
+  animation:
+    ntSymbolAppear
+    400ms
+    920ms
+    ease
+    forwards;
+}
+
+/* Marcas del punto medio */
+
+.nt-equal-mark {
+  stroke: var(--azul);
+  stroke-width: 6;
+  stroke-linecap: round;
+
+  opacity: 0;
+
+  animation:
+    ntSymbolAppear
+    430ms
+    780ms
+    ease
+    forwards;
+}
+
+/* Arcos de la bisectriz */
+
+.nt-angle-arc {
+  fill: none;
+
+  stroke: #d19534;
+  stroke-width: 7;
+  stroke-linecap: round;
+
+  opacity: 0;
+
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+
+  animation:
+    ntDrawArc
+    520ms
+    720ms
+    ease
+    forwards;
+}
+
+.nt-alpha {
+  fill: var(--cobre-700);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 27px;
+  font-weight: 700;
+
+  text-anchor: middle;
+
+  opacity: 0;
+
+  animation:
+    ntSymbolAppear
+    400ms
+    1.05s
+    ease
+    forwards;
+}
+
+/* Nombres H y M */
+
+.nt-altitude-name,
+.nt-median-name {
+  opacity: 0;
+
+  animation:
+    ntSymbolAppear
+    420ms
+    1.02s
+    ease
+    forwards;
+}
+
+/* Botones */
+
+.notable-toolbar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.nt-button {
+  min-width: 135px;
+
+  padding: 12px 22px;
+
+  border: 1px solid rgba(18, 60, 50, 0.16);
+  border-radius: 999px;
+
+  color: var(--verde-700);
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  box-shadow: var(--sombra-sm);
+
+  transition:
+    color var(--transicion),
+    background var(--transicion),
+    transform var(--transicion),
+    box-shadow var(--transicion);
+}
+
+.nt-button:hover {
+  transform: translateY(-3px);
+
+  box-shadow: var(--sombra-md);
+}
+
+.nt-button.active {
+  color: var(--blanco);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--verde-700),
+      var(--verde-500)
+    );
+}
+
+/* Definición */
+
+.notable-definition {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 18px;
+  align-items: center;
+
+  padding: 16px 21px;
+
+  border-left: 8px solid var(--cobre-600);
+  border-radius: var(--radio-md);
+
+  color: var(--texto);
+
+  background: var(--blanco);
+
+  box-shadow: var(--sombra-sm);
+
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.notable-definition-tag {
+  min-width: 105px;
+
+  padding: 10px 15px;
+
+  border-radius: 999px;
+
+  color: var(--blanco);
+
+  font-weight: 700;
+  text-align: center;
+
+  background: var(--cobre-600);
+}
+
+.notable-definition p {
+  margin: 0;
+
+  line-height: 1.45;
+}
+
+/* Animaciones */
+
+@keyframes ntSceneEnter {
+  from {
+    opacity: 0;
+
+    transform: scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+@keyframes ntPulsePoint {
+  0% {
+    opacity: 0;
+
+    transform: scale(0.35);
+  }
+
+  70% {
+    opacity: 1;
+
+    transform: scale(1.15);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+@keyframes ntDrawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ntPointAppear {
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+@keyframes ntSymbolAppear {
+  from {
+    opacity: 0;
+
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+@keyframes ntDrawArc {
+  to {
+    opacity: 1;
+
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Pantallas bajas */
+
+@media (max-height: 800px) and (min-width: 769px) {
+  #notableSvg {
+    height: min(245px, 31vh);
+  }
+
+  .notable-definition {
+    padding: 12px 17px;
+
+    font-size: 0.96rem;
+  }
+
+  .nt-button {
+    padding: 9px 18px;
+  }
+}
+
+/* Celular */
+
+@media (max-width: 768px) {
+  #notableSvg {
+    height: min(205px, 27vh);
+  }
+
+  .notable-toolbar {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .nt-button {
+    width: 100%;
+  }
+
+  .notable-definition {
+    grid-template-columns: 1fr;
+    gap: 9px;
+
+    padding: 14px;
+  }
+
+  .notable-definition-tag {
+    width: fit-content;
+  }
+}
