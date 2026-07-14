@@ -1075,7 +1075,7 @@ if (document.readyState === "loading") {
 } else {
   initializeApp();
 }
-/* DIAPOSITIVA 2 (TRIÁNGULOS)
+/* DIAPOSITIVA 2 (TRIÁNGULOS) /*
 function restartTriangleAnimation(){
 
 const svg=document.getElementById("triangleDefinition");
