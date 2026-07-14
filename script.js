@@ -1728,7 +1728,65 @@ function initializeNotableLines() {
     "active"
   );
 }
+/* =========================================================
+   12. CONGRUENCIA DE TRIÁNGULOS
+========================================================= */
 
+function superimposeTriangles() {
+  const movingTriangle =
+    document.getElementById(
+      "movingTriangle"
+    );
+
+  const message =
+    document.getElementById(
+      "congruenceMessage"
+    );
+
+  if (
+    !movingTriangle ||
+    !message
+  ) {
+    return;
+  }
+
+  movingTriangle.classList.add(
+    "superimposed"
+  );
+
+  window.setTimeout(() => {
+    message.classList.add(
+      "success"
+    );
+  }, 1050);
+}
+
+function resetCongruence() {
+  const movingTriangle =
+    document.getElementById(
+      "movingTriangle"
+    );
+
+  const message =
+    document.getElementById(
+      "congruenceMessage"
+    );
+
+  if (
+    !movingTriangle ||
+    !message
+  ) {
+    return;
+  }
+
+  movingTriangle.classList.remove(
+    "superimposed"
+  );
+
+  message.classList.remove(
+    "success"
+  );
+}
 /* =========================================================
    12. INICIALIZACIÓN GENERAL
 ========================================================= */
