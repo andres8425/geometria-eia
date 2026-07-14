@@ -1,18 +1,47 @@
-/* ========================= */
-/* ESTILO GENERAL */
-/* ========================= */
+/* =========================================================
+   GEOM-EIA · STYLE.CSS
+   Página inicial + Capítulo 1 tipo Beamer/Canva
+========================================================= */
+
+/* =========================
+   1. VARIABLES Y BASE
+========================= */
+
+:root {
+  --verde-oscuro: #123c32;
+  --verde-profundo: #092622;
+  --verde-azulado: #1f6874;
+  --cobre: #ad6543;
+  --cobre-suave: #a65f3f;
+  --dorado: #f7c873;
+  --rojo: #bd3740;
+
+  --papel: #fffaf0;
+  --papel-suave: #f4e8cd;
+  --papel-calido: #fff4dc;
+  --texto: #2c241c;
+
+  --sombra-grande: 0 35px 90px rgba(0, 0, 0, 0.35);
+  --sombra-media: 0 20px 45px rgba(0, 0, 0, 0.14);
+  --radio-grande: 36px;
+  --radio-medio: 28px;
+}
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
 }
 
 body {
   margin: 0;
 }
 
-/* ========================= */
-/* PÁGINA INICIAL */
-/* ========================= */
+/* =========================
+   2. PÁGINA INICIAL
+========================= */
 
 .home {
   min-height: 100vh;
@@ -43,29 +72,29 @@ body {
 }
 
 .pretitle {
-  color: #f7c873;
+  margin: 0 0 12px;
+  color: var(--dorado);
   text-transform: uppercase;
   letter-spacing: 12px;
   font-size: 1.4rem;
-  margin-bottom: 12px;
 }
 
 .hero-inicio h1 {
+  margin: 0;
+  color: var(--papel);
   font-size: clamp(4rem, 9vw, 8rem);
   line-height: 0.92;
   text-transform: uppercase;
   letter-spacing: 7px;
-  margin: 0;
-  color: #fffaf0;
-  text-shadow: 0 8px 35px rgba(0,0,0,0.55);
+  text-shadow: 0 8px 35px rgba(0, 0, 0, 0.55);
 }
 
 .linea-decorativa {
   width: min(560px, 80%);
   height: 1px;
   margin: 34px auto 24px;
-  background: linear-gradient(90deg, transparent, #f7c873, transparent);
   position: relative;
+  background: linear-gradient(90deg, transparent, var(--dorado), transparent);
 }
 
 .linea-decorativa span {
@@ -75,32 +104,32 @@ body {
   width: 34px;
   height: 34px;
   transform: translate(-50%, -50%);
-  border: 2px solid #f7c873;
+  border: 2px solid var(--dorado);
   border-radius: 50%;
   background: rgba(0, 50, 52, 0.9);
 }
 
 .hero-inicio h2 {
+  margin: 0 0 24px;
   font-size: 1.7rem;
   letter-spacing: 8px;
   font-weight: 400;
-  margin-bottom: 24px;
 }
 
 .descripcion {
   max-width: 760px;
   margin: 0 auto 40px;
+  color: rgba(255, 255, 255, 0.92);
   font-size: 1.25rem;
   line-height: 1.7;
-  color: rgba(255,255,255,0.92);
 }
 
 .capitulos-home {
   display: grid;
   grid-template-columns: repeat(2, minmax(280px, 1fr));
   gap: 28px;
-  margin: 30px auto;
   max-width: 920px;
+  margin: 30px auto;
 }
 
 .card-capitulo {
@@ -109,26 +138,30 @@ body {
   grid-template-columns: 170px 1fr;
   gap: 24px;
   align-items: center;
-  text-align: left;
   padding: 28px;
-  border-radius: 26px;
-  text-decoration: none;
-  color: white;
-  background: rgba(0, 98, 93, 0.34);
   border: 1px solid rgba(80, 255, 230, 0.35);
-  box-shadow: 0 24px 55px rgba(0,0,0,0.32);
+  border-radius: 26px;
+  color: white;
+  text-align: left;
+  text-decoration: none;
+  background: rgba(0, 98, 93, 0.34);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.32);
   backdrop-filter: blur(12px);
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .card-capitulo:hover {
   transform: translateY(-8px) scale(1.02);
   background: rgba(0, 120, 110, 0.5);
+  box-shadow: 0 30px 65px rgba(0, 0, 0, 0.4);
 }
 
 .card-dorado {
-  background: rgba(60, 50, 28, 0.42);
   border-color: rgba(247, 200, 115, 0.55);
+  background: rgba(60, 50, 28, 0.42);
 }
 
 .card-dorado:hover {
@@ -138,126 +171,81 @@ body {
 .icono-capitulo {
   width: 150px;
   height: 150px;
-  border: 2px solid #f7c873;
-  border-radius: 50%;
   display: grid;
   place-items: center;
-  box-shadow: inset 0 0 40px rgba(247,200,115,0.15);
+  border: 2px solid var(--dorado);
+  border-radius: 50%;
+  box-shadow: inset 0 0 40px rgba(247, 200, 115, 0.15);
 }
 
 .compas,
 .triangulo-icono {
+  color: var(--dorado);
   font-size: 5rem;
-  color: #f7c873;
 }
 
 .cap-label {
+  margin: 0;
+  color: var(--dorado);
   text-transform: uppercase;
   letter-spacing: 8px;
-  color: #f7c873;
-  margin: 0;
 }
 
 .card-capitulo h3 {
-  font-size: 4.2rem;
   margin: 0;
   color: #55ffe0;
+  font-size: 4.2rem;
 }
 
 .card-dorado h3 {
-  color: #f7c873;
+  color: var(--dorado);
 }
 
 .card-capitulo p {
+  margin: 8px 0 20px;
   font-size: 1.35rem;
   line-height: 1.3;
-  margin: 8px 0 20px;
 }
 
 .card-capitulo span {
   display: inline-block;
-  border: 1px solid currentColor;
   padding: 10px 22px;
+  border: 1px solid currentColor;
   border-radius: 999px;
   color: #55ffe0;
 }
 
 .card-dorado span {
-  color: #f7c873;
+  color: var(--dorado);
 }
 
 .beneficios {
   max-width: 1080px;
-  margin: 28px auto 0;
-  padding: 20px 28px;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.22);
-  border: 1px solid rgba(255,255,255,0.14);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 18px;
-  backdrop-filter: blur(10px);
+  margin: 28px auto 0;
+  padding: 20px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
   font-size: 1rem;
+  background: rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(10px);
 }
 
-/* ========================= */
-/* ANIMACIONES */
-/* ========================= */
-
-@keyframes aparecerInicio {
-  from {
-    opacity: 0;
-    transform: translateY(28px) scale(0.98);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* ========================= */
-/* RESPONSIVE */
-/* ========================= */
-
-@media (max-width: 900px) {
-  .capitulos-home {
-    grid-template-columns: 1fr;
-  }
-
-  .card-capitulo {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .icono-capitulo {
-    margin: auto;
-  }
-
-  .beneficios {
-    border-radius: 28px;
-    grid-template-columns: 1fr;
-  }
-
-  .pretitle {
-    letter-spacing: 6px;
-  }
-}
-
-/* ========================= */
-/* CAPÍTULO 1 · PRESENTACIÓN */
-/* ========================= */
+/* =========================
+   3. CAPÍTULO 1 · PRESENTACIÓN
+========================= */
 
 .capitulo-presentacion {
-  margin: 0;
   min-height: 100vh;
   overflow: hidden;
+  color: var(--papel);
+  font-family: Georgia, "Times New Roman", serif;
   background:
     radial-gradient(circle at 15% 20%, rgba(247, 200, 115, 0.25), transparent 28%),
     radial-gradient(circle at 85% 80%, rgba(63, 170, 150, 0.22), transparent 30%),
-    linear-gradient(135deg, #123c32, #092622);
-  color: #fffaf0;
-  font-family: Georgia, "Times New Roman", serif;
+    linear-gradient(135deg, var(--verde-oscuro), var(--verde-profundo));
 }
 
 .deck {
@@ -270,16 +258,27 @@ body {
 .slide {
   display: none;
   width: min(1120px, 92vw);
-  height: min(680px, 82vh);
-  padding: 64px;
-  border-radius: 36px;
-  background:
-    linear-gradient(145deg, rgba(255, 250, 240, 0.97), rgba(244, 232, 205, 0.96));
-  color: #2c241c;
-  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(247, 200, 115, 0.45);
+  height: min(680px, 86vh);
+  padding:
+    clamp(28px, 4vh, 48px)
+    clamp(30px, 4vw, 58px)
+    82px;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid rgba(247, 200, 115, 0.45);
+  border-radius: var(--radio-grande);
+  color: var(--texto);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 250, 240, 0.98),
+      rgba(244, 232, 205, 0.97)
+    );
+  box-shadow: var(--sombra-grande);
+  scroll-behavior: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
 }
 
 .slide::before {
@@ -287,61 +286,109 @@ body {
   position: absolute;
   width: 420px;
   height: 420px;
-  border: 2px solid rgba(18, 60, 50, 0.12);
-  border-radius: 50%;
   right: -150px;
   top: -150px;
+  pointer-events: none;
+  border: 2px solid rgba(18, 60, 50, 0.12);
+  border-radius: 50%;
 }
 
 .slide.active {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
-  justify-content: center;
-  animation: slideIn 0.7s cubic-bezier(.2,.8,.2,1);
+  justify-content: flex-start !important;
+  align-items: stretch;
+  animation: slideIn 0.55s cubic-bezier(.2, .8, .2, 1);
 }
 
+/* =========================
+   4. TÍTULOS Y TEXTO
+========================= */
+
 .kicker {
-  color: #a65f3f;
+  flex: 0 0 auto;
+  margin: 0 0 10px;
+  color: var(--cobre-suave);
+  font-size: clamp(0.72rem, 1.2vw, 0.95rem);
+  line-height: 1.3;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 4px;
-  font-weight: 700;
-  margin: 0 0 16px;
+}
+
+.slide h1,
+.slide h2 {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 100%;
+  color: var(--verde-oscuro);
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: none;
 }
 
 .slide h1 {
-  font-size: clamp(4rem, 9vw, 7.8rem);
-  line-height: 0.95;
-  margin: 0 0 28px;
-  color: #123c32;
+  margin: 0 0 20px;
+  font-size: clamp(3.4rem, 6.4vw, 6.3rem);
+  line-height: 0.94;
 }
 
 .slide h2 {
-  font-size: clamp(2.6rem, 5vw, 4.3rem);
-  line-height: 1;
-  margin: 0 0 28px;
-  color: #123c32;
+  margin: 0 0 16px;
+  font-size: clamp(2.15rem, 3.8vw, 3.55rem);
+  line-height: 1.02;
+}
+
+.slide h2.title-long {
+  max-width: 930px;
+  font-size: clamp(1.9rem, 3.25vw, 3rem);
+  line-height: 1.03;
 }
 
 .lead {
-  max-width: 850px;
-  font-size: 1.45rem;
-  line-height: 1.65;
+  flex: 0 0 auto;
+  max-width: 880px;
+  margin: 0 0 14px;
+  font-size: clamp(1.02rem, 1.65vw, 1.32rem);
+  line-height: 1.5;
 }
 
+.compact-lead {
+  margin-bottom: 8px;
+  font-size: clamp(0.98rem, 1.45vw, 1.18rem);
+  line-height: 1.42;
+}
+
+.small-note {
+  margin-top: 16px;
+  color: #755b44;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+/* =========================
+   5. BOTONES
+========================= */
+
 .btn {
-  margin-top: 34px;
   width: fit-content;
+  flex: 0 0 auto;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding: 15px 30px;
   border: none;
   border-radius: 999px;
-  padding: 15px 30px;
-  background: linear-gradient(135deg, #123c32, #1f5f74);
-  color: #fffaf0;
-  font-weight: 700;
+  color: var(--papel);
   font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
   text-decoration: none;
   cursor: pointer;
+  background: linear-gradient(135deg, var(--verde-oscuro), #1f5f74);
   box-shadow: 0 14px 28px rgba(18, 60, 50, 0.25);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .btn:hover {
@@ -349,397 +396,48 @@ body {
   box-shadow: 0 22px 38px rgba(18, 60, 50, 0.32);
 }
 
+/* =========================
+   6. FIGURAS Y PANELES SVG
+========================= */
+
 .segment-demo,
 .interactive-board {
   width: 100%;
-  background: #fff4dc;
+  flex: 0 0 auto;
+  margin: 10px 0 14px;
+  padding: 8px 14px;
   border: 2px solid rgba(166, 95, 63, 0.25);
-  border-radius: 28px;
-  padding: 18px;
-  margin: 20px 0;
+  border-radius: var(--radio-medio);
+  background: var(--papel-calido);
 }
 
 .segment-demo svg,
 .interactive-board svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.svg-line {
-  stroke: #a65f3f;
-  stroke-width: 9;
-  stroke-linecap: round;
-}
-
-.svg-point {
-  fill: #123c32;
-  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
-}
-
-.svg-label {
-  text-anchor: middle;
-  font-size: 38px;
-  font-weight: 700;
-  fill: #123c32;
-}
-
-.draw {
-  stroke-dasharray: 480;
-  stroke-dashoffset: 480;
-  animation: drawLine 1.25s ease forwards;
-}
-
-.appear {
-  opacity: 0;
-  transform-origin: center;
-  animation: popPoint 0.65s ease forwards;
-}
-
-.delay {
-  animation-delay: 0.45s;
-}
-
-.definition-card,
-.formula-card,
-.answer-box {
-  background: white;
-  border-radius: 28px;
-  padding: 30px;
-  border-left: 10px solid #a65f3f;
-  box-shadow: 0 18px 45px rgba(0,0,0,0.12);
-  font-size: 1.45rem;
-  line-height: 1.6;
-}
-
-.small-note {
-  margin-top: 18px;
-  color: #755b44;
-  font-size: 1rem;
-}
-
-#baseTrack {
-  stroke: rgba(18, 60, 50, 0.18);
-  stroke-width: 12;
-  stroke-linecap: round;
-}
-
-#segmentLine {
-  stroke: #a65f3f;
-  stroke-width: 9;
-  stroke-linecap: round;
-}
-
-#pointA,
-#pointB {
-  fill: #123c32;
-  cursor: grab;
-  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
-}
-
-#pointA:hover,
-#pointB:hover {
-  fill: #1f5f74;
-}
-
-#pointM {
-  fill: #b43b3b;
-}
-
-#labelA,
-#labelB,
-#labelM {
-  text-anchor: middle;
-  font-size: 36px;
-  font-weight: 700;
-  fill: #123c32;
-}
-
-#labelM {
-  fill: #b43b3b;
-}
-
-.measure-pill {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  width: fit-content;
-  background: #123c32;
-  color: white;
-  padding: 18px 26px;
-  border-radius: 999px;
-  box-shadow: 0 14px 30px rgba(18, 60, 50, 0.25);
-}
-
-.measure-pill span {
-  opacity: 0.85;
-}
-
-.measure-pill strong {
-  font-size: 1.35rem;
-}
-
-.flip-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(260px, 1fr));
-  gap: 32px;
-  margin-top: 28px;
-  max-width: 800px;
-}
-
-.flip-card {
-  height: 230px;
-  position: relative;
-  perspective: 1000px;
-  cursor: pointer;
-}
-
-.flip-card .front,
-.flip-card .back {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  border-radius: 28px;
-  backface-visibility: hidden;
-  transition: transform 0.75s cubic-bezier(.2,.8,.2,1);
-  box-shadow: 0 20px 45px rgba(0,0,0,0.14);
-  padding: 28px;
-  text-align: center;
-}
-
-.flip-card .front {
-  background: white;
-  color: #123c32;
-  border: 2px solid rgba(18, 60, 50, 0.18);
-  font-size: 3rem;
-  font-weight: 700;
-}
-
-.flip-card .back {
-  background: #123c32;
-  color: white;
-  transform: rotateY(180deg);
-  font-size: 1.4rem;
-  line-height: 1.5;
-}
-
-.flip-card.flipped .front {
-  transform: rotateY(180deg);
-}
-
-.flip-card.flipped .back {
-  transform: rotateY(360deg);
-}
-
-.activity-box {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 22px;
-  font-size: 1.2rem;
-}
-
-.activity-box input {
-  padding: 14px 18px;
-  border-radius: 16px;
-  border: 2px solid rgba(18, 60, 50, 0.22);
-  font-size: 1.1rem;
-  width: 190px;
-}
-
-.activity-box button {
-  border: none;
-  background: #a65f3f;
-  color: white;
-  font-weight: 700;
-  border-radius: 16px;
-  padding: 14px 22px;
-  cursor: pointer;
-}
-
-.summary-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-  margin-top: 30px;
-}
-
-.summary-grid div {
-  background: white;
-  border-radius: 28px;
-  padding: 32px 20px;
-  text-align: center;
-  color: #123c32;
-  font-size: 2.3rem;
-  font-weight: 700;
-  box-shadow: 0 18px 45px rgba(0,0,0,0.12);
-}
-
-.summary-grid span {
-  display: block;
-  font-size: 1rem;
-  margin-top: 12px;
-  color: #a65f3f;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.slide-controls {
-  position: fixed;
-  left: 50%;
-  bottom: 24px;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 12px 18px;
-  border-radius: 999px;
-  background: rgba(255, 250, 240, 0.88);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
-  color: #123c32;
-  z-index: 20;
-}
-
-.slide-controls button {
-  width: 42px;
-  height: 42px;
-  border: none;
-  border-radius: 50%;
-  background: #123c32;
-  color: white;
-  cursor: pointer;
-  font-size: 1.2rem;
-}
-
-.slide-controls span {
-  font-weight: 700;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(32px) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes drawLine {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes popPoint {
-  from {
-    opacity: 0;
-    transform: scale(0.2);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@media (max-width: 850px) {
-  .slide {
-    padding: 34px;
-    height: 84vh;
-  }
-
-  .flip-grid,
-  .summary-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .lead,
-  .definition-card,
-  .formula-card {
-    font-size: 1.15rem;
-  }
-}
-
-/* =========================================================
-   CORRECCIÓN DEFINITIVA: TÍTULOS, DISTRIBUCIÓN Y SVG
-   Debe permanecer al FINAL de style.css
-========================================================= */
-
-/* Evita que el contenido alto quede centrado y se corte arriba */
-.capitulo-presentacion .slide.active {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-start !important;
-  align-items: stretch;
-}
-
-/* Espacio seguro para títulos y controles inferiores */
-.capitulo-presentacion .slide {
-  width: min(1120px, 92vw);
-  height: min(680px, 86vh);
-  padding: clamp(34px, 5vh, 58px) clamp(34px, 4vw, 62px) 88px;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-}
-
-/* Evita que los títulos crezcan demasiado en pantallas bajas */
-.capitulo-presentacion .slide h1,
-.capitulo-presentacion .slide h2 {
-  width: 100%;
-  max-width: 100%;
-  flex-shrink: 0;
-  overflow: visible;
-  word-break: normal;
-  overflow-wrap: normal;
-  hyphens: none;
-}
-
-.capitulo-presentacion .slide h1 {
-  font-size: clamp(3.5rem, 6.8vw, 6.6rem) !important;
-  line-height: 0.95 !important;
-  margin: 0 0 24px !important;
-}
-
-.capitulo-presentacion .slide h2 {
-  font-size: clamp(2.2rem, 4.1vw, 3.75rem) !important;
-  line-height: 1.02 !important;
-  margin: 0 0 20px !important;
-}
-
-/* Títulos largos: máximo dos líneas, sin salir de la tarjeta */
-.capitulo-presentacion .slide h2.title-long {
-  font-size: clamp(2rem, 3.6vw, 3.3rem) !important;
-  max-width: 950px;
-}
-
-/* Texto introductorio más compacto */
-.capitulo-presentacion .compact-lead {
-  font-size: clamp(1rem, 1.7vw, 1.25rem);
-  line-height: 1.42;
-  margin: 0 0 12px;
-}
-
-/* La zona del SVG no debe crecer excesivamente */
-.capitulo-presentacion .compact-board {
-  margin: 8px 0 14px;
-  padding: 8px 14px;
-  flex-shrink: 1;
-}
-
-.capitulo-presentacion .compact-board svg {
   width: 100%;
   height: min(275px, 34vh);
   display: block;
   overflow: visible;
 }
 
-/* =========================================================
-   SEGMENTO SIMPLE
-========================================================= */
+.svg-line {
+  stroke: var(--cobre-suave);
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+
+.svg-point {
+  fill: var(--verde-oscuro);
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.25));
+}
+
+.svg-label {
+  fill: var(--verde-oscuro);
+  font-size: 38px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+/* Segmento simple */
 
 #simpleBaseTrack {
   stroke: rgba(18, 60, 50, 0.16) !important;
@@ -748,15 +446,15 @@ body {
 }
 
 #simpleSegmentLine {
-  stroke: #ad6543 !important;
+  stroke: var(--cobre) !important;
   stroke-width: 9 !important;
   stroke-linecap: round;
 }
 
 #simplePointA,
 #simplePointB {
-  fill: #123c32 !important;
-  stroke: #fff4dc;
+  fill: var(--verde-oscuro) !important;
+  stroke: var(--papel-calido);
   stroke-width: 3;
   cursor: grab;
   touch-action: none;
@@ -770,7 +468,7 @@ body {
 
 #simpleLabelA,
 #simpleLabelB {
-  fill: #123c32 !important;
+  fill: var(--verde-oscuro) !important;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 36px;
   font-weight: 700;
@@ -778,9 +476,7 @@ body {
   pointer-events: none;
 }
 
-/* =========================================================
-   SEGMENTO CON PUNTO MEDIO
-========================================================= */
+/* Segmento con punto medio */
 
 #midpointBaseTrack {
   stroke: rgba(18, 60, 50, 0.16) !important;
@@ -788,39 +484,42 @@ body {
   stroke-linecap: round;
 }
 
-/* Línea completa, visible debajo de las dos mitades */
 #midpointSegmentLine {
-  stroke: #ad6543 !important;
+  stroke: var(--cobre) !important;
   stroke-width: 10 !important;
   stroke-linecap: round;
 }
 
-/* Las mitades refuerzan visualmente AM = MB */
 #midpointLeftHalf {
-  stroke: #ad6543 !important;
+  stroke: var(--cobre) !important;
   stroke-width: 10 !important;
   stroke-linecap: round;
 }
 
 #midpointRightHalf {
-  stroke: #1f6874 !important;
+  stroke: var(--verde-azulado) !important;
   stroke-width: 10 !important;
   stroke-linecap: round;
 }
 
 #midpointPointA,
 #midpointPointB {
-  fill: #123c32 !important;
-  stroke: #fff4dc;
+  fill: var(--verde-oscuro) !important;
+  stroke: var(--papel-calido);
   stroke-width: 3;
   cursor: grab;
   touch-action: none;
   filter: drop-shadow(0 7px 9px rgba(0, 0, 0, 0.2));
 }
 
+#midpointPointA:active,
+#midpointPointB:active {
+  cursor: grabbing;
+}
+
 #midpointPointM {
-  fill: #bd3740 !important;
-  stroke: #fff4dc;
+  fill: var(--rojo) !important;
+  stroke: var(--papel-calido);
   stroke-width: 3;
   pointer-events: none;
   filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.18));
@@ -838,42 +537,28 @@ body {
 
 #midpointLabelA,
 #midpointLabelB {
-  fill: #123c32 !important;
+  fill: var(--verde-oscuro) !important;
 }
 
 #midpointLabelM {
-  fill: #bd3740 !important;
+  fill: var(--rojo) !important;
 }
 
-/* Medidas debajo del segmento */
-.midpoint-measures {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 8px;
-}
+/* =========================
+   7. TARJETAS Y CAJAS
+========================= */
 
-.midpoint-measures span {
-  background: #123c32;
-  color: #fffaf0;
-  border-radius: 999px;
-  padding: 10px 18px;
-  font-weight: 700;
-}
-
-/* Botón siempre dentro de la diapositiva */
-.capitulo-presentacion .slide > .btn,
-.capitulo-presentacion .slide > .link-btn {
-  flex-shrink: 0;
-  margin-top: auto;
-  margin-bottom: 0;
-}
-
-/* La definición de punto medio ocupa menos altura */
-.midpoint-definition {
-  font-size: clamp(1rem, 1.75vw, 1.25rem) !important;
-  line-height: 1.42 !important;
-  padding: clamp(20px, 2.5vw, 28px) !important;
+.definition-card,
+.formula-card,
+.answer-box {
+  flex: 0 0 auto;
+  padding: clamp(20px, 2.5vw, 28px);
+  border-left: 10px solid var(--cobre-suave);
+  border-radius: var(--radio-medio);
+  font-size: clamp(1rem, 1.75vw, 1.25rem);
+  line-height: 1.45;
+  background: white;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
 }
 
 .midpoint-definition p {
@@ -887,80 +572,418 @@ body {
 
 .midpoint-definition li {
   margin-bottom: 10px;
+  line-height: 1.45;
 }
 
 .rigorous-conclusion {
+  flex: 0 0 auto;
   margin-top: 12px;
   padding: 12px 20px;
+  border-radius: 22px;
+  color: var(--verde-oscuro);
   font-size: clamp(1rem, 1.7vw, 1.2rem);
+  font-weight: 700;
+  text-align: center;
+  background: rgba(18, 60, 50, 0.08);
 }
 
-/* =========================================================
-   PANTALLAS DE POCA ALTURA
-========================================================= */
+/* Tarjetas giratorias */
+
+.flip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 32px;
+  max-width: 800px;
+  margin-top: 20px;
+}
+
+.flip-card {
+  height: 220px;
+  position: relative;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.flip-card .front,
+.flip-card .back {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  border-radius: var(--radio-medio);
+  backface-visibility: hidden;
+  text-align: center;
+  box-shadow: var(--sombra-media);
+  transition: transform 0.75s cubic-bezier(.2, .8, .2, 1);
+}
+
+.flip-card .front {
+  border: 2px solid rgba(18, 60, 50, 0.18);
+  color: var(--verde-oscuro);
+  font-size: 3rem;
+  font-weight: 700;
+  background: white;
+}
+
+.flip-card .back {
+  color: white;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  transform: rotateY(180deg);
+  background: var(--verde-oscuro);
+}
+
+.flip-card.flipped .front {
+  transform: rotateY(180deg);
+}
+
+.flip-card.flipped .back {
+  transform: rotateY(360deg);
+}
+
+/* =========================
+   8. MEDIDAS Y ACTIVIDAD
+========================= */
+
+.measure-pill {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 0 0 auto;
+  padding: 14px 24px;
+  border-radius: 999px;
+  color: white;
+  background: var(--verde-oscuro);
+  box-shadow: 0 14px 30px rgba(18, 60, 50, 0.25);
+}
+
+.measure-pill span {
+  opacity: 0.85;
+}
+
+.measure-pill strong {
+  font-size: 1.25rem;
+}
+
+.midpoint-measures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.midpoint-measures span {
+  padding: 10px 18px;
+  border-radius: 999px;
+  color: var(--papel);
+  font-weight: 700;
+  background: var(--verde-oscuro);
+}
+
+.activity-box {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 18px;
+  font-size: 1.15rem;
+}
+
+.activity-box input {
+  width: 190px;
+  padding: 14px 18px;
+  border: 2px solid rgba(18, 60, 50, 0.22);
+  border-radius: 16px;
+  font-size: 1.1rem;
+}
+
+.activity-box button {
+  padding: 14px 22px;
+  border: none;
+  border-radius: 16px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--cobre-suave);
+}
+
+/* =========================
+   9. RESUMEN
+========================= */
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.summary-grid div {
+  padding: 30px 20px;
+  border-radius: var(--radio-medio);
+  color: var(--verde-oscuro);
+  font-size: 2.3rem;
+  font-weight: 700;
+  text-align: center;
+  background: white;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+}
+
+.summary-grid span {
+  display: block;
+  margin-top: 12px;
+  color: var(--cobre-suave);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* =========================
+   10. CONTROLES
+========================= */
+
+.slide-controls {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 18px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  color: var(--verde-oscuro);
+  background: rgba(255, 250, 240, 0.88);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+}
+
+.slide-controls button {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background: var(--verde-oscuro);
+}
+
+.slide-controls span {
+  font-weight: 700;
+}
+
+/* =========================
+   11. ANIMACIONES
+========================= */
+
+.draw {
+  stroke-dasharray: 480;
+  stroke-dashoffset: 480;
+  animation: drawLine 1.25s ease forwards;
+}
+
+.appear {
+  opacity: 0;
+  transform-origin: center;
+  animation: popPoint 0.65s ease forwards;
+}
+
+.delay {
+  animation-delay: 0.45s;
+}
+
+@keyframes aparecerInicio {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes popPoint {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =========================
+   12. PANTALLAS DE POCA ALTURA
+========================= */
 
 @media (max-height: 800px) and (min-width: 769px) {
-  .capitulo-presentacion .slide {
+  .slide {
     height: 89vh;
-    padding-top: 28px;
-    padding-bottom: 78px;
+    padding:
+      24px
+      clamp(34px, 4vw, 56px)
+      76px;
   }
 
-  .capitulo-presentacion .slide h1 {
-    font-size: clamp(3.2rem, 6vw, 5.5rem) !important;
+  .slide h1 {
+    font-size: clamp(3.1rem, 5.8vw, 5.4rem);
   }
 
-  .capitulo-presentacion .slide h2 {
-    font-size: clamp(2rem, 3.6vw, 3.15rem) !important;
-    margin-bottom: 14px !important;
+  .slide h2 {
+    margin-bottom: 12px;
+    font-size: clamp(1.95rem, 3.35vw, 3rem);
   }
 
-  .capitulo-presentacion .slide h2.title-long {
-    font-size: clamp(1.85rem, 3.15vw, 2.75rem) !important;
+  .slide h2.title-long {
+    font-size: clamp(1.75rem, 2.9vw, 2.65rem);
   }
 
-  .capitulo-presentacion .compact-board svg {
-    height: min(235px, 31vh);
+  .lead {
+    font-size: clamp(0.98rem, 1.4vw, 1.15rem);
+  }
+
+  .segment-demo svg,
+  .interactive-board svg {
+    height: min(225px, 29vh);
   }
 
   .definition-card,
   .formula-card,
   .answer-box {
-    padding: 18px 24px;
+    padding: 18px 22px;
+  }
+
+  .flip-card {
+    height: 185px;
   }
 }
 
-/* =========================================================
-   CELULAR
-========================================================= */
+/* =========================
+   13. TABLET Y CELULAR
+========================= */
+
+@media (max-width: 900px) {
+  .capitulos-home {
+    grid-template-columns: 1fr;
+  }
+
+  .card-capitulo {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .icono-capitulo {
+    margin: auto;
+  }
+
+  .beneficios {
+    grid-template-columns: 1fr;
+    border-radius: 28px;
+  }
+
+  .pretitle {
+    letter-spacing: 6px;
+  }
+}
 
 @media (max-width: 768px) {
-  .capitulo-presentacion .slide {
+  .capitulo-presentacion {
+    overflow: hidden;
+  }
+
+  .slide {
     width: 94vw;
     height: 87vh;
-    padding: 26px 20px 72px;
+    padding: 24px 20px 72px;
+    border-radius: 26px;
   }
 
-  .capitulo-presentacion .slide h1 {
-    font-size: clamp(2.8rem, 15vw, 4.5rem) !important;
+  .kicker {
+    margin-bottom: 8px;
+    font-size: 0.7rem;
+    letter-spacing: 1.8px;
   }
 
-  .capitulo-presentacion .slide h2,
-  .capitulo-presentacion .slide h2.title-long {
-    font-size: clamp(1.75rem, 8.5vw, 2.65rem) !important;
-    line-height: 1.04 !important;
+  .slide h1 {
+    margin-bottom: 14px;
+    font-size: clamp(2.8rem, 15vw, 4.5rem);
+    line-height: 0.95;
   }
 
-  .capitulo-presentacion .compact-board svg {
-    height: min(215px, 28vh);
+  .slide h2,
+  .slide h2.title-long {
+    margin-bottom: 12px;
+    font-size: clamp(1.7rem, 8vw, 2.55rem);
+    line-height: 1.04;
+  }
+
+  .lead,
+  .compact-lead {
+    font-size: 0.98rem;
+    line-height: 1.42;
+  }
+
+  .segment-demo,
+  .interactive-board {
+    padding: 4px;
+  }
+
+  .segment-demo svg,
+  .interactive-board svg {
+    height: min(205px, 27vh);
+  }
+
+  .definition-card,
+  .formula-card,
+  .answer-box,
+  .rigorous-conclusion {
+    padding: 17px;
+    font-size: 0.98rem;
+  }
+
+  .flip-grid,
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flip-card {
+    height: 170px;
   }
 
   .measure-pill {
     width: 100%;
     flex-direction: column;
     gap: 4px;
-    text-align: center;
     border-radius: 22px;
+    text-align: center;
   }
 
   .midpoint-measures {
@@ -973,9 +996,24 @@ body {
     text-align: center;
   }
 
-  .capitulo-presentacion .slide > .btn,
-  .capitulo-presentacion .slide > .link-btn {
+  .activity-box {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .activity-box input,
+  .activity-box button {
+    width: 100%;
+  }
+
+  .slide > .btn,
+  .slide > .link-btn {
     width: 100%;
     text-align: center;
+  }
+
+  .slide-controls {
+    bottom: 8px;
+    transform: translateX(-50%) scale(0.86);
   }
 }
