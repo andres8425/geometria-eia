@@ -1087,3 +1087,82 @@ const clone=svg.cloneNode(true);
 svg.parentNode.replaceChild(clone,svg);
 
 }
+/* =========================================================
+   ELEMENTOS DEL TRIÁNGULO
+========================================================= */
+
+function highlightTriangleElements(type, button) {
+  const layout = document.querySelector(
+    ".triangle-elements-layout"
+  );
+
+  const description = document.getElementById(
+    "triangleElementDescription"
+  );
+
+  if (!layout || !description) {
+    return;
+  }
+
+  layout.classList.remove(
+    "show-all",
+    "show-vertices",
+    "show-sides",
+    "show-angles"
+  );
+
+  layout.classList.add(`show-${type}`);
+
+  document
+    .querySelectorAll(".element-selector")
+    .forEach((selector) => {
+      selector.classList.remove("active");
+    });
+
+  button?.classList.add("active");
+
+  const descriptions = {
+    all: `
+      <strong>\\(\\triangle ABC\\)</strong>
+
+      <p>
+        Está formado por tres vértices, tres lados
+        y tres ángulos interiores.
+      </p>
+    `,
+
+    vertices: `
+      <strong>Vértices</strong>
+
+      <p>
+        Los vértices son los puntos
+        \\(A\\), \\(B\\) y \\(C\\).
+      </p>
+    `,
+
+    sides: `
+      <strong>Lados</strong>
+
+      <p>
+        Los lados son los segmentos
+        \\(\\overline{AB}\\),
+        \\(\\overline{BC}\\) y
+        \\(\\overline{CA}\\).
+      </p>
+    `,
+
+    angles: `
+      <strong>Ángulos interiores</strong>
+
+      <p>
+        Los ángulos interiores están determinados
+        por cada par de lados que se encuentran
+        en un vértice.
+      </p>
+    `
+  };
+
+  description.innerHTML = descriptions[type];
+
+  renderMath(description);
+}
