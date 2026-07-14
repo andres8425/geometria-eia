@@ -1,1 +1,936 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Segmentos y ángulos</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [
+          ['\\(', '\\)'],
+          ['$', '$']
+        ]
+      }
+    };
+  </script>
+
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+
+  <script
+    defer
+    src="script.js"
+  ></script>
+</head>
+
+<body class="capitulo-presentacion">
+
+  <main class="deck">
+
+    <!-- DIAPOSITIVA 1: PORTADA -->
+
+    <section class="slide active">
+
+      <p class="kicker">
+        Capítulo 1 · Sección 1
+      </p>
+
+      <h1>Segmentos y ángulos</h1>
+
+      <p class="lead">
+        Construiremos las nociones de segmento, longitud, punto medio
+        y ángulo mediante definiciones, animaciones y actividades
+        interactivas.
+      </p>
+
+      <button
+        class="btn"
+        type="button"
+        onclick="nextSlide()"
+      >
+        Comenzar →
+      </button>
+
+    </section>
+
+    <!-- DIAPOSITIVA 2: IDEA GEOMÉTRICA -->
+
+    <section class="slide">
+
+      <p class="kicker">
+        Idea geométrica
+      </p>
+
+      <h2 class="title-long">
+        Nombrar lo que vemos
+      </h2>
+
+      <p class="lead">
+        La geometría comienza cuando aprendemos a distinguir objetos,
+        relaciones y medidas.
+      </p>
+
+      <div class="segment-demo">
+
+        <svg
+          viewBox="0 0 900 260"
+          aria-label="Segmento AB"
+        >
+
+          <line
+            x1="210"
+            y1="130"
+            x2="690"
+            y2="130"
+            class="svg-line draw"
+          ></line>
+
+          <circle
+            cx="210"
+            cy="130"
+            r="18"
+            class="svg-point appear"
+          ></circle>
+
+          <circle
+            cx="690"
+            cy="130"
+            r="18"
+            class="svg-point appear delay"
+          ></circle>
+
+          <text
+            x="210"
+            y="88"
+            class="svg-label"
+          >
+            A
+          </text>
+
+          <text
+            x="690"
+            y="88"
+            class="svg-label"
+          >
+            B
+          </text>
+
+        </svg>
+
+      </div>
+
+      <button
+        class="btn"
+        type="button"
+        onclick="nextSlide()"
+      >
+        Siguiente →
+      </button>
+
+    </section>
+
+    <!-- DIAPOSITIVA 3: DEFINICIÓN DE SEGMENTO -->
+
+    <section class="slide">
+
+      <p class="kicker">
+        Definición
+      </p>
+
+      <h2>
+        ¿Qué es un segmento?
+      </h2>
+
+      <div class="definition-card">
+
+        <p>
+          Dados dos puntos distintos \(A\) y \(B\), el segmento
+          \(\overline{AB}\) es la parte de la recta determinada
+          por \(A\) y \(B\) que está comprendida entre ambos puntos,
+          incluyendo sus extremos.
+        </p>
+
+      </div>
+
+      <p class="small-note">
+        El símbolo \(\overline{AB}\) representa el objeto geométrico,
+        mientras que \(AB\) representa su longitud.
+      </p>
+
+      <button
+        class="btn"
+        type="button"
+        onclick="nextSlide()"
+      >
+        Explorar →
+      </button>
+
+    </section>
+
+    <!-- DIAPOSITIVA 4: SEGMENTO INTERACTIVO -->
+
+    <section class="slide">
+
+      <p class="kicker">
+        Exploración interactiva
+      </p>
+
+      <h2>
+        Arrastra los extremos
+      </h2>
+
+      <p class="lead compact-lead">
+        Mueve los puntos \(A\) y \(B\). La longitud cambia,
+        pero ambos extremos permanecen sobre la misma línea.
+      </p>
+
+      <div class="interactive-board">
+
+        <svg
+          id="simpleSegmentSvg"
+          viewBox="0 0 900 300"
+          aria-label="Segmento interactivo AB"
+        >
+
+          <line
+            id="simpleBaseTrack"
+            x1="150"
+            y1="165"
+            x2="750"
+            y2="165"
+          ></line>
+
+          <line
+            id="simpleSegmentLine"
+            x1="250"
+            y1="165"
+            x2="650"
+            y2="165"
+          ></line>
+
+          <circle
+            id="simplePointA"
+            cx="250"
+            cy="165"
+            r="20"
+          ></circle>
+
+          <circle
+            id="simplePointB"
+            cx="650"
+            cy="165"
+            r="20"
+          ></circle>
+
+          <text
+            id="simpleLabelA"
+            x="250"
+            y="112"
+          >
+            A
+          </text>
+
+          <text
+            id="simpleLabelB"
+            x="650"
+            y="112"
+          >
+            B
+          </text>
+
+        </svg>
+
+      </div>
+
+      <div class="measure-pill">
+
+        <span>
+          Longitud actual
+        </span>
+
+        <strong id="simpleLengthText">
+          AB = 400 unidades
+        </strong>
+
+      </div>
+
+      <button
+        class="btn"
+        type="button"
+        onclick="nextSlide()"
+      >
+        Siguiente →
+      </button>
+
+    </section>
+
+    <!-- DIAPOSITIVA 5: OBJETO Y MEDIDA -->
+
+    <section class="slide">
+
+      <p class="kicker">
+        Objeto vs medida
+      </p>
+
+      <h2 class="title-long">
+        No es lo mismo \(\overline{AB}\) que \(AB\)
+      </h2>
+
+      <div class="flip-grid">
+
+        <article
+          class="flip-card"
+          tabindex="0"
+          onclick="flipCard(this)"
+        >
+
+          <div class="front">
+            \(\overline{AB}\)
+          </div>
+
+          <div class="back">
+            Es el segmento como objeto geométrico.
+          </div>
+
+        </article>
+
+        <article
+          class="flip-card"
+          tabindex="0"
+          onclick="flipCard(this)"
+        >
+
+          <div class="front">
+            \(AB\)
+          </div>
+
+          <div class="back">
+            Es la longitud del segmento.
+          </div>
+
+        </article>
+
+      </div>
+
+      <p class="small-note">
+        Haz clic sobre cada tarjeta.
+      </p>
+
+      <button
+        class="btn"
+        type="button"
+        onclick="nextSlide()"
+      >
+        Siguiente →
+      </button>
+
+    </section>
+
+    <!-- DIAPOSITIVA 6: PUNTO MEDIO -->
+
+    <section class="slide">
+
+      <p class="kicker">
+        Definición
+      </p>
+
+      <h2 class="title-long">
+        Punto medio de un segmento
+      </h2>
+
+      <div class="definition-card midpoint-definition">
+
+        <p>
+          Sea \(\overline{AB}\) un segmento. Un punto \(M\)
+          es el <strong>punto medio</strong> de \(\overline{AB}\)
+          si se cumplen simultáneamente:
+        </p>
+
+        <ol>
+          <li>
+            \(M\in\overline{AB}\).
+          </li>
+
+          <li>
+            \(AM=MB\).
+          </li>
+        </ol>
+
+      </div>
+
+      <div class="rigorous-conclusion">
+
+        En consecuencia,
+
+        \[
+          AM=MB=\frac{AB}{2}.
+        \]
+
+      </div>
+
+      <button
+        class="btn"
+        type="button"
+        onclick="nextSlide()"
+      >
+        Ver construcción →
+      </button>
+
+    </section>
+
+    <!-- DIAPOSITIVA 7: PUNTO MEDIO INTERACTIVO -->
+
+    <section class="slide">
+
+      <p class="kicker">
+        Exploración interactiva
+      </p>
+
+      <h2 class="title-long">
+        El punto medio se ajusta automáticamente
+      </h2>
+
+      <p class="lead compact-lead">
+        Arrastra \(A\) o \(B\). El punto \(M\) permanece en el segmento
+        y conserva la igualdad \(AM=MB\).
+      </p>
+
+      <div class="interactive-board">
+
+        <svg
+          id="midpointSvg"
+          viewBox="0 0 900 300"
+          aria-label="Segmento interactivo con punto medio"
+        >
+
+          <line
+            id="midpointBaseTrack"
+            x1="150"
+            y1="165"
+            x2="750"
+            y2="165"
+          ></line>
+
+          <line
+            id="midpointSegmentLine"
+            x1="250"
+            y1="165"
+            x2="650"
+            y2="165"
+          ></line>
+
+          <line
+            id="midpointLeftHalf"
+            x1="250"
+            y1="165"
+            x2="450"
+            y2="165"
+          ></line>
+
+          <line
+            id="midpointRightHalf"
+            x1="450"
+            y1="165"
+            x2="650"
+            y2="165"
+          ></line>
+
+          <circle
+            id="midpointPointA"
+            cx="250"
+            cy="165"
+            r="20"
+          ></circle>
+
+          <circle
+            id="midpointPointB"
+            cx="650"
+            cy="165"
+            r="20"
+          ></circle>
+
+          <circle
+            id="midpointPointM"
+            cx="450"
+            cy="165"
+            r="14"
+          ></circle>
+
+          <text
+            id="midpointLabelA"
+            x="250"
+            y="112"
+          >
+            A
+          </text>
+
+          <text
+            id="midpointLabelB"
+            x="650"
+            y="112"
+          >
+            B
+          </text>
+
+          <text
+            id="midpointLabelM"
+            x="450"
+            y="220"
+          >
+            M
+          </text>
+
+        </svg>
+
+      </div>
+
+      <div class="midpoint-measures">
+
+        <span id="midpointLengthAB">
+          AB = 400
+        </span>
+
+        <span id="midpointLengthAM">
+          AM = 200
+        </span>
+
+        <span id="midpointLengthMB">
+          MB = 200
+        </span>
+
+      </div>
+
+      <button
+        class="btn"
+        type="button"
+        onclick="nextSlide()"
+      >
+        Siguiente →
+      </button>
+
+    </section>
+
+    <!-- DIAPOSITIVA 8: DEFINICIÓN DE ÁNGULO -->
+
+    <section class="slide">
+
+      <p class="kicker">
+        Definición formal
+      </p>
+
+      <h2>
+        ¿Qué es un ángulo?
+      </h2>
+
+      <div class="definition-card">
+
+        <p>
+          Sean \(A\), \(O\) y \(B\) puntos del plano,
+          con \(A\neq O\) y \(B\neq O\).
+          El ángulo \(\angle AOB\) es la figura formada
+          por las semirrectas
+          \(\overrightarrow{OA}\) y
+          \(\overrightarrow{OB}\),
+          que tienen origen común \(O\).
+        </p>
+
+      </div>
+
+      <div class="angle-parts">
+
+        <div>
+          <strong>Vértice:</strong>
+          \(O\)
+        </div>
+
+        <div>
+          <strong>Lados:</strong>
+          \(\overrightarrow{OA}\) y
+          \(\overrightarrow{OB}\)
+        </div>
+
+        <div>
+          <strong>Medida:</strong>
+          \(m\angle AOB\)
+        </div>
+
+      </div>
+
+      <button
+        class="btn"
+        type="button"
+        onclick="nextSlide()"
+      >
+        Construir ángulos →
+      </button>
+
+    </section>
+
+    <!-- DIAPOSITIVA 9: CONSTRUCTOR DE ÁNGULOS -->
+
+    <section class="slide">
+
+      <p class="kicker">
+        Construcción interactiva
+      </p>
+
+      <h2 class="title-long">
+        Construye y clasifica un ángulo
+      </h2>
+
+      <p class="lead compact-lead">
+        Arrastra el punto \(B\) alrededor del vértice \(O\),
+        o selecciona un tipo de ángulo.
+      </p>
+
+      <div class="interactive-board angle-board">
+
+        <svg
+          id="angleSvg"
+          viewBox="0 0 900 380"
+          aria-label="Constructor interactivo de ángulos"
+        >
+
+          <path
+            id="angleArc"
+            class="angle-arc"
+            d=""
+          ></path>
+
+          <line
+            id="angleRayA"
+            x1="450"
+            y1="210"
+            x2="700"
+            y2="210"
+          ></line>
+
+          <line
+            id="angleRayB"
+            x1="450"
+            y1="210"
+            x2="640"
+            y2="49"
+          ></line>
+
+          <circle
+            id="angleVertexO"
+            cx="450"
+            cy="210"
+            r="14"
+          ></circle>
+
+          <circle
+            id="anglePointA"
+            cx="700"
+            cy="210"
+            r="18"
+          ></circle>
+
+          <circle
+            id="anglePointB"
+            cx="640"
+            cy="49"
+            r="20"
+          ></circle>
+
+          <text
+            x="450"
+            y="255"
+            class="angle-label"
+          >
+            O
+          </text>
+
+          <text
+            x="725"
+            y="215"
+            class="angle-label"
+          >
+            A
+          </text>
+
+          <text
+            id="angleLabelB"
+            x="660"
+            y="35"
+            class="angle-label"
+          >
+            B
+          </text>
+
+          <text
+            id="angleMeasureSvg"
+            x="450"
+            y="350"
+            class="angle-measure-svg"
+          >
+            40°
+          </text>
+
+        </svg>
+
+      </div>
+
+      <div class="angle-controls">
+
+        <button
+          type="button"
+          onclick="setAngle(0)"
+        >
+          Nulo
+        </button>
+
+        <button
+          type="button"
+          onclick="setAngle(40)"
+        >
+          Agudo
+        </button>
+
+        <button
+          type="button"
+          onclick="setAngle(90)"
+        >
+          Recto
+        </button>
+
+        <button
+          type="button"
+          onclick="setAngle(125)"
+        >
+          Obtuso
+        </button>
+
+        <button
+          type="button"
+          onclick="setAngle(180)"
+        >
+          Llano
+        </button>
+
+      </div>
+
+      <div class="angle-result">
+
+        <strong id="angleMeasureText">
+          40°
+        </strong>
+
+        <span id="angleTypeText">
+          Ángulo agudo
+        </span>
+
+      </div>
+
+      <button
+        class="btn"
+        type="button"
+        onclick="nextSlide()"
+      >
+        Siguiente →
+      </button>
+
+    </section>
+
+    <!-- DIAPOSITIVA 10: CLASIFICACIÓN -->
+
+    <section class="slide">
+
+      <p class="kicker">
+        Clasificación
+      </p>
+
+      <h2>
+        Tipos de ángulo
+      </h2>
+
+      <div class="angle-types-grid">
+
+        <article>
+          <strong>Nulo</strong>
+          <span>
+            \(\alpha=0^\circ\)
+          </span>
+        </article>
+
+        <article>
+          <strong>Agudo</strong>
+          <span>
+            \(0^\circ&lt;\alpha&lt;90^\circ\)
+          </span>
+        </article>
+
+        <article>
+          <strong>Recto</strong>
+          <span>
+            \(\alpha=90^\circ\)
+          </span>
+        </article>
+
+        <article>
+          <strong>Obtuso</strong>
+          <span>
+            \(90^\circ&lt;\alpha&lt;180^\circ\)
+          </span>
+        </article>
+
+        <article>
+          <strong>Llano</strong>
+          <span>
+            \(\alpha=180^\circ\)
+          </span>
+        </article>
+
+      </div>
+
+      <button
+        class="btn"
+        type="button"
+        onclick="nextSlide()"
+      >
+        Actividad →
+      </button>
+
+    </section>
+
+    <!-- DIAPOSITIVA 11: ACTIVIDAD -->
+
+    <section class="slide">
+
+      <p class="kicker">
+        Actividad
+      </p>
+
+      <h2>
+        Clasifica el ángulo
+      </h2>
+
+      <p class="lead">
+        Escribe una medida entre
+        \(0^\circ\) y \(180^\circ\).
+      </p>
+
+      <div class="activity-box">
+
+        <label for="angleInput">
+          Medida:
+        </label>
+
+        <input
+          id="angleInput"
+          type="number"
+          min="0"
+          max="180"
+          step="1"
+          placeholder="Ejemplo: 120"
+        >
+
+        <button
+          type="button"
+          onclick="classifyAngleInput()"
+        >
+          Clasificar
+        </button>
+
+      </div>
+
+      <div
+        id="angleAnswer"
+        class="answer-box"
+      >
+        Aquí aparecerá la clasificación.
+      </div>
+
+      <button
+        class="btn"
+        type="button"
+        onclick="nextSlide()"
+      >
+        Resumen →
+      </button>
+
+    </section>
+
+    <!-- DIAPOSITIVA 12: RESUMEN -->
+
+    <section class="slide">
+
+      <p class="kicker">
+        Resumen de la sección
+      </p>
+
+      <h2>
+        Ideas clave
+      </h2>
+
+      <div class="summary-grid">
+
+        <div>
+          \(\overline{AB}\)
+          <span>Segmento</span>
+        </div>
+
+        <div>
+          \(M\)
+          <span>Punto medio</span>
+        </div>
+
+        <div>
+          \(\angle AOB\)
+          <span>Ángulo</span>
+        </div>
+
+      </div>
+
+      <a
+        href="cap1.html"
+        class="btn link-btn"
+      >
+        ← Volver al menú del capítulo
+      </a>
+
+    </section>
+
+  </main>
+
+  <nav
+    class="slide-controls"
+    aria-label="Controles de la presentación"
+  >
+
+    <button
+      type="button"
+      onclick="prevSlide()"
+      aria-label="Diapositiva anterior"
+    >
+      ←
+    </button>
+
+    <span id="slideCounter">
+      1 / 12
+    </span>
+
+    <button
+      type="button"
+      onclick="nextSlide()"
+      aria-label="Diapositiva siguiente"
+    >
+      →
+    </button>
+
+  </nav>
+
+</body>
+</html>
