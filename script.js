@@ -1162,7 +1162,108 @@ function highlightTriangleElements(type, button) {
     `
   };
 
-  description.innerHTML = descriptions[type];
-
+  description.innerHTML = descriptions[type]; 
   renderMath(description);
+}
+/* =========================================================
+   LÍNEAS NOTABLES DEL TRIÁNGULO
+========================================================= */
+
+function showNotableLine(type, button) {
+  const groups = {
+    altitude:
+      document.getElementById("altitudeGroup"),
+
+    median:
+      document.getElementById("medianGroup"),
+
+    bisector:
+      document.getElementById("bisectorGroup")
+  };
+
+  const description =
+    document.getElementById(
+      "notableLineDescription"
+    );
+
+  Object.values(groups).forEach((group) => {
+    group?.classList.remove("active");
+  });
+
+  /*
+   * Clonar el grupo permite reiniciar sus animaciones
+   * cada vez que se selecciona.
+   */
+  const selectedGroup = groups[type];
+
+  if (selectedGroup) {
+    const clonedGroup =
+      selectedGroup.cloneNode(true);
+
+    selectedGroup.replaceWith(clonedGroup);
+
+    clonedGroup.classList.add("active");
+  }
+
+  document
+    .querySelectorAll(".notable-selector")
+    .forEach((selector) => {
+      selector.classList.remove("active");
+    });
+
+  button?.classList.add("active");
+
+  const descriptions = {
+    altitude: `
+      <strong>Altura</strong>
+
+      <p>
+        La altura relativa al lado
+        \\(\\overline{AB}\\) es el segmento
+        perpendicular trazado desde el vértice
+        \\(C\\) hasta la recta que contiene a
+        \\(\\overline{AB}\\).
+      </p>
+    `,
+
+    median: `
+      <strong>Mediana</strong>
+
+      <p>
+        La mediana relativa al lado
+        \\(\\overline{AB}\\) es el segmento
+        que une el vértice \\(C\\) con el
+        punto medio \\(M\\) de
+        \\(\\overline{AB}\\).
+      </p>
+    `,
+
+    bisector: `
+      <strong>Bisectriz</strong>
+
+      <p>
+        La bisectriz del ángulo
+        \\(\\angle ACB\\) es la semirrecta
+        que parte del vértice \\(C\\) y divide
+        dicho ángulo en dos ángulos de igual medida.
+      </p>
+    `
+  };
+
+  if (!description) return;
+
+  description.style.opacity = "0";
+  description.style.transform =
+    "translateY(6px)";
+
+  window.setTimeout(() => {
+    description.innerHTML =
+      descriptions[type];
+
+    description.style.opacity = "1";
+    description.style.transform =
+      "translateY(0)";
+
+    renderMath(description);
+  }, 140);
 }
