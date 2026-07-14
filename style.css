@@ -1949,3 +1949,450 @@ button.section-card {
     transition-duration: 1ms !important;
   }
 }
+/* =========================================================
+   SECCIÓN 2 · TRIÁNGULOS Y CONGRUENCIA
+   DIAPOSITIVA 1 · PORTADA
+========================================================= */
+
+.triangle-cover {
+  overflow: hidden;
+}
+
+.triangle-cover-content {
+  min-height: 100%;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.85fr);
+  gap: clamp(30px, 5vw, 70px);
+  align-items: center;
+}
+
+.triangle-cover-text {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.triangle-kicker {
+  opacity: 0;
+
+  animation:
+    triangleTextEnter
+    700ms
+    150ms
+    cubic-bezier(.2, .8, .2, 1)
+    forwards;
+}
+
+.triangle-cover-title {
+  max-width: 690px;
+
+  opacity: 0;
+
+  animation:
+    triangleTitleEnter
+    850ms
+    280ms
+    cubic-bezier(.2, .8, .2, 1)
+    forwards;
+}
+
+.triangle-cover-lead {
+  max-width: 690px;
+
+  opacity: 0;
+
+  animation:
+    triangleTextEnter
+    750ms
+    500ms
+    cubic-bezier(.2, .8, .2, 1)
+    forwards;
+}
+
+.triangle-start-button {
+  margin-top: 26px;
+
+  opacity: 0;
+
+  animation:
+    triangleButtonEnter
+    650ms
+    780ms
+    cubic-bezier(.2, .8, .2, 1)
+    forwards;
+}
+
+.triangle-cover-visual {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  place-items: center;
+
+  min-width: 0;
+}
+
+#triangleCoverSvg {
+  width: min(100%, 530px);
+  height: auto;
+
+  overflow: visible;
+
+  filter:
+    drop-shadow(
+      0 25px 28px rgba(18, 60, 50, 0.15)
+    );
+}
+
+/* Interior */
+
+.cover-triangle-fill {
+  fill: rgba(31, 104, 116, 0.13);
+
+  opacity: 0;
+
+  transform-origin: center;
+  transform: scale(0.92);
+
+  animation:
+    triangleFillEnter
+    800ms
+    2.35s
+    ease
+    forwards;
+}
+
+/* Lados */
+
+.cover-triangle-side {
+  fill: none;
+
+  stroke: var(--cobre-600);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  vector-effect: non-scaling-stroke;
+}
+
+.side-ab {
+  stroke-dasharray: 410;
+  stroke-dashoffset: 410;
+
+  animation:
+    triangleDrawSide
+    650ms
+    1.15s
+    ease
+    forwards;
+}
+
+.side-bc {
+  stroke-dasharray: 365;
+  stroke-dashoffset: 365;
+
+  animation:
+    triangleDrawSide
+    650ms
+    1.55s
+    ease
+    forwards;
+}
+
+.side-ca {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+
+  animation:
+    triangleDrawSide
+    650ms
+    1.95s
+    ease
+    forwards;
+}
+
+/* Puntos */
+
+.cover-triangle-point {
+  fill: var(--verde-700);
+
+  stroke: var(--papel-3);
+  stroke-width: 4;
+
+  opacity: 0;
+
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+
+  filter:
+    drop-shadow(
+      0 8px 10px rgba(0, 0, 0, 0.2)
+    );
+
+  animation:
+    trianglePointEnter
+    500ms
+    cubic-bezier(.2, .9, .3, 1.25)
+    forwards;
+}
+
+.point-a {
+  animation-delay: 650ms;
+}
+
+.point-b {
+  animation-delay: 800ms;
+}
+
+.point-c {
+  animation-delay: 950ms;
+}
+
+/* Etiquetas */
+
+.cover-triangle-label {
+  fill: var(--verde-700);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 38px;
+  font-weight: 700;
+
+  text-anchor: middle;
+
+  opacity: 0;
+
+  animation:
+    triangleLabelEnter
+    450ms
+    ease
+    forwards;
+}
+
+.label-a {
+  animation-delay: 800ms;
+}
+
+.label-b {
+  animation-delay: 950ms;
+}
+
+.label-c {
+  animation-delay: 1.1s;
+}
+
+/* Regreso */
+
+.triangle-back-link {
+  position: absolute;
+  left: clamp(30px, 4vw, 58px);
+  bottom: 28px;
+  z-index: 5;
+
+  color: var(--cobre-700);
+
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+
+  opacity: 0.78;
+
+  transition:
+    opacity var(--transicion),
+    transform var(--transicion);
+}
+
+.triangle-back-link:hover {
+  opacity: 1;
+
+  transform: translateX(-4px);
+}
+
+/* Animaciones */
+
+@keyframes triangleTitleEnter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(30px)
+      scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+@keyframes triangleTextEnter {
+  from {
+    opacity: 0;
+
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+@keyframes triangleButtonEnter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(14px)
+      scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+@keyframes trianglePointEnter {
+  from {
+    opacity: 0;
+
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+@keyframes triangleLabelEnter {
+  from {
+    opacity: 0;
+
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+@keyframes triangleDrawSide {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes triangleFillEnter {
+  from {
+    opacity: 0;
+
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+/* Pantallas de poca altura */
+
+@media (max-height: 800px) and (min-width: 769px) {
+
+  .triangle-cover-content {
+    gap: 34px;
+  }
+
+  #triangleCoverSvg {
+    width: min(100%, 430px);
+  }
+
+  .triangle-cover-title {
+    font-size: clamp(2.8rem, 4.8vw, 4.8rem);
+  }
+}
+
+/* Tableta */
+
+@media (max-width: 900px) {
+
+  .triangle-cover-content {
+    grid-template-columns: 1fr;
+    gap: 10px;
+
+    align-content: start;
+  }
+
+  .triangle-cover-text {
+    align-items: center;
+
+    text-align: center;
+  }
+
+  .triangle-cover-lead {
+    margin-inline: auto;
+  }
+
+  .triangle-start-button {
+    align-self: center;
+  }
+
+  #triangleCoverSvg {
+    width: min(100%, 390px);
+    max-height: 310px;
+  }
+}
+
+/* Celular */
+
+@media (max-width: 768px) {
+
+  .triangle-cover {
+    padding-bottom: 80px;
+  }
+
+  .triangle-cover-content {
+    gap: 4px;
+  }
+
+  .triangle-cover-title {
+    font-size: clamp(2.35rem, 12vw, 3.8rem);
+  }
+
+  .triangle-cover-lead {
+    font-size: 0.96rem;
+  }
+
+  #triangleCoverSvg {
+    width: min(100%, 330px);
+    max-height: 250px;
+  }
+
+  .triangle-start-button {
+    width: 100%;
+  }
+
+  .triangle-back-link {
+    left: 20px;
+    bottom: 22px;
+
+    font-size: 0.82rem;
+  }
+}
